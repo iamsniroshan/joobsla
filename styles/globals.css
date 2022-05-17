@@ -1,0 +1,7 @@
+.kanban-height,.post-list-height {
+    height: calc(100vh - 150px);
+}
+
+.job-detail-height{
+    height: calc(100vh - 370px);
+}
