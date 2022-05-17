@@ -95,7 +95,7 @@ export default function SearchComponent() {
                     <label
                         for="floating_outlined"
                         class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >Category</label>
+                    >Category test</label>
                     {suggestions.length > 0 && (<div className="absolute w-full py-1 border border-gray-300 mt-10 overflow-auto text-base bg-gray-100 rounded-md max-h-60  focus:outline-none sm:text-sm">
                         {renderSuggestions()}
                     </div>)}
