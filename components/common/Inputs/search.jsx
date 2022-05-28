@@ -8,7 +8,7 @@ const people = [
   "Tom Cook"
 ];
 
-export default function () {
+export default function Search() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPersons, setSelectedPersons] = useState([]);
 
@@ -36,7 +36,7 @@ export default function () {
   }
 
   return (
-    <div className="mt-1 relative my-4">
+    <div className="relative my-4">
       <div className="w-full max-w-xs mx-auto">
         <Listbox
           as="div"
@@ -47,11 +47,11 @@ export default function () {
         >
           {({ isOpen }) => (
             <>
-              <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900 z-10">Search</Listbox.Label>
+              <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">Search</Listbox.Label>
               <div className="relative">
                 <span className="inline-block w-full rounded-md shadow-sm">
                   <Listbox.Button
-                    className="cursor-default relative w-full rounded-md border border-teal-600 bg-white pl-3 pr-10 py-2 text-left sm:text-sm"
+                    className="cursor-default relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left sm:text-sm focus:border-teal-600"
                     onClick={() => setIsOpen(!isOpen)}
                     open={isOpen}
                   >

@@ -47,12 +47,12 @@ export default function Select() {
   const [selected, setSelected] = useState({})
 
   return (
-    <Listbox value={selected} onChange={setSelected} className="my-5">
+    <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <div className="mt-1 relative">
-          <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900 z-10">Category</Listbox.Label>
-            <Listbox.Button className="cursor-default relative w-full rounded-md border border-teal-600 bg-white pl-3 pr-10 py-2 text-left sm:text-sm">
+          <div className="relative my-5">
+          <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">Category</Listbox.Label>
+            <Listbox.Button className="cursor-default relative w-full rounded-md border border-gray-300 pl-3 pr-10 py-2 text-left sm:text-sm focus:border-teal-600">
               <span className="flex items-center">
                 <span className="block truncate">{selected.label ? selected.label: '.'}</span>
               </span>
