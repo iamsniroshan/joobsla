@@ -1,5 +1,4 @@
 import { LinkIcon, PlusIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
-import SideOverComponent from '../SlideOver'
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';

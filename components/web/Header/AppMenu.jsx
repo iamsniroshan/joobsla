@@ -16,7 +16,7 @@ const appsMenuData = [
   {
     name: 'Add jobs',
     description: 'Add your jobs advertisement',
-    href: '/user/post/list',
+    href: '/user/post/list/table',
     srcUrl: '/apps/kb.png',
     icon: DocumentAddIcon
   }

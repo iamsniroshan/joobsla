@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { XIcon } from '@heroicons/react/outline'
 import { LinkIcon, PlusIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
 
-export default function SideOverComponent({ open = false, children }) {
+export default function RightSideBar({ open = false, children }) {
 
     const router = useRouter();
     const [isShowModal, setShowModal] = useState(false)
