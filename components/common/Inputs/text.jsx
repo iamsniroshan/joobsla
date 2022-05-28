@@ -15,22 +15,21 @@
   ```
 */
 export default function Text() {
-    return (
-      <div className="relative border border-gray-300 rounded-md px-3 py-2 my-6 shadow-sm">
-        <label
+  return (
+    <div className="relative my-6">
+      <label
           htmlFor="name"
           className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400"
         >
           Name
         </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          className="block w-full border-0 p-0 text-gray-900 placeholder-gray-400 focus:ring-0 sm:text-sm focus:border-teal-600"
-          placeholder=""
-        />
-      </div>
-    )
-  }
-  
+      <input
+        type="text"
+        name="first-name"
+        id="first-name"
+        autoComplete="given-name"
+        className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-0 focus:border-teal-600"
+      />
+    </div>
+  )
+}

@@ -1,18 +1,16 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { useState } from "react";
-
-
-
 const jobType = {
   'Full-Time': '10',
-  'Internship':'20',
-  'Part-Time':'100',
-  'Contract':'10',
+  'Internship': '20',
+  'Part-Time': '100',
+  'Contract': '10',
 }
 
 import Select from "components/common/Inputs/select";
 import Text from "components/common/Inputs/text";
 import Search from "components/common/Inputs/search";
+import Checkbox from "components/common/Inputs/checkbox";
 
 export default function FilterComponent() {
 
@@ -22,9 +20,10 @@ export default function FilterComponent() {
         <div className="bg-white rounded-lg shadow">
           <div className="p-6">
             <div className="flow-root">
-              <Search/>
-              <Select/>
-              <Text/>
+              <Search />
+              <Select />
+              <Text />
+              <Checkbox/>
             </div>
           </div>
         </div>
@@ -33,36 +32,7 @@ export default function FilterComponent() {
         <div className="bg-white rounded-lg shadow">
           <div className="p-6">
             <div className="flow-root">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 pb-1"
-              >
-                Job Type
-              </label>
-              <fieldset className="grid grid-cols-2 gap-3 pt-3">
-              {Object.keys(jobType).map((key,index) => (
-                   <div className="flex" key={index}>
-                   <div className="flex items-center h-5">
-                     <input
-                       id="comments"
-                       aria-describedby="comments-description"
-                       name="comments"
-                       type="checkbox"
-                       className="focus:ring-0 h-4 w-4 text-sky-800 border-gray-300 rounded"
-                     />
-                   </div>
-                   <div className="ml-3 text-sm">
-                     <label
-                       className="font-normal text-gray-500"
-                     >
-                      {key}
-                     </label>
-                   </div>
-                 </div>
-                  ))}
-             
-                
-              </fieldset>
+            <Checkbox/>
             </div>
           </div>
         </div>

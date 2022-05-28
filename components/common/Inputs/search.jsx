@@ -36,7 +36,7 @@ export default function Search() {
   }
 
   return (
-    <div className="relative my-4">
+    <div className="relative my-6">
       <div className="w-full max-w-xs mx-auto">
         <Listbox
           as="div"
@@ -51,7 +51,7 @@ export default function Search() {
               <div className="relative">
                 <span className="inline-block w-full rounded-md shadow-sm">
                   <Listbox.Button
-                    className="cursor-default relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left sm:text-sm focus:border-teal-600"
+                    className="cursor-default relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left sm:text-sm focus:ring-0 focus:border-teal-600"
                     onClick={() => setIsOpen(!isOpen)}
                     open={isOpen}
                   >
