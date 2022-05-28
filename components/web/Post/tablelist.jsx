@@ -140,12 +140,35 @@ export default function PostCardListComponent() {
             <a href="#" className="block hover:bg-gray-50">
               <div className="px-4 py-4 sm:px-6">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-indigo-600 truncate">{position.title}</p>
+                  <span className="text-sm font-medium text-indigo-600 truncate">{position.title}</span>
+                  
+         
                   <div className="ml-2 flex-shrink-0 flex">
-                    <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      {position.type}
-                    </p>
+                    
+                    <div className="flex -space-x-1 relative z-0 overflow-hidden">
+        <img
+          className="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt=""
+        />
+        <img
+          className="relative z-20 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt=""
+        />
+        <img
+          className="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+          alt=""
+        />
+        <img
+          className="relative z-0 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt=""
+        />
+      </div>
                   </div>
+                  
                 </div>
                 <div className="mt-2 sm:flex sm:justify-between">
                   <div className="sm:flex">
@@ -157,12 +180,21 @@ export default function PostCardListComponent() {
                       <LocationMarkerIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
                       {position.location}
                     </p>
-                  </div>
-                  <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                    <span className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                     <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
                     <p>
                       Closing on <time dateTime={position.closeDate}>{position.closeDateFull}</time>
                     </p>
+                    </span>
+                    <span className="px-2 ml-5 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      {position.type}
+                    </span>
+                  </div>
+                  <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                    {/* <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                    <p>
+                      Closing on <time dateTime={position.closeDate}>{position.closeDateFull}</time>
+                    </p> */}
                   </div>
                 </div>
               </div>
