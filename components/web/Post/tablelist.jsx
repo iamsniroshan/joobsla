@@ -65,26 +65,6 @@ export default function PostCardListComponent() {
                         <div className="w-full py-5 lg:border-t lg:border-white lg:border-opacity-20">
                             <div className="grid grid-cols-3 gap-4">
                                 {/* Left nav */}
-                                <div className="hidden lg:block lg:col-span-2">
-                                    <nav className="flex space-x-4">
-                                        {navigation.map((item) => (
-                                            <a
-                                                key={item.name}
-                                                href={item.href}
-                                                className={classNames(
-                                                    item.current ? "text-white" : "text-cyan-100",
-                                                    "text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10"
-                                                )}
-                                                aria-current={item.current ? "page" : undefined}
-                                            >
-                                                {item.name}
-                                            </a>
-                                        ))}
-                                    </nav>
-                                </div>
-                                <div className="lg:hidden col-span-1">
-                                    <MobileMenuComponent />
-                                </div>
                                 <div className="col-span-2 lg:col-span-1">
                                     {/* Search */}
                                     <div className="max-w-xs mx-auto w-full lg:max-w-md">
