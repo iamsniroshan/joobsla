@@ -1,110 +1,151 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Listbox, Transition } from "@headlessui/react";
 
+const people = [
+  "Wade Cooper",
+  "Arlene Mccoy",
+  "Devon Webb",
+  "Tom Cook"
+];
 
-const jobType = [
-    { label: 'IT-Sware/DB/QA/Web/Graphics/GIS', value: '10', id: 1 },
-    { label: 'IT-HWare/Networks/Systems', value: '20', id: '2' },
-    { label: 'Accounting/Auditing/Finance', value: '100', id: '3' },
-    { label: 'Banking/Insurance', value: '10', id: '4' },
-    { label: 'Sales/Marketing/Merchandising', value: '58', id: '5' },
-    { label: 'HR/Training', value: '58', id: '5' },
-    { label: 'Corporate Management/Analysts', value: '58', id: '5' },
-    { label: 'Office Admin/Secretary/Receptionist', value: '58', id: '5' },
-    { label: 'Civil Eng/Interior Design/Architecture', value: '58', id: '5' },
-    { label: 'IT-Telecoms', value: '58', id: '5' },
-    { label: 'Customer Relations/Public Relations', value: '58', id: '5' },
-    { label: 'Logistics/Warehouse/Transport', value: '58', id: '5' },
-    { label: 'Eng-Mech/Auto/Elec', value: '58', id: '5' },
-    { label: 'Manufacturing/Operations', value: '58', id: '5' },
-    { label: 'Media/Advert/Communication', value: '58', id: '5' },
-    { label: 'Hotels/Restaurants/Food', value: '58', id: '5' },
-    { label: 'Hospitality/Tourism', value: '58', id: '5' },
-    { label: 'Hospitality/Tourism', value: '58', id: '5' },
-    { label: 'Sports/Fitness/Recreation', value: '58', id: '5' },
-    { label: 'Hospital/Nursing/Healthcare', value: '58', id: '5' },
-    { label: 'Legal/Law', value: '58', id: '5' },
-    { label: 'Supervision/Quality Control', value: '58', id: '5' },
-    { label: 'Apparel/Clothing', value: '58', id: '5' },
-    { label: 'Ticketing/Airline/Marine', value: '58', id: '5' },
-    { label: 'Teaching/Academic/Library', value: '58', id: '5' },
-    { label: 'R&D/Science/Research', value: '58', id: '5' },
-    { label: 'Agriculture/Dairy/Environment', value: '58', id: '5' },
-    { label: 'Security', value: '58', id: '5' },
-    { label: 'Fashion/Design/Beauty', value: '58', id: '5' },
-    { label: 'International Development', value: '58', id: '5' },
-    { label: 'KPO/BPO', value: '58', id: '5' },
-    { label: 'Imports/Exports', value: '58', id: '5' },
-]
+export default function () {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedPersons, setSelectedPersons] = useState([]);
 
-export default function SearchComponent() {
+  function isSelected(value) {
+    return selectedPersons.find((el) => el === value) ? true : false;
+  }
 
-    const [suggestions, setSuggestion] = useState([])
-    const [text, setText] = useState('');
-
-
-    const onTextChanged = (e) => {
-        const value = e.target.value;
-        let suggestions = [];
-        if (value.length > 0) {
-            const regex = new RegExp(`^${value}`, 'i');
-            suggestions = jobType.sort().filter(v => regex.test(v.label));
-        } else {
-            suggestions = jobType
-        }
-        setSuggestion(suggestions)
-        setText(value)
+  function handleSelect(value) {
+    if (!isSelected(value)) {
+      const selectedPersonsUpdated = [
+        ...selectedPersons,
+        people.find((el) => el === value)
+      ];
+      setSelectedPersons(selectedPersonsUpdated);
+    } else {
+      handleDeselect(value);
     }
+    setIsOpen(true);
+  }
 
-    const suggestionSelected = (value) => {
-        setSuggestion([])
-        setText(value)
-    }
+  function handleDeselect(value) {
+    const selectedPersonsUpdated = selectedPersons.filter((el) => el !== value);
+    setSelectedPersons(selectedPersonsUpdated);
+    setIsOpen(true);
+  }
 
-    const renderSuggestions = () => {
-        if (suggestions.length === 0) {
-            return null;
-        }
-        return (
-            <div className="srchList">
-                <ul className="bg-gary-100">
-                    {suggestions.map((item) => <li className="hover:bg-sky-200 px-3 py-2 cursor-pointer text-xs" onClick={() => suggestionSelected(item.label)}>{item.label}</li>)}
-                </ul>
-            </div>
-        );
-    }
+  return (
+    <div className="mt-1 relative my-4">
+      <div className="w-full max-w-xs mx-auto">
+        <Listbox
+          as="div"
+          className="space-y-1"
+          value={selectedPersons}
+          onChange={(value) => handleSelect(value)}
+          open={isOpen}
+        >
+          {({ isOpen }) => (
+            <>
+              <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900 z-10">Search</Listbox.Label>
+              <div className="relative">
+                <span className="inline-block w-full rounded-md shadow-sm">
+                  <Listbox.Button
+                    className="cursor-default relative w-full rounded-md border border-teal-600 bg-white pl-3 pr-10 py-2 text-left sm:text-sm"
+                    onClick={() => setIsOpen(!isOpen)}
+                    open={isOpen}
+                  >
+                    <span className="block truncate">
+                      {selectedPersons.length < 1
+                        ? "Select persons"
+                        : `Selected persons (${selectedPersons.length})`}
+                    </span>
+                    <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                      <svg
+                        className="h-5 w-5 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <path
+                          d="M7 7l3-3 3 3m0 6l-3 3-3-3"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </Listbox.Button>
+                </span>
 
-    return (
-        <>
-            <div>
-                {/* <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700 pb-1"
-          >
-            Category
-          </label> */}
-                <div className="flex mt-1 relative">
-                    <input
-                        value={text}
-                        onClick={onTextChanged}
-                        onChange={onTextChanged}
-                        type="text"
-                        id="floating_outlined"
-                        class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-blue-900 bg-transparent rounded-lg border-1 border-blue-500 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
-                        placeholder="Jane Doe"
-                    />
-                    <label
-                        for="floating_outlined"
-                        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >Category</label>
-                    {suggestions.length > 0 && (<div className="absolute w-full py-1 border border-gray-300 mt-14 overflow-auto text-base bg-gray-100 rounded-md max-h-60  focus:outline-none sm:text-sm">
-                        {renderSuggestions()}
-                    </div>)}
-                </div>
-
-            </div>
-        </>
-    );
+                <Transition
+                  unmount={false}
+                  show={isOpen}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                  className="absolute mt-1 w-full rounded-md bg-white shadow-lg z-20"
+                >
+                  <Listbox.Options
+                    static
+                    className="max-h-60 border border-gray-300 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"
+                  >
+                    {people.map((person) => {
+                      const selected = isSelected(person);
+                      return (
+                        <Listbox.Option key={person} value={person}>
+                          {({ active }) => (
+                            <div
+                              className={`${
+                                active
+                                  ? "text-white bg-blue-600"
+                                  : "text-gray-900"
+                              } cursor-default select-none relative py-2 pl-8 pr-4`}
+                            >
+                              <span
+                                className={`${
+                                  selected ? "font-semibold" : "font-normal"
+                                } block truncate`}
+                              >
+                                {person}
+                              </span>
+                              {selected && (
+                                <span
+                                  className={`${
+                                    active ? "text-white" : "text-blue-600"
+                                  } absolute inset-y-0 left-0 flex items-center pl-1.5`}
+                                >
+                                  <svg
+                                    className="h-5 w-5"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </Listbox.Option>
+                      );
+                    })}
+                  </Listbox.Options>
+                </Transition>
+                {/* <div className="pt-1 text-sm">
+                  {selectedPersons.length > 0 && (
+                    <>Selected persons: {selectedPersons.join(", ")}</>
+                  )}
+                </div> */}
+              </div>
+            </>
+          )}
+        </Listbox>
+      </div>
+    </div>
+  );
 }
-
-
-
