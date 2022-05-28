@@ -7,8 +7,8 @@ const TableList = () => {
   return <PostTableListComponent/>
 };
 
-PostTableListComponent.auth = true;
-PostTableListComponent.getLayout = userLayout
+TableList.auth = true;
+TableList.getLayout = userLayout
 
 
 export default TableList;

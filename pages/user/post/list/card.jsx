@@ -10,8 +10,8 @@ const CardList = () => {
 };
 
 
-PostCardListComponent.auth = true;
-PostCardListComponent.getLayout = userLayout
+CardList.auth = true;
+CardList.getLayout = userLayout
 
 
 export default CardList;
