@@ -30,7 +30,8 @@ const JobDescriptionComponent = () => {
                                         Job Title
                                     </label>
                                     <input
-                                        name="firstName" value={jobDescription.desc} placeholder="Job description" onChange={handleInputChange}
+                                        type="text"
+                                        name="desc" value={jobDescription.desc} placeholder="Job description" onChange={handleInputChange}
                                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     />
                                 </div>
