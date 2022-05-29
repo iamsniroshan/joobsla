@@ -1,5 +1,6 @@
 
 import RightSideBar from 'components/common/Sidebar/rightsidebar';
+import TopSideBar from 'components/common/Sidebar/topsidebar';
 import { useRouter } from 'next/router'
 import UserInformationFormComponent from '../Forms/UserInformation';
 import LoginComponent from '../Login'
@@ -21,9 +22,12 @@ export default function InjectorComponent() {
       <RightSideBar open={userInfoEditModal}>
         <UserInformationFormComponent />
       </RightSideBar>
-      <OverlayModalComponent open={openPostAddModal} width="md:max-w-7xl">
+      {/* <OverlayModalComponent open={openPostAddModal} width="md:max-w-7xl">
         <PostAddComponent />
-      </OverlayModalComponent>
+      </OverlayModalComponent> */}
+      <TopSideBar open={openPostAddModal}>
+        <PostAddComponent />
+      </TopSideBar>
     </>
   );
 }

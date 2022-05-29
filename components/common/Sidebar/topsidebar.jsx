@@ -7,8 +7,8 @@ import { useRouter } from 'next/router';
 import { XIcon } from '@heroicons/react/outline'
 import { LinkIcon, PlusIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
 
-export default function TopSideBar({ open = false, children }) {
-
+export default function TopSideBar(props) {
+    const { open = false, children, width = 'max-full' } = props;
     const router = useRouter();
     const [isShowModal, setShowModal] = useState(false)
     const { makeContextualHref, returnHref } = useContextualRouting();
@@ -38,7 +38,7 @@ export default function TopSideBar({ open = false, children }) {
                         <Dialog.Overlay className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
                     <Dialog.Overlay className="absolute inset-0" />
-                    <div className="fixed inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16">
+                    <div className="fixed top-0 right-0 left-0 w-full flex">
                         <Transition.Child
                             as={Fragment}
                             enter="transform transition ease-in-out duration-300 sm:duration-400"
@@ -48,17 +48,15 @@ export default function TopSideBar({ open = false, children }) {
                             leaveFrom="-translate-y-0"
                             leaveTo="-translate-y-full"
                         >
-                                <div className="w-screen max-w-xl">
+                                <div className={`w-screen  ${width}`}>
                                     <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                                         <div className="flex-1">
                                             {/* Header */}
                                             <div className="px-4 py-6 bg-gradient-to-r from-sky-800 to-cyan-600 sm:px-6">
+                                            <div className="container mx-auto max-w-7xl">
                                                 <div className="flex items-start justify-between space-x-3">
                                                     <div className="space-y-1">
                                                         <Dialog.Title className="text-lg font-medium text-white">New project</Dialog.Title>
-                                                        <p className="text-sm text-white">
-                                                            Get started by filling in the information below to create your new project.
-                                                        </p>
                                                     </div>
                                                     <div className="h-7 flex items-center">
                                                         <button
@@ -70,6 +68,7 @@ export default function TopSideBar({ open = false, children }) {
                                                             <XIcon className="h-6 w-6" aria-hidden="true" />
                                                         </button>
                                                     </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
