@@ -17,8 +17,6 @@ const JobDetailsComponent = () => {
 
   return (
     <>
-      <div className="p-0 mt-10">
-        <div className="container mx-auto max-w-7xl">
           <form>
             <div className="bg-white  py-10  h-96">
               <div className="grid grid-cols-6 gap-6">
@@ -50,8 +48,6 @@ const JobDetailsComponent = () => {
               </div>
             </div>
           </form>
-        </div>
-      </div>
     </>
   )
 }
