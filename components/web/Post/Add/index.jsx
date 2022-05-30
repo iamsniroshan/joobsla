@@ -14,7 +14,7 @@ const componentsList = [
 
 // Supplying initial state values to use with different components.
 const InitialValues = {
-  jobDetail: { jobTitle: "", jobType: ""},
+  jobDetail: { jobTitle: "", jobType: "",jobCategory:""},
   jobDescription: { desc: "" }
 }
 

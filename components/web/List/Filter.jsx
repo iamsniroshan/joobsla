@@ -8,7 +8,7 @@ const jobType = {
 }
 
 import Select from "components/common/Inputs/select";
-import Text from "components/common/Inputs/text";
+import TextInput from "components/common/Inputs/TextInput";
 import Search from "components/common/Inputs/search";
 import Checkbox from "components/common/Inputs/checkbox";
 
@@ -22,7 +22,7 @@ export default function FilterComponent() {
             <div className="flow-root">
               <Search />
               <Select />
-              <Text />
+              <TextInput />
               <Checkbox/>
             </div>
           </div>

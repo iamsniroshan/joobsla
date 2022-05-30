@@ -87,8 +87,7 @@ const JobDescriptionComponent = () => {
                         
                     </div>
                     <div className="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
-                        <label for="editor" className="sr-only">Publish post</label>
-                        <ContentEditable placeholder={'Write an article...'} html={jobDescription.desc} onChange={handleInputChange} className="block px-0 w-full text-sm max-h-full overflow-y-auto text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" />
+                        <ContentEditable placeholder={'Write an article...'} html={jobDescription.desc} onChange={handleInputChange} className="min-h-[17rem] block px-0 w-full text-sm max-h-full overflow-y-auto text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" />
                     </div>
                 </div>
             </form>
