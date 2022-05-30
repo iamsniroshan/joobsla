@@ -38,7 +38,7 @@ export default function TopSideBar(props) {
                         <Dialog.Overlay className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
                     <Dialog.Overlay className="absolute inset-0" />
-                    <div className="fixed top-0 right-0 left-0 w-full flex">
+                    <div className="fixed inset-y-10 top-0 right-0 left-0 w-full flex">
                         <Transition.Child
                             as={Fragment}
                             enter="transform transition ease-in-out duration-300 sm:duration-400"

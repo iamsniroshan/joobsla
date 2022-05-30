@@ -26,7 +26,7 @@ function PostAddComponent() {
   const [proceedNext, setProceedNext] = useState(true); // Enable or Disable 'Next' button within each component
 
   return (
-    <div className="App">
+    <div className="xxxxxxxx">
       <OrderContext.Provider value={{ postDetails, setPostDetails, setProceedNext }}>
         <MultiStepForm
           list={componentsList}

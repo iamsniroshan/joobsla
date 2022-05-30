@@ -18,7 +18,7 @@ const JobDetailsComponent = () => {
   return (
     <>
           <form>
-            <div className="bg-white  py-10  h-96">
+            <div className="bg-white py-10">
               <div className="grid grid-cols-6 gap-6">
                 <div className="col-span-6 sm:col-span-3">
                   <label
