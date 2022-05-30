@@ -22,6 +22,7 @@
         "next-use-contextual-routing": "^2.1.0",
         "prop-types": "^15.7.2",
         "react": "^18.1.0",
+        "react-contenteditable": "^3.3.6",
         "react-dom": "^18.1.0",
         "react-hook-form": "^7.31.3",
         "react-infinite-scroll-component": "^6.1.0",
