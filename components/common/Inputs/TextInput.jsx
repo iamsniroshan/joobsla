@@ -4,7 +4,7 @@ export default function TextInput({ value, label, name, placeholder, type, onCha
     <div className="relative my-6">
       {label && <label
         htmlFor="name"
-        className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400"
+        className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-500"
       >
         {label}
       </label>}
