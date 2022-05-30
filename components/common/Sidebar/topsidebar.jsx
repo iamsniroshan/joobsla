@@ -38,7 +38,7 @@ export default function TopSideBar(props) {
                         <Dialog.Overlay className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
                     <Dialog.Overlay className="absolute inset-0" />
-                    <div className="fixed inset-y-10 top-0 right-0 left-0 w-full flex">
+                    <div className="fixed inset-y-28 top-0 right-0 left-0 w-full flex">
                         <Transition.Child
                             as={Fragment}
                             enter="transform transition ease-in-out duration-300 sm:duration-400"
@@ -50,7 +50,6 @@ export default function TopSideBar(props) {
                         >
                                 <div className={`w-screen  ${width}`}>
                                     <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
-                                        <div className="flex-1">
                                             {/* Header */}
                                             <div className="px-4 py-6 bg-gradient-to-r from-sky-800 to-cyan-600 sm:px-6">
                                             <div className="container mx-auto max-w-7xl">
@@ -71,7 +70,6 @@ export default function TopSideBar(props) {
                                                 </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         {/* Adding children here */}
                                         {children}
                                     </div>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext }) => (
     <>
-        <div className="px-0 py-3 bg-gray-50 text-right sm:px-6">
+        <div className="absolute bottom-0 w-full px-0 py-3 bg-gray-50 text-right sm:px-6">
             <div className="container mx-auto max-w-7xl">
                 <button disabled={selectedIndex === 0} onClick={goPrevious} className="mr-2 w-32 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Previous
@@ -16,6 +16,7 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext
                 )}
             </div>
         </div>
+        <div className="block h-20 w-full"></div>
     </>
 );
 
