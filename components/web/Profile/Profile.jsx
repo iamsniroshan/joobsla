@@ -80,7 +80,7 @@ export default function ProfileComponent() {
 
 
   return (
-    <div className="relative min-h-screen bg-grayBg">
+    <div className="relative bg-grayBg">
       <Popover
         as="header"
         className="pb-24 bg-gradient-to-r from-sky-800 to-cyan-600"
@@ -252,7 +252,7 @@ export default function ProfileComponent() {
           </>
         )}
       </Popover>
-      <main className="-mt-24 pb-8">
+      <main className="-mt-24 pb-8 main-height">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-0">
           <h1 className="sr-only">Profile</h1>
           {/* Main 3 column grid */}
@@ -405,7 +405,7 @@ export default function ProfileComponent() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
           <div className="border-t border-gray-200 py-8 text-sm text-gray-500 text-center sm:text-left">
             <span className="block sm:inline">
-              &copy; 2021 Tailwind Labs Inc.
+              &copy; 2021 LotJobs Pvt Ltd..
             </span>{" "}
             <span className="block sm:inline">All rights reserved.</span>
           </div>

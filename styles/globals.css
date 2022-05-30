@@ -15,6 +15,10 @@ h6 {
     height: calc(100vh - 370px);
 }
 
+.main-height {
+    height: calc(100vh - 150px);
+}
+
 [contenteditable=true]:empty:before {
     content: attr(placeholder);
     pointer-events: none;

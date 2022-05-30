@@ -65,40 +65,40 @@ export default function PostCardListComponent() {
       closeDate: '2020-01-14',
       closeDateFull: 'January 14, 2020',
     },
-    {
-      id: 5,
-      title: 'User Interface Designer',
-      type: 'Full-time',
-      status: 'Approved',
-      location: 'Remote',
-      department: 'Design',
-      closeDate: '2020-01-14',
-      closeDateFull: 'January 14, 2020',
-    },
-    {
-      id: 6,
-      title: 'User Interface Designer',
-      type: 'Full-time',
-      status: 'Approved',
-      location: 'Remote',
-      department: 'Design',
-      closeDate: '2020-01-14',
-      closeDateFull: 'January 14, 2020',
-    },
-    {
-      id: 7,
-      title: 'User Interface Designer',
-      type: 'Full-time',
-      status: 'Approved',
-      location: 'Remote',
-      department: 'Design',
-      closeDate: '2020-01-14',
-      closeDateFull: 'January 14, 2020',
-    },
+    // {
+    //   id: 5,
+    //   title: 'User Interface Designer',
+    //   type: 'Full-time',
+    //   status: 'Approved',
+    //   location: 'Remote',
+    //   department: 'Design',
+    //   closeDate: '2020-01-14',
+    //   closeDateFull: 'January 14, 2020',
+    // },
+    // {
+    //   id: 6,
+    //   title: 'User Interface Designer',
+    //   type: 'Full-time',
+    //   status: 'Approved',
+    //   location: 'Remote',
+    //   department: 'Design',
+    //   closeDate: '2020-01-14',
+    //   closeDateFull: 'January 14, 2020',
+    // },
+    // {
+    //   id: 7,
+    //   title: 'User Interface Designer',
+    //   type: 'Full-time',
+    //   status: 'Approved',
+    //   location: 'Remote',
+    //   department: 'Design',
+    //   closeDate: '2020-01-14',
+    //   closeDateFull: 'January 14, 2020',
+    // },
   ]
 
   return (
-    <div className="relative min-h-screen bg-grayBg">
+    <div className="relative bg-grayBg">
       <div
         as="header"
         className="pb-24 bg-gradient-to-r from-sky-800 to-cyan-600"
@@ -132,116 +132,112 @@ export default function PostCardListComponent() {
           </div>
         </div>
       </div>
-      <main className="-mt-24 pb-8">
+      <main className="-mt-24 pb-8 main-height">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-0">
           <h1 className="sr-only">Profile</h1>
           {/* Main 1 column grid */}
-          <div className="grid grid-cols-1 gap-4 items-start post-list-height">
-            <div className="bg-white shadow overflow-hidden sm:rounded-md">
-              <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-                <div className="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">
-                  <div className="ml-4 mt-4">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">Job Postings</h3>
-                    <p className="mt-1 text-sm text-gray-500">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit quam corrupti consectetur.
-                    </p>
-                  </div>
-                  <div className="ml-4 mt-4 flex-shrink-0">
+          <div className="bg-white shadow overflow-hidden sm:rounded-md">
+            <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+              <div className="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">
+                <div className="ml-4 mt-4">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">Job Postings</h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit quam corrupti consectetur.
+                  </p>
+                </div>
+                <div className="ml-4 mt-4 flex-shrink-0">
                   <Link scroll={false}
-                      href={makeContextualHref({ openPostAddModal: true })}
-                      as="/user/post/add">
+                    href={makeContextualHref({ openPostAddModal: true })}
+                    as="/user/post/add">
                     <button
                       type="button"
                       className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-0"
                     >
                       Create new job
                     </button>
-                    </Link>
-                  </div>
+                  </Link>
                 </div>
               </div>
-              <ul className="divide-y divide-gray-200">
-                {positions.map((position) => (
-                  <li key={position.id}>
-                    <a href="#" className="block hover:bg-gray-50">
-                      <div className="px-4 py-4 sm:px-6">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-indigo-600 truncate">{position.title}</span>
+            </div>
+            <ul className="divide-y divide-gray-200">
+              {positions.map((position) => (
+                <li key={position.id}>
+                  <a href="#" className="block hover:bg-gray-50">
+                    <div className="px-4 py-4 sm:px-6">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-indigo-600 truncate">{position.title}</span>
 
 
-                          <div className="ml-2 flex-shrink-0 flex">
+                        <div className="ml-2 flex-shrink-0 flex">
 
-                            <div className="flex -space-x-1 relative z-0 overflow-hidden">
-                              <span className="block mr-4">
-                                <img
-                                  className="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                                  src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt=""
-                                />
-                                <img
-                                  className="relative z-20 inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt=""
-                                />
-                                <img
-                                  className="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-                                  alt=""
-                                />
-                                <img
-                                  className="relative z-0 inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt=""
-                                />
-                              </span>
+                          <div className="flex -space-x-1 relative z-0 overflow-hidden">
+                            <span className="block mr-4">
+                              <img
+                                className="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                alt=""
+                              />
+                              <img
+                                className="relative z-20 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                alt=""
+                              />
+                              <img
+                                className="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+                                alt=""
+                              />
+                              <img
+                                className="relative z-0 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                alt=""
+                              />
+                            </span>
 
-                              <span className="block"><ArrowCircleRightIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 mt-1" aria-hidden="true" /></span>
-                              <span className="block text-sm font-medium text-indigo-600 truncate p-1">View applications</span>
-                            </div>
+                            <span className="block"><ArrowCircleRightIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 mt-1" aria-hidden="true" /></span>
+                            <span className="block text-sm font-medium text-indigo-600 truncate p-1">View applications</span>
                           </div>
-
                         </div>
-                        <div className="mt-2 sm:flex sm:justify-between">
-                          <div className="sm:flex">
-                            <p className="flex items-center text-sm text-gray-500">
-                              <UsersIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                              {position.department}
+
+                      </div>
+                      <div className="mt-2 sm:flex sm:justify-between">
+                        <div className="sm:flex">
+                          <p className="flex items-center text-sm text-gray-500">
+                            <UsersIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                            {position.department}
+                          </p>
+                          <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                            <LocationMarkerIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                            {position.location}
+                          </p>
+                          <span className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                            <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                            <p>
+                              Closing on <time dateTime={position.closeDate}>{position.closeDateFull}</time>
                             </p>
-                            <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                              <LocationMarkerIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                              {position.location}
-                            </p>
-                            <span className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                              <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                              <p>
-                                Closing on <time dateTime={position.closeDate}>{position.closeDateFull}</time>
-                              </p>
-                            </span>
-                            <span className="px-2 ml-5 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              {position.status}
-                            </span>
-                          </div>
-                          <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                            <span className="block text-sm font-medium text-red-600 truncate p-0">Delete</span>
-                            <span className="block text-sm font-medium text-green-600 truncate p-0 ml-6">Edit</span>
-                          </div>
+                          </span>
+                          <span className="px-2 ml-5 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            {position.status}
+                          </span>
+                        </div>
+                        <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                          <span className="block text-sm font-medium text-red-600 truncate p-0">Delete</span>
+                          <span className="block text-sm font-medium text-green-600 truncate p-0 ml-6">Edit</span>
                         </div>
                       </div>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-
         </div>
-
       </main>
       <footer>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
           <div className="border-t border-gray-200 py-8 text-sm text-gray-500 text-center sm:text-left">
             <span className="block sm:inline">
-              &copy; 2021 Tailwind Labs Inc.
+              &copy; 2021 LotJobs Pvt Ltd..
             </span>{" "}
             <span className="block sm:inline">All rights reserved.</span>
           </div>
