@@ -28,11 +28,10 @@ function PostAddComponent() {
 
   return (
     <div className="xxxxxxxx">
-      <OrderContext.Provider value={{ postDetails, setPostDetails, setProceedNext }}>
+      <OrderContext.Provider value={{ postDetails, setPostDetails, proceedNext, setProceedNext }}>
         <MultiStepForm
           list={componentsList}
           displayProgressBar={true} // Set this to false if you don't want to display the progress bar.
-          proceedNext={proceedNext} // Optional props. To Enable/Disable 'Next' button from child component.
         />
       </OrderContext.Provider>
 

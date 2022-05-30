@@ -1,5 +1,6 @@
 import PanelSteps from "components/common/Steps/Panels";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import OrderContext from "./OrderContext";
 
 
 const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext }) => (
@@ -42,19 +43,28 @@ const ProgressBar = ({ list, selectedIndex }) => {
 }
 
 
-const MultiStepForm = ({ list, displayProgressBar, proceedNext = true }) => {
+const MultiStepForm = ({ list, displayProgressBar }) => {
 
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const { proceedNext, setProceedNext, postDetails } = useContext(OrderContext); // Context API
 
     const goNext = () => {
-        if (selectedIndex !== list.length - 1)
-            setSelectedIndex(selectedIndex + 1);
+        if (checkStepOneValidation(postDetails)) {
+            selectedIndex !== (list.length - 1) ? setSelectedIndex(selectedIndex + 1) : null
+        } else {
+            setProceedNext(false)
+        }
     };
 
     const goPrevious = () => {
         if (selectedIndex !== 0)
             setSelectedIndex(selectedIndex - 1);
     };
+
+    const checkStepOneValidation = (props) => {
+        let { jobTitle, jobType, jobCategory } = props.jobDetail
+        return jobTitle && jobType && jobCategory ? true : false
+    }
 
     return (
         <>
