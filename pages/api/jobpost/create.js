@@ -20,12 +20,10 @@ async function handler(req, res) {
   const buildData = { ...data, userId };
   var ObjectId = require("mongodb").ObjectId;
 
-  try {
-    const data = await db.collection("jobPosts").insertOne(buildData);
-    if(result.acknowledged) res.status(201).json({ "status": "error", message: "Created success!",data});
-  } catch (error) {
-    res.status(400).json({ "status": "error", message: "Created failed!",data: error});
-  }
+
+    const result = await db.collection("jobPosts").insertOne(buildData);
+    if(result.acknowledged) res.status(201).json({ "status": "error", message: "Created success!","data":result});
+
   client.close();
 }
 

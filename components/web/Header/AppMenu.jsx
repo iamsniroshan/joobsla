@@ -43,7 +43,7 @@ export default function AppMenuComponent() {
               <div>
                 <Menu.Button className="bg-gray-200 text-sm text-gray-500 leading-none  border-gray-200 rounded-full inline-flex">
                   <button className="inline-flex items-center text-sky-800 transition-colors duration-300 ease-in focus:outline-none hover:text-blue-800  rounded-l-full px-4 py-2 active" id="grid">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fill-current w-4 h-4 mr-2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="fill-current w-4 h-4 mr-2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                     <span className="h-4">Menu</span>
                   </button>
                 </Menu.Button>

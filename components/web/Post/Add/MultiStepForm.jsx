@@ -5,7 +5,14 @@ import createJobPostApi from 'services/api/jobPost'
 
 
 const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext }) => {
+
     const { postDetails } = useContext(AddPostWizardContext); // Context API
+
+    const submitData = (postDetails) => {
+        const result = createJobPostApi(postDetails);
+        console.log(result);
+    }
+
     return (
         <>
             <div className="absolute bottom-0 w-full px-0 py-3 bg-gray-50 text-right sm:px-6">
@@ -13,16 +20,16 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext
                     <button disabled={selectedIndex === 0} onClick={goPrevious} className="mr-2 w-32 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Previous
                     </button>{" "}
-                    {selectedIndex !== list.length - 1 && (
-                        <button onClick={goNext} className="mr-2 w-32 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    {selectedIndex !== list.length - 1 ? (
+                        <button type="button" onClick={goNext} className="mr-2 w-32 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-0 ">
                             {selectedIndex !== list.length - 1 ? "Next" : "Finish"}
                         </button>
-                    )}
-                    {selectedIndex === list.length - 1 && (
-                        <button onClick={submitData(postDetails)} className="mr-2 w-32 bg-green-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    ) : (
+                        <button type="button" onClick={() => submitData(postDetails)} className="mr-2 w-32 bg-green-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-0">
                             {'Submit'}
                         </button>
                     )}
+
                 </div>
             </div>
             <div className="block h-20 w-full"></div>
@@ -30,14 +37,7 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext
     )
 };
 
-const submitData = (postDetails) => {
-    try {
-        const result = createJobPostApi(postDetails);
-        console.log(result);
-    } catch (error) {
-        console.log(error);
-    }
-}
+
 
 const ProgressBar = ({ list, selectedIndex }) => {
     const newList = list.map((item, index) => {

@@ -7,7 +7,7 @@ async function createJobPostApi (reqBody) {
       },
     });
   
-    const data = await response.json();
+    const { data } = await response.json();
     return data;
   }
   
