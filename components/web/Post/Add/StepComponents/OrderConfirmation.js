@@ -1,8 +1,8 @@
 import React, {useContext} from 'react'
-import OrderContext from '../OrderContext';
+import { AddPostWizardContext } from 'components/context';
 
 const OrderConfirmation = () => {
-    const { postDetails } = useContext(OrderContext);
+    const { postDetails } = useContext(AddPostWizardContext);
     return (
         <>
             <center>

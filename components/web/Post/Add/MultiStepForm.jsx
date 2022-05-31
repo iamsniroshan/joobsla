@@ -1,6 +1,6 @@
 import PanelSteps from "components/common/Steps/Panels";
 import React, { useState, useContext } from "react";
-import OrderContext from "./OrderContext";
+import { AddPostWizardContext } from 'components/context';
 
 
 const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext }) => (
@@ -11,7 +11,7 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext
                     Previous
                 </button>{" "}
                 {selectedIndex !== list.length - 1 && (
-                    <button onClick={goNext} disabled={!proceedNext} className="mr-2 w-32 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button onClick={goNext}  className="mr-2 w-32 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         {selectedIndex !== list.length - 1 ? "Next" : "Finish"}
                     </button>
                 )}
@@ -46,10 +46,10 @@ const ProgressBar = ({ list, selectedIndex }) => {
 const MultiStepForm = ({ list, displayProgressBar }) => {
 
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const { proceedNext, setProceedNext, postDetails } = useContext(OrderContext); // Context API
+    const { proceedNext, setProceedNext, postDetails } = useContext(AddPostWizardContext); // Context API
 
     const goNext = () => {
-        if (checkStepOneValidation(postDetails)) {
+        if (checkValidation(postDetails,selectedIndex)) { // check step one validation
             selectedIndex !== (list.length - 1) ? setSelectedIndex(selectedIndex + 1) : null
         } else {
             setProceedNext(false)
@@ -61,9 +61,16 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
             setSelectedIndex(selectedIndex - 1);
     };
 
-    const checkStepOneValidation = (props) => {
+    const checkValidation = (props,selectedIndex) => {
         let { jobTitle, jobType, jobCategory } = props.jobDetail
-        return jobTitle && jobType && jobCategory ? true : false
+        let { desc } = props.jobDescription
+        if(selectedIndex === 0) { // step one validation
+            return jobTitle && jobType && jobCategory ? true : false
+        } 
+        if(selectedIndex === 1) { // step two validation
+            return desc ? true : false
+        } 
+        
     }
 
     return (

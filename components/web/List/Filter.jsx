@@ -22,7 +22,8 @@ export default function FilterComponent() {
             <div className="flow-root">
               <Search />
               <Select />
-              <TextInput />
+              <TextInput type="text" label="Job Type"
+                name="jobType"/>
               <Checkbox/>
             </div>
           </div>

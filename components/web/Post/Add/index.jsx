@@ -1,6 +1,6 @@
+import { AddPostWizardContext } from 'components/context';
 import React, { useState } from 'react';
 import MultiStepForm from './MultiStepForm';
-import OrderContext from './OrderContext';
 import { JobDetailsComponent, JobDescriptionComponent, OrderConfirmation } from './StepComponents';
 
 
@@ -28,13 +28,12 @@ function PostAddComponent() {
 
   return (
     <div className="xxxxxxxx">
-      <OrderContext.Provider value={{ postDetails, setPostDetails, proceedNext, setProceedNext }}>
+      <AddPostWizardContext.Provider value={{ postDetails, setPostDetails, proceedNext, setProceedNext }}>
         <MultiStepForm
           list={componentsList}
           displayProgressBar={true} // Set this to false if you don't want to display the progress bar.
         />
-      </OrderContext.Provider>
-
+      </AddPostWizardContext.Provider>
     </div>
   );
 }
