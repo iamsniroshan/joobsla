@@ -128,7 +128,6 @@ export default function PostCardListComponent() {
             <li className="flex col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
               <Link scroll={false}
                 href={makeContextualHref({ openPostAddModal: true })}
-                as="/user/post/add"
                 className="ml-6 inline-flex items-center"
               >
                 <button
