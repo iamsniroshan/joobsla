@@ -3,6 +3,7 @@
 import { AddPostWizardContext } from 'components/context';
 import React, { useContext } from "react";
 import ContentEditable from 'react-contenteditable'
+import { ExclamationCircleIcon } from '@heroicons/react/solid'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -81,10 +82,13 @@ export default function TextEditInput({ value, label, placeholder, onChange, req
                 </div>
 
             </div>
-            <div className="p-4 bg-white rounded-b-lg dark:bg-gray-800">
+            <div className="relative p-4 pb-8 bg-white rounded-b-lg dark:bg-gray-800">
                 <ContentEditable placeholder={placeholder} html={value} onChange={onChange}
-                    className={classNames(isValidate ? "min-h-[17rem] block w-full pr-10 border border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-0" : "min-h-[17rem] mt-1 block w-full shadow-sm sm:text-sm rounded-md focus:ring-0 border-0")}
+                    className={classNames(isValidate ? "min-h-[17rem] block w-full pr-10 border rounded-md border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-0" : "min-h-[17rem] mt-1 block w-full shadow-sm sm:text-sm rounded-md focus:ring-0 border-0")}
                 />
+                {isValidate && <div className="absolute flex right-0 mr-5 p-1">
+        <span className="text-xs text-red-600 mb-1 mr-2">Required filed is missing</span> <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
+      </div>}
             </div>
         </div>
     )

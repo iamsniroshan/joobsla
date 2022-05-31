@@ -12,7 +12,7 @@ function classNames(...classes) {
 export default function TextInput({ value, label, name, placeholder, type, onChange, required = false }) {
 
   const { proceedNext } = useContext(AddPostWizardContext); // Context API
-    const isValidate = !proceedNext && required && !value
+  const isValidate = !proceedNext && required && !value
 
   return (
     <div className="relative my-6">
@@ -29,11 +29,11 @@ export default function TextInput({ value, label, name, placeholder, type, onCha
         name={name}
         placeholder={placeholder}
         onChange={onChange}
-        className={classNames(isValidate ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-0 rounded-md" :"mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-0 focus:border-teal-600")}
+        className={classNames(isValidate ? "block w-full pr-10 sm:text-sm border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-0 rounded-md" : "mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-0 focus:border-teal-600")}
       />
       {isValidate && <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-          <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
-        </div>}
+        <span className="text-xs text-red-600 mb-1 mr-2">Required filed is missing</span> <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
+      </div>}
     </div>
   )
 }
