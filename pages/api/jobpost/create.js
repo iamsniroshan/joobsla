@@ -18,11 +18,14 @@ async function handler(req, res) {
 
   const userId = session.user.id;
   const buildData = { ...data, userId };
-  var ObjectId = require("mongodb").ObjectId;
+  //var ObjectId = require("mongodb").ObjectId;
 
-
+  try {
     const result = await db.collection("jobPosts").insertOne(buildData);
-    if(result.acknowledged) res.status(201).json({ "status": "error", message: "Created success!","data":result});
+    res.status(201).json({ "status": "success", message: "Job post creation success!", "data": result });
+  } catch (err) {
+    res.status(400).json({ "status": "error", message: "Job post creation failed!", "data": err });
+  }
 
   client.close();
 }

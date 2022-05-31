@@ -2,15 +2,23 @@ import PanelSteps from "components/common/Steps/Panels";
 import React, { useState, useContext } from "react";
 import { AddPostWizardContext } from 'components/context';
 import createJobPostApi from 'services/api/jobPost'
-
+import { useContextualRouting } from "next-use-contextual-routing";
+import { useRouter } from 'next/router';
 
 const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext }) => {
 
     const { postDetails } = useContext(AddPostWizardContext); // Context API
+    const router = useRouter();
+    const { returnHref } = useContextualRouting();
 
     const submitData = (postDetails) => {
-        const result = createJobPostApi(postDetails);
-        console.log(result);
+        createJobPostApi(postDetails).then(item => {
+            if (item.status === 'success') {
+                router.push(returnHref, undefined, { shallow: true })
+            } else {
+                router.push(returnHref, undefined, { shallow: true })
+            }
+        });
     }
 
     return (

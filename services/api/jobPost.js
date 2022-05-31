@@ -1,4 +1,4 @@
-async function createJobPostApi (reqBody) {
+const createJobPostApi = async (reqBody) => {
     const response = await fetch('/api/jobpost/create', {
       method: 'POST',
       body: JSON.stringify(reqBody),
@@ -7,8 +7,8 @@ async function createJobPostApi (reqBody) {
       },
     });
   
-    const { data } = await response.json();
-    return data;
+    const data = await response.json();
+    return data
   }
   
   export default createJobPostApi
