@@ -51,7 +51,7 @@ export default function TopSideBar(props) {
                                 <div className={`w-screen  ${width}`}>
                                     <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                                             {/* Header */}
-                                            <div className="px-4 py-6 bg-gradient-to-r from-sky-800 to-cyan-600 sm:px-6">
+                                            <div className="px-4 py-2 bg-gradient-to-r from-sky-800 to-cyan-600 sm:px-6">
                                             <div className="container mx-auto max-w-7xl">
                                                 <div className="flex items-start justify-between space-x-3">
                                                     <div className="space-y-1">

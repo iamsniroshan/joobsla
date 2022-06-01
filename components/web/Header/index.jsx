@@ -6,8 +6,6 @@ import {
 import { BellIcon, MenuIcon, XIcon, HomeIcon, FireIcon, UserGroupIcon, TrendingUpIcon, ViewGridIcon } from '@heroicons/react/outline'
 import AppMenuComponent from './AppMenu'
 import Link from 'next/link'
-import { useAtom } from 'jotai'
-import { openLoginAtom } from 'Jotai-atoms'
 import { useRouter } from 'next/router'
 import { useContextualRouting } from 'next-use-contextual-routing';
 import { useSession, signOut } from 'next-auth/client';

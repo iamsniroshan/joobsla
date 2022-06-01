@@ -4,17 +4,23 @@ import { AddPostWizardContext } from 'components/context';
 import createJobPostApi from 'services/api/jobPost'
 import { useContextualRouting } from "next-use-contextual-routing";
 import { useRouter } from 'next/router';
+import { addPostSuccessAtom } from "atoms-store";
+import { useAtom } from "jotai";
+import ProcessingLoader from "components/common/Loader/processing";
 
 const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext }) => {
 
     const { postDetails } = useContext(AddPostWizardContext); // Context API
-    const router = useRouter();
     const { returnHref } = useContextualRouting();
+    const [loader, setLoader] = useAtom(addPostSuccessAtom)
+    const router = useRouter();
 
     const submitData = (postDetails) => {
         createJobPostApi(postDetails).then(item => {
+            setLoader(true)
             if (item.status === 'success') {
                 router.push(returnHref, undefined, { shallow: true })
+                setLoader(false)
             } else {
                 router.push(returnHref, undefined, { shallow: true })
             }
@@ -73,6 +79,7 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
 
     const [selectedIndex, setSelectedIndex] = useState(0);
     const { proceedNext, setProceedNext, postDetails } = useContext(AddPostWizardContext); // Context API
+    const [loader] = useAtom(addPostSuccessAtom)
 
     const goNext = () => {
         if (checkValidation(postDetails, selectedIndex)) { // check step one validation
@@ -101,27 +108,33 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
 
     return (
         <>
-            <div className={"wrapper wrapper-content "}>
-                <div className="p-0 mt-10">
-                    <div className="container mx-auto max-w-7xl">
-                        {displayProgressBar && (<ProgressBar list={list} selectedIndex={selectedIndex} />)}
-                    </div>
+            {loader ? (
+                <div className="items-center justify-center flex h-80">
+                    <ProcessingLoader/>
                 </div>
-                {/*-------------------------------*/}
-                <div className="p-0 mt-10">
-                    <div className="container mx-auto max-w-7xl">
-                        {list[selectedIndex].component}
+            ) : (
+                <div className={"wrapper wrapper-content "}>
+                    <div className="p-0 mt-10">
+                        <div className="container mx-auto max-w-7xl">
+                            {displayProgressBar && (<ProgressBar list={list} selectedIndex={selectedIndex} />)}
+                        </div>
                     </div>
+                    {/*-------------------------------*/}
+                    <div className="p-0 mt-10">
+                        <div className="container mx-auto max-w-7xl">
+                            {list[selectedIndex].component}
+                        </div>
+                    </div>
+                    {/** ---------------- Navigation buttons ---------------- */}
+                    <NavigationButton
+                        goNext={goNext}
+                        goPrevious={goPrevious}
+                        selectedIndex={selectedIndex}
+                        list={list}
+                        proceedNext={proceedNext}
+                    />
                 </div>
-                {/** ---------------- Navigation buttons ---------------- */}
-                <NavigationButton
-                    goNext={goNext}
-                    goPrevious={goPrevious}
-                    selectedIndex={selectedIndex}
-                    list={list}
-                    proceedNext={proceedNext}
-                />
-            </div>
+            )}
         </>
     )
 }
