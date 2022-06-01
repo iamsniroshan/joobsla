@@ -3,7 +3,7 @@ import { useState } from "react";
 import { omit } from "lodash";
 import SelectInput from "components/common/Inputs/SelectInput";
 import TextInput from "components/common/Inputs/TextInput";
-import Search from "components/common/Inputs/search";
+import MultiSelectInput from "components/common/Inputs/MultiSelectInput";
 import Checkbox from "components/common/Inputs/checkbox";
 
 const jobType = {
@@ -66,7 +66,7 @@ export default function FilterComponent() {
         <div className="bg-white rounded-lg shadow">
           <div className="p-6">
             <div className="flow-root">
-              <Search />
+              <MultiSelectInput/>
               <SelectInput label="Category" data={jobTypeData} value={filterObj.category || {}} onChange={(e) => handleInputChange({...e,inputName:'category'})}/>
               <TextInput type="text" label="Job Type"
                 name="jobType"/>

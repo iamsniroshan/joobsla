@@ -22,7 +22,6 @@ export default function SelectInput({ value, data = [], label, onChange, require
     <Listbox value={selectedOption} onChange={onChange}>
       {({ open }) => (
         <>
-        {JSON.stringify(selectedOption)}
           <div className="relative my-6">
             <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">{label}</Listbox.Label>
             <Listbox.Button className="cursor-default relative w-full rounded-md border border-gray-300 pl-3 pr-10 py-2 text-left sm:text-sm focus:ring-0 focus:border-teal-600">
@@ -53,7 +52,6 @@ export default function SelectInput({ value, data = [], label, onChange, require
                       )
                     }
                     value={eachItem}
-                    name={'fuck'}
                   >
                     {({ active }) => (
                       <>
