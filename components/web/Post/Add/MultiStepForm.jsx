@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { addPostSuccessAtom } from "atoms-store";
 import { useAtom } from "jotai";
 import ProcessingLoader from "components/common/Loader/processing";
+import BounceLoader from "components/common/Loader/bounce";
 
 const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext }) => {
 
@@ -110,7 +111,7 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
         <>
             {loader ? (
                 <div className="items-center justify-center flex h-80">
-                    <ProcessingLoader/>
+                    <BounceLoader/>
                 </div>
             ) : (
                 <div className={"wrapper wrapper-content "}>
