@@ -7,13 +7,13 @@ export default function PanelSteps(props) {
   const {steps} = props
   return (
     <nav aria-label="Progress">
-      <ol className="flex items-center justify-center  mx-auto border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0">
+      <ol className="flex items-center justify-center  mx-auto border border-gray-300 bg-gray-100 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0">
         {steps.map((step, stepIdx) => (
           <li key={step.headerText} className="relative md:flex-1 md:flex">
             {step.status === 'complete' ? (
               <a href={step.href} className="group flex items-center w-full">
                 <span className="px-6 py-2 flex items-center text-sm font-medium">
-                  <span className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-600 rounded-full group-hover:bg-indigo-800">
+                  <span className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-green-700 rounded-full group-hover:bg-green-700">
                     <CheckIcon className="w-6 h-6 text-white" aria-hidden="true" />
                   </span>
                   <span className="ml-4 text-sm font-medium text-gray-900">{step.headerText}</span>

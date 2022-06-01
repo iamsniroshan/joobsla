@@ -25,7 +25,7 @@ export default function InjectorComponent() {
       {/* <OverlayModalComponent open={openPostAddModal} width="md:max-w-7xl">
         <PostAddComponent />
       </OverlayModalComponent> */}
-      <TopSideBar open={openPostAddModal}>
+      <TopSideBar open={openPostAddModal} title="Post New Job">
         <PostAddComponent />
       </TopSideBar>
     </>

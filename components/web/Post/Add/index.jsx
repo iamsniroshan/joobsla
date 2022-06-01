@@ -7,9 +7,9 @@ import { JobDetailsComponent, JobDescriptionComponent, OrderConfirmation } from 
 
 // List of components to switch inside the multi-form container
 const componentsList = [
-  { id: 1, headerText: 'Shipping Address', status: 'current', component: <JobDetailsComponent /> },
-  { id: 2, headerText: 'Payment Details', status: 'upcoming', component: <JobDescriptionComponent /> },
-  { id: 3, headerText: 'Order Confirmation', status: 'upcoming', component: <OrderConfirmation /> },
+  { id: 1, headerText: 'Job Detail', status: 'current', component: <JobDetailsComponent /> },
+  { id: 2, headerText: 'Job Description', status: 'upcoming', component: <JobDescriptionComponent /> },
+  { id: 3, headerText: 'Preview', status: 'upcoming', component: <OrderConfirmation /> },
 ];
 
 // Supplying initial state values to use with different components.

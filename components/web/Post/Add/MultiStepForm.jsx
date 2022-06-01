@@ -20,8 +20,8 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext
         setLoader(true)
         createJobPostApi(postDetails).then(item => {
             if (item.status === 'success') {
-                router.push(returnHref, undefined, { shallow: true })
-                setLoader(false)
+                // router.push(returnHref, undefined, { shallow: true })
+                // setLoader(false)
             } else {
                 router.push(returnHref, undefined, { shallow: true })
             }
@@ -110,8 +110,11 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
     return (
         <>
             {loader ? (
-                <div className="items-center justify-center flex h-80">
+                <div className="flex items-center justify-center h-80">
+                    <div>
                     <BounceLoader/>
+                    <p className="text-center mt-4 font-bold">Creating...</p>
+                    </div>
                 </div>
             ) : (
                 <div className={"wrapper wrapper-content "}>

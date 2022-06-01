@@ -8,7 +8,7 @@ import { XIcon } from '@heroicons/react/outline'
 import { LinkIcon, PlusIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
 
 export default function TopSideBar(props) {
-    const { open = false, children, width = 'max-full' } = props;
+    const { open = false, children, width = 'max-full', title } = props;
     const router = useRouter();
     const [isShowModal, setShowModal] = useState(false)
     const { makeContextualHref, returnHref } = useContextualRouting();
@@ -55,7 +55,7 @@ export default function TopSideBar(props) {
                                             <div className="container mx-auto max-w-7xl">
                                                 <div className="flex items-start justify-between space-x-3">
                                                     <div className="space-y-1">
-                                                        <Dialog.Title className="text-lg font-medium text-white">New project</Dialog.Title>
+                                                        <Dialog.Title className="text-lg font-medium text-white">{title}</Dialog.Title>
                                                     </div>
                                                     <div className="h-7 flex items-center">
                                                         <button
