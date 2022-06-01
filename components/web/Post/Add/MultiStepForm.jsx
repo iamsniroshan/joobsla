@@ -16,8 +16,8 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext
     const router = useRouter();
 
     const submitData = (postDetails) => {
+        setLoader(true)
         createJobPostApi(postDetails).then(item => {
-            setLoader(true)
             if (item.status === 'success') {
                 router.push(returnHref, undefined, { shallow: true })
                 setLoader(false)
