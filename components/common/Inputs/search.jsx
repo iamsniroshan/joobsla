@@ -8,7 +8,7 @@ const people = [
   "Tom Cook"
 ];
 
-export default function Search() {
+export default function MultiSelectInput() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPersons, setSelectedPersons] = useState([]);
 

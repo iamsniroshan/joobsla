@@ -44,7 +44,7 @@ const JobDetailsComponent = () => {
             </div>
 
             <div className="col-span-3 sm:col-span-1">
-              <CurrencyInput type="text" label="Min Salary"
+              <CurrencyInput type="number" label="Min Salary"
                 name="minAmount" value={jobSalary} placeholder="00.00" onChange={handleSalaryInputChange} />
             </div>
 
