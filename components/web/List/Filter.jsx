@@ -6,14 +6,9 @@ import TextInput from "components/common/Inputs/TextInput";
 import MultiSelectInput from "components/common/Inputs/MultiSelectInput";
 import Checkbox from "components/common/Inputs/checkbox";
 
-const jobType = {
-  'Full-Time': '10',
-  'Internship': '20',
-  'Part-Time': '100',
-  'Contract': '10',
-}
 
-const jobTypeData = [
+
+const jobCatData = [
   { label: 'IT-Sware/DB/QA/Web/Graphics/GIS', value: '1', id: '1' },
   { label: 'IT-HWare/Networks/Systems', value: '2', id: '2' },
   { label: 'Accounting/Auditing/Finance', value: '3', id: '3' },
@@ -48,14 +43,18 @@ const jobTypeData = [
   // { label: 'Imports/Exports', value: '58', id: '5' },
 ]
 
-
+const jobTypeData = [
+  { value:'1',label:'Wade Cooper'},
+  { value:'2',label:'Wade erew'},
+  { value:'3',label:'Wade Cowerwroper'}
+ ];
 
 export default function FilterComponent() {
-  const [filterObj, setFilterObj] = useState({})
+  const [filterObj, setFilterObj] = useState({"jobType":[],"jobCategory":{}})
 
   const handleInputChange = (props) => {
     const data = { ...filterObj }
-    data[props.inputName] = omit(props,'inputName');
+    data[props.inputName] =props.dataObj;
     setFilterObj(data);
   }
   
@@ -66,8 +65,8 @@ export default function FilterComponent() {
         <div className="bg-white rounded-lg shadow">
           <div className="p-6">
             <div className="flow-root">
-              <MultiSelectInput/>
-              <SelectInput label="Category" data={jobTypeData} value={filterObj.category || {}} onChange={(e) => handleInputChange({...e,inputName:'category'})}/>
+              <MultiSelectInput label="Type" data={jobTypeData} value={filterObj.jobType || []} onChange={(e) => handleInputChange({dataObj:e,inputName:'jobType'})}/>
+              <SelectInput label="Category" data={jobCatData} value={filterObj.jobCategory || {}} onChange={(e) => handleInputChange({dataObj:e,inputName:'jobCategory'})}/>
               <TextInput type="text" label="Job Type"
                 name="jobType"/>
               <Checkbox/>
@@ -84,6 +83,7 @@ export default function FilterComponent() {
           </div>
         </div>
       </section>
+      {JSON.stringify(filterObj)}
     </div>
   );
 }

@@ -1,43 +1,37 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
-// const people = [
-//  { value:'1',label:'Wade Cooper'},
-//  { value:'2',label:'Wade erew'}
-//  { value:'3',label:'Wade Cowerwroper'}
-// ];
+const people = [
+  "Wade Cooper",
+  "Arlene Mccoy",
+  "Devon Webb",
+  "Tom Cook"
+];
 
-export default function MultiSelectInput({ value, data = [], label, onChange, required = false }) {
+export default function SearchSelectInput({ value, data = [], label, onChange, required = false }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPersons, setSelectedPersons] = useState([]);
 
-  useEffect(() => {
-    setSelectedPersons(value)
-  }, [value])
-  
-
-  function isSelected(selectedValue) {
-    return selectedPersons.find((el) => el.value === selectedValue.value) ? true : false;
+  function isSelected(value) {
+    return selectedPersons.find((el) => el === value) ? true : false;
   }
 
-  function handleSelect(selectedValue) {
-    if (!isSelected(selectedValue)) {
+  function handleSelect(value) {
+    if (!isSelected(value)) {
       const selectedPersonsUpdated = [
         ...selectedPersons,
-        selectedValue
+        people.find((el) => el === value)
       ];
       setSelectedPersons(selectedPersonsUpdated);
-      onChange(selectedPersonsUpdated)
     } else {
-      handleDeselect(selectedValue);
+      handleDeselect(value);
     }
     setIsOpen(true);
   }
 
-  function handleDeselect(selectedValue) {
-    const selectedPersonsUpdated = selectedPersons.filter((el) => el.value !== selectedValue.value);
+  function handleDeselect(value) {
+    const selectedPersonsUpdated = selectedPersons.filter((el) => el !== value);
     setSelectedPersons(selectedPersonsUpdated);
-    onChange(selectedPersonsUpdated)
     setIsOpen(true);
   }
 
@@ -48,12 +42,12 @@ export default function MultiSelectInput({ value, data = [], label, onChange, re
           as="div"
           className="space-y-1"
           value={selectedPersons}
-          onChange={(selectedValue) => handleSelect(selectedValue)}
+          onChange={(value) => handleSelect(value)}
           open={isOpen}
         >
           {({ isOpen }) => (
             <>
-              <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">{label}</Listbox.Label>
+              <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">Search</Listbox.Label>
               <div className="relative">
                 <span className="inline-block w-full rounded-md shadow-sm">
                   <Listbox.Button
@@ -96,10 +90,10 @@ export default function MultiSelectInput({ value, data = [], label, onChange, re
                     static
                     className="max-h-60 border border-gray-300 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"
                   >
-                    {data.map((eachItem) => {
-                      const selected = isSelected(eachItem);
+                    {people.map((person) => {
+                      const selected = isSelected(person);
                       return (
-                        <Listbox.Option key={eachItem.value} value={eachItem}>
+                        <Listbox.Option key={person} value={person}>
                           {({ active }) => (
                             <div
                               className={`${
@@ -113,7 +107,7 @@ export default function MultiSelectInput({ value, data = [], label, onChange, re
                                   selected ? "font-semibold" : "font-normal"
                                 } block truncate`}
                               >
-                                {eachItem.label}
+                                {person}
                               </span>
                               {selected && (
                                 <span
