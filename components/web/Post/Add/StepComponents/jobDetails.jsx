@@ -10,9 +10,9 @@ const JobDetailsComponent = () => {
   const handleInputChange = ({ element, inputName, groupNme }) => {
     const data = { ...postDetails }
     if(groupNme) {
-      element.target ?  data[groupNme][inputName] = element.target.value : data[groupNme][inputName] = element
+      element.target ?  data[groupNme][element.target.name] = element.target.value : data[groupNme][inputName] = element
     } else {
-      element.target ?  data[inputName] = element.target.value : data[inputName] = element
+      element.target ?  data[element.target.name] = element.target.value : data[inputName] = element
     }
     setPostDetails(data);
   }
