@@ -58,12 +58,21 @@ export default function TextEditInput({ value, label, placeholder, onChange, req
     }
 
     return (
-        <div className="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+        <div className="mb-4 w-full bg-gray-100 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
             <div className="flex justify-between items-center py-0 px-3 border-b dark:border-gray-600">
                 <div className="flex flex-wrap items-center">
                     <div className="flex items-center space-x-1 sm:pr-4">
+                        <EditButton cmd="ClearAuthenticationCache" icon={iconHtml.bold} />
+                        <EditButton cmd="insertParagraph" icon={iconHtml.bold} />
                         <EditButton cmd="bold" icon={iconHtml.bold} />
                         <EditButton cmd="italic" icon={iconHtml.italic} />
+                        <EditButton cmd="underline" icon={iconHtml.italic} />
+
+                        <EditButton cmd="insertUnorderedList" icon={iconHtml.bold} />
+                        <EditButton cmd="insertOrderedList" icon={iconHtml.bold} />
+
+                        <EditButton cmd="justifyCenter" icon={iconHtml.bold} />
+                        <EditButton cmd="justifyLeft" icon={iconHtml.bold} />
 
                         <EditButton cmd="formatBlock" arg="h6" name="heading" icon={iconHtml.hTag} />
                         <EditButton cmd="insertHTML" arg="<h2 className='mt-4 text-base font-medium text-gray-900'>test content</h2>" name="insertHTML" icon={iconHtml.html} />
@@ -82,13 +91,14 @@ export default function TextEditInput({ value, label, placeholder, onChange, req
                 </div>
 
             </div>
-            <div className="relative p-4 pb-8 bg-white rounded-b-lg dark:bg-gray-800">
+            <div className="relative bg-white p-2 rounded-b-lg dark:bg-gray-800">
                 <ContentEditable placeholder={placeholder} html={value} onChange={onChange}
-                    className={classNames(isValidate ? "min-h-[17rem] block w-full pr-10 border rounded-md border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-0" : "min-h-[17rem] mt-1 block w-full shadow-sm sm:text-sm rounded-md focus:ring-0 border-0")}
+                    className={classNames(isValidate ? "min-h-[17rem] block w-full p-2 bg-gray-100 border rounded-md border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-0" : "min-h-[17rem] mt-1 block w-full shadow-sm sm:text-sm rounded-md focus:ring-0 border-0")}
                 />
-                {isValidate && <div className="absolute flex right-0 mr-5 p-1">
-        <span className="text-xs text-red-600 mb-1 mr-2">Required filed is missing</span> <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
-      </div>}
+                {isValidate && <div className="absolute flex right-0 p-5">
+                    <span className="text-xs text-red-600 mb-1 mr-2">Required filed is missing</span> <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
+                </div>
+                }
             </div>
         </div>
     )

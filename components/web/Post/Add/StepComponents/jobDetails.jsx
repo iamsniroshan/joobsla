@@ -1,26 +1,22 @@
-import CurrencyInput from 'components/common/Inputs/CurrencyInput';
-import TextInput from 'components/common/Inputs/TextInput';
 import React, { useContext } from 'react'
 import { AddPostWizardContext } from 'components/context';
-
+import * as myConstClass from 'constant';
+import { TextInput, SelectInput,CurrencyInput } from 'components/common/Inputs';
 
 const JobDetailsComponent = () => {
 
   const { postDetails, setPostDetails } = useContext(AddPostWizardContext); // Context API
 
-  const handleInputChange = ({ target: { name, value } }) => {
+  const handleInputChange = ({ element, inputName, groupNme }) => {
     const data = { ...postDetails }
-    data["jobDetail"][name] = value;
+    if(groupNme) {
+      element.target ?  data[groupNme][inputName] = element.target.value : data[groupNme][inputName] = element
+    } else {
+      element.target ?  data[inputName] = element.target.value : data[inputName] = element
+    }
     setPostDetails(data);
   }
 
-  const handleSalaryInputChange = ({ target: { name, value } }) => {
-    const data = { ...postDetails }
-    data["jobSalary"][name] = value;
-    setPostDetails(data);
-  }
-
-  // Destructuring object from Context API
   const { jobDetail, jobSalary } = postDetails;
 
   return (
@@ -30,27 +26,25 @@ const JobDetailsComponent = () => {
           <div className="grid grid-cols-3 gap-6">
             <div className="col-span-3 sm:col-span-1">
               <TextInput type="text" label="Job Title" required="true"
-                name="jobTitle" value={jobDetail.jobTitle} placeholder="" onChange={handleInputChange} />
+                name="jobTitle" value={jobDetail.jobTitle} placeholder="" onChange={(e) => handleInputChange({ element: e, inputName: 'jobTitle', groupNme:'jobDetail' })} />
             </div>
 
             <div className="col-span-3 sm:col-span-1">
-              <TextInput type="text" label="Job Type" required="true"
-                name="jobType" value={jobDetail.jobType} placeholder="" onChange={handleInputChange} />
+              <SelectInput label="Job Category" data={myConstClass.jobCatData} value={jobDetail.jobCategory || {}} onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme:'jobDetail' })} />
             </div>
 
             <div className="col-span-3 sm:col-span-1">
-              <TextInput type="text" label="Job Category" required="true"
-                name="jobCategory" value={jobDetail.jobCategory} placeholder="" onChange={handleInputChange} />
+              <SelectInput label="Job Type" data={myConstClass.jobTypeData} value={jobDetail.jobType || {}} onChange={(e) => handleInputChange({ element: e, inputName: 'jobType', groupNme:'jobDetail' })} />
             </div>
 
             <div className="col-span-3 sm:col-span-1">
               <CurrencyInput type="number" label="Min Salary"
-                name="minAmount" value={jobSalary} placeholder="00.00" onChange={handleSalaryInputChange} />
+                name="minAmount" value={jobSalary} placeholder="00.00" onChange={(e) => handleInputChange({ element: e, inputName: 'minAmount', groupNme:'jobSalary' })} />
             </div>
 
             <div className="col-span-3 sm:col-span-1">
               <CurrencyInput type="text" label="Max Salary"
-                name="maxAmount" value={jobSalary} placeholder="00.00" onChange={handleSalaryInputChange} />
+                name="maxAmount" value={jobSalary} placeholder="00.00" onChange={(e) => handleInputChange({ element: e, inputName: 'maxAmount' , groupNme:'jobSalary'})} />
             </div>
           </div>
         </div>

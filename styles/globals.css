@@ -37,3 +37,17 @@ input[type=number] {
     display: block;
     /* For Firefox */
 }
+
+/* // css for editor */
+
+ol {
+    padding: 20px;
+}
+
+li {
+    list-style-type: initial;
+}
+
+li li {
+    list-style-type: square;
+}
