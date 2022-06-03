@@ -26,7 +26,6 @@ const JobDescriptionComponent = () => {
 
   return (
     <>
-    {JSON.stringify(error)}
       <form>
         <TextEditInput
           validate={error.desc}
