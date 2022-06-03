@@ -12,7 +12,7 @@ export default function TextInput({ value, label, name, placeholder, type, onCha
 
   return (
     <>
-      <div className="relative my-6">
+      <div className="mt-1 relative rounded-md shadow-sm">
         {label && <label
           htmlFor="name"
           className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-500"

@@ -1,6 +1,6 @@
 export default function CurrencyInput({ value, label, name, placeholder, type, onChange }) {
     return (
-        <div>
+        <>
             <div className="mt-1 relative rounded-md shadow-sm">
                 {label && <label
                     htmlFor="name"
@@ -32,7 +32,7 @@ export default function CurrencyInput({ value, label, name, placeholder, type, o
                     </select>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 // CurrencyInput.defaultProps = { value: { minAmount: '', currency: '' }, label: '', placeholder: '', type: '' }

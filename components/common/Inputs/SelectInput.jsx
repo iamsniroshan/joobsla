@@ -24,7 +24,7 @@ export default function SelectInput({ value, data = [], label, onChange, validat
       <Listbox value={selectedOption} onChange={onChange}>
         {({ open }) => (
           <>
-            <div className="relative my-6">
+            <div className="mt-1 relative rounded-md shadow-sm">
               <Listbox.Label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">{label}</Listbox.Label>
               <Listbox.Button className={classNames(validate && !open ? "cursor-default relative w-full rounded-md border border-red-300 text-red-900 placeholder-red-300 pl-3 pr-10 py-2 text-left sm:text-sm focus:ring-0 focus:border-teal-600" : "cursor-default relative w-full rounded-md border border-gray-300 pl-3 pr-10 py-2 text-left sm:text-sm focus:ring-0 focus:border-teal-600")}>
                 <span className="flex items-center">

@@ -5,6 +5,7 @@ import {
   TextInput,
   SelectInput,
   CurrencyInput,
+  DatePickerInput
 } from "components/common/Inputs";
 import { useAtom } from 'jotai'
 import { jobDescriptionErrorAtom } from "atoms-store";
@@ -78,8 +79,22 @@ const JobDetailsComponent = () => {
           </div>
 
           <div className="col-span-3 sm:col-span-1">
+            <DatePickerInput
+            label="Expiration date"
+            value={jobDetail.expirationDate}
+              onChange={(e) =>
+                handleInputChange({
+                  element: e,
+                  inputName: "expirationDate",
+                  groupNme: "jobDetail",
+                })
+              }
+            />
+          </div>
+
+          <div className="col-span-3 sm:col-span-1 pt-8">
             <SelectInput
-            validate={error.jobType}
+              validate={error.jobType}
               label="Job Type"
               data={myConstClass.jobTypeData}
               value={jobDetail.jobType || {}}
@@ -93,15 +108,57 @@ const JobDetailsComponent = () => {
             />
           </div>
 
-          {/* <div className="col-span-3 sm:col-span-1">
-              <CurrencyInput type="number" label="Min Salary"
-                name="minAmount" value={jobSalary} placeholder="00.00" onChange={(e) => handleInputChange({ element: e, inputName: 'minAmount', groupNme:'jobSalary' })} />
-            </div>
+          <div className="col-span-3 sm:col-span-1 pt-8">
+            <CurrencyInput
+              type="number"
+              label="Min Salary"
+              name="minAmount"
+              value={jobSalary}
+              placeholder="00.00"
+              onChange={(e) =>
+                handleInputChange({
+                  element: e,
+                  inputName: "minAmount",
+                  groupNme: "jobSalary",
+                })
+              }
+            />
+          </div>
 
-            <div className="col-span-3 sm:col-span-1">
-              <CurrencyInput type="text" label="Max Salary"
-                name="maxAmount" value={jobSalary} placeholder="00.00" onChange={(e) => handleInputChange({ element: e, inputName: 'maxAmount' , groupNme:'jobSalary'})} />
-            </div> */}
+          <div className="col-span-3 sm:col-span-1 pt-8">
+            <CurrencyInput
+              type="text"
+              label="Max Salary"
+              name="maxAmount"
+              value={jobSalary}
+              placeholder="00.00"
+              onChange={(e) =>
+                handleInputChange({
+                  element: e,
+                  inputName: "maxAmount",
+                  groupNme: "jobSalary",
+                })
+              }
+            />
+          </div>
+
+          {/* <div className="col-span-3 sm:col-span-1 pt-8">
+            <CurrencyInput
+              type="text"
+              label="Experience"
+              name="experience"
+              value={jobDetail.experience}
+              placeholder="00"
+              onChange={(e) =>
+                handleInputChange({
+                  element: e,
+                  inputName: "experience",
+                  groupNme: "jobDetail",
+                })
+              }
+            />
+          </div> */}
+
         </div>
       </div>
     </>
