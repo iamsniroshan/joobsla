@@ -4,12 +4,11 @@ import { AddPostWizardContext } from 'components/context';
 import createJobPostApi from 'services/api/jobPost'
 import { useContextualRouting } from "next-use-contextual-routing";
 import { useRouter } from 'next/router';
-import { addPostSuccessAtom } from "atoms-store";
+import { addPostSuccessAtom, jobDescriptionErrorAtom } from "atoms-store";
 import { useAtom } from "jotai";
-import ProcessingLoader from "components/common/Loader/processing";
 import BounceLoader from "components/common/Loader/bounce";
 
-const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext }) => {
+const NavigationButton = ({ goNext, goPrevious, selectedIndex, list }) => {
 
     const { postDetails } = useContext(AddPostWizardContext); // Context API
     const { returnHref } = useContextualRouting();
@@ -79,14 +78,13 @@ const ProgressBar = ({ list, selectedIndex }) => {
 const MultiStepForm = ({ list, displayProgressBar }) => {
 
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const { proceedNext, setProceedNext, postDetails } = useContext(AddPostWizardContext); // Context API
+    const { postDetails } = useContext(AddPostWizardContext); // Context API
     const [loader] = useAtom(addPostSuccessAtom)
+    const [error, setError] = useAtom(jobDescriptionErrorAtom);
 
     const goNext = () => {
         if (checkValidation(postDetails, selectedIndex)) { // check step one validation
             selectedIndex !== (list.length - 1) ? setSelectedIndex(selectedIndex + 1) : null
-        } else {
-            setProceedNext(false)
         }
     };
 
@@ -98,10 +96,35 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
     const checkValidation = (props, selectedIndex) => {
         let { jobTitle, jobType, jobCategory } = props.jobDetail
         let { desc } = props.jobDescription
+
         if (selectedIndex === 0) { // step one validation
+            const errorObj = {
+                jobTitle : "",
+                jobType: "",
+                jobCategory: "",
+                desc: ""
+            }
+            for (var key in props.jobDetail) {
+                if(props.jobDetail[key] === '') {
+                    errorObj[key] = 'Required filed is missing'
+                }
+            }
+            setError(errorObj)
             return jobTitle && jobType && jobCategory ? true : false
         }
         if (selectedIndex === 1) { // step two validation
+            const errorObj = {
+                jobTitle : "",
+                jobType: "",
+                jobCategory: "",
+                desc: ""
+            }
+            for (var key in props.jobDescription) {
+                if(props.jobDescription[key] === '') {
+                    errorObj[key] = 'Required filed is missing'
+                }
+            }
+            setError(errorObj)
             return desc ? true : false
         }
 
@@ -114,8 +137,8 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
             {loader ? (
                 <div className="flex items-center justify-center h-80">
                     <div>
-                    <BounceLoader/>
-                    <p className="text-center mt-4 font-bold">Creating...</p>
+                        <BounceLoader />
+                        <p className="text-center mt-4 font-bold">Creating...</p>
                     </div>
                 </div>
             ) : (
@@ -137,7 +160,6 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
                         goPrevious={goPrevious}
                         selectedIndex={selectedIndex}
                         list={list}
-                        proceedNext={proceedNext}
                     />
                 </div>
             )}

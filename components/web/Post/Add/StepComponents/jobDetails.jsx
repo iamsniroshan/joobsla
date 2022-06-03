@@ -77,11 +77,23 @@ const JobDetailsComponent = () => {
             />
           </div>
 
-          {/* <div className="col-span-3 sm:col-span-1">
-              <SelectInput label="Job Type" data={myConstClass.jobTypeData} value={jobDetail.jobType || {}} onChange={(e) => handleInputChange({ element: e, inputName: 'jobType', groupNme:'jobDetail' })} />
-            </div>
+          <div className="col-span-3 sm:col-span-1">
+            <SelectInput
+            validate={error.jobType}
+              label="Job Type"
+              data={myConstClass.jobTypeData}
+              value={jobDetail.jobType || {}}
+              onChange={(e) =>
+                handleInputChange({
+                  element: e,
+                  inputName: "jobType",
+                  groupNme: "jobDetail",
+                })
+              }
+            />
+          </div>
 
-            <div className="col-span-3 sm:col-span-1">
+          {/* <div className="col-span-3 sm:col-span-1">
               <CurrencyInput type="number" label="Min Salary"
                 name="minAmount" value={jobSalary} placeholder="00.00" onChange={(e) => handleInputChange({ element: e, inputName: 'minAmount', groupNme:'jobSalary' })} />
             </div>

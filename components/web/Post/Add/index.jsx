@@ -24,11 +24,11 @@ function PostAddComponent() {
   // State to store checkout details
   // This is used to prevent losing unsaved changes when you switch the component.
   const [postDetails, setPostDetails] = useState(InitialValues);
-  const [proceedNext, setProceedNext] = useState(true); // Enable or Disable 'Next' button within each component
+
 
   return (
     <div className="xxxxxxxx">
-      <AddPostWizardContext.Provider value={{ postDetails, setPostDetails, proceedNext, setProceedNext }}>
+      <AddPostWizardContext.Provider value={{ postDetails, setPostDetails }}>
         <MultiStepForm
           list={componentsList}
           displayProgressBar={true} // Set this to false if you don't want to display the progress bar.

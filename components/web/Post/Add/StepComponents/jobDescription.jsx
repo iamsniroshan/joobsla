@@ -1,30 +1,49 @@
-import React, { useContext, useRef } from 'react'
-import { AddPostWizardContext } from 'components/context';
-import TextEditInput from 'components/common/Inputs/TextEditorInput';
-
+import React, { useContext, useRef } from "react";
+import { AddPostWizardContext } from "components/context";
+import TextEditInput from "components/common/Inputs/TextEditorInput";
+import { jobDescriptionErrorAtom } from "atoms-store";
+import { useAtom } from "jotai";
 
 const JobDescriptionComponent = () => {
+  const { postDetails, setPostDetails } = useContext(AddPostWizardContext); // Context API
+  const [error, setError] = useAtom(jobDescriptionErrorAtom); // Context API
 
-    const { postDetails, setPostDetails } = useContext(AddPostWizardContext); // Context API
+  const handleInputChange = ({ element, inputName, groupNme }) => {
+    const data = { ...postDetails };
+    data[groupNme][inputName] = element.target.value
+    setPostDetails(data);
+    formValidator(element.target.value,inputName)
+  };
 
+  const formValidator = (value, inputName) => {
+    if (value === "")
+      setError({ ...error, [inputName]: "Required filed is missing" });
+    else setError({ ...error, [inputName]: "" });
+  };
 
-    const handleInputChange = ({ target: { name = 'desc', value } }) => {
-        const data = { ...postDetails }
-        data["jobDescription"][name] = value;
-        setPostDetails(data);
-    }
+  // Destructuring object from Context API
+  const { jobDescription } = postDetails;
 
-    // Destructuring object from Context API
-    const { jobDescription } = postDetails;
-
-
-
-    return (
-        <>
-            <form>
-                <TextEditInput value={jobDescription.desc} onChange={handleInputChange} label="Job Description" placeholder={' Write Your job post...'} required="true" />
-            </form>
-        </>
-    )
-}
-export default JobDescriptionComponent
+  return (
+    <>
+    {JSON.stringify(error)}
+      <form>
+        <TextEditInput
+          validate={error.desc}
+          value={jobDescription.desc}
+          label="Job Description"
+          name="desc"
+          placeholder={" Write Your job post..."}
+          onChange={(e) =>
+            handleInputChange({
+              element: e,
+              inputName: "desc",
+              groupNme: "jobDescription",
+            })
+          }
+        />
+      </form>
+    </>
+  );
+};
+export default JobDescriptionComponent;

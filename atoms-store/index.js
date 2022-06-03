@@ -3,7 +3,7 @@ import { atom, useAtom } from 'jotai'
 // Create your atoms and derivatives
 export const addPostSuccessAtom = atom(false)
 
-export const jobDescriptionErrorAtom = atom({ jobTitle: "", jobCategory: "" })
+export const jobDescriptionErrorAtom = atom({ jobTitle: "", jobType: "", jobCategory: "", desc:"" })
 
 
 
