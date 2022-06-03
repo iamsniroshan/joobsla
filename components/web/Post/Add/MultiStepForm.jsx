@@ -36,7 +36,7 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list, proceedNext
                         Previous
                     </button>{" "}
                     {selectedIndex !== list.length - 1 ? (
-                        <button type="button" onClick={goNext} className="mr-2 w-32 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-0 ">
+                        <button type="submit" onClick={goNext} className="mr-2 w-32 bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-0 ">
                             {selectedIndex !== list.length - 1 ? "Next" : "Finish"}
                         </button>
                     ) : (
@@ -106,6 +106,8 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
         }
 
     }
+
+
 
     return (
         <>

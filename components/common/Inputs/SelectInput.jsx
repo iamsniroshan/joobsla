@@ -1,8 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState, useEffect } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-
+import { CheckIcon, SelectorIcon, ExclamationCircleIcon } from '@heroicons/react/solid'
 
 
 
@@ -10,8 +9,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function SelectInput({ value, data = [], label, onChange, required = false }) {
+export default function SelectInput({ value, data = [], label, onChange, validate }) {
   const [selectedOption, setSelectedOption] = useState({})
+
 
   useEffect(() => {
     setSelectedOption(value)
@@ -32,6 +32,11 @@ export default function SelectInput({ value, data = [], label, onChange, require
                 <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </span>
             </Listbox.Button>
+            {
+              validate && <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <span className="text-xs text-red-600 mb-1 mr-2">{validate}</span> <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
+              </div>
+            }
             <Transition
               show={open}
               as={Fragment}
@@ -43,39 +48,40 @@ export default function SelectInput({ value, data = [], label, onChange, require
                 {data.map((eachItem) => {
                   const selected = eachItem.value === selectedOption.value ? true : false
                   return (
-                  <Listbox.Option
-                    key={eachItem.id}
-                    className={({ active }) =>
-                      classNames(
-                        active ? 'bg-teal-600 text-white' : 'text-gray-900',
-                        'cursor-default select-none relative py-2 pl-3 pr-3'
-                      )
-                    }
-                    value={eachItem}
-                  >
-                    {({ active }) => (
-                      <>
-                        {selected ? (
-                          <span
-                            className={classNames(
-                              active ? 'text-white' : 'text-teal-600',
-                              'absolute inset-y-0 left-0 flex items-center pl-1'
-                            )}
-                          >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
-                        <div className="flex items-center">
-                          <span
-                            className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-4 block truncate')}
-                          >
-                            {eachItem.label}
-                          </span>
-                        </div>
-                      </>
-                    )}
-                  </Listbox.Option>
-                )})}
+                    <Listbox.Option
+                      key={eachItem.id}
+                      className={({ active }) =>
+                        classNames(
+                          active ? 'bg-teal-600 text-white' : 'text-gray-900',
+                          'cursor-default select-none relative py-2 pl-3 pr-3'
+                        )
+                      }
+                      value={eachItem}
+                    >
+                      {({ active }) => (
+                        <>
+                          {selected ? (
+                            <span
+                              className={classNames(
+                                active ? 'text-white' : 'text-teal-600',
+                                'absolute inset-y-0 left-0 flex items-center pl-1'
+                              )}
+                            >
+                              <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                          ) : null}
+                          <div className="flex items-center">
+                            <span
+                              className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-4 block truncate')}
+                            >
+                              {eachItem.label}
+                            </span>
+                          </div>
+                        </>
+                      )}
+                    </Listbox.Option>
+                  )
+                })}
               </Listbox.Options>
             </Transition>
           </div>
