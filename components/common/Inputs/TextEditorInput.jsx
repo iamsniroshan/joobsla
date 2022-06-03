@@ -16,7 +16,7 @@ export default function TextEditInput({ value, label, placeholder, onChange, val
 
 
     const handleChange = () => {
-        //onChange({ target: { name: 'desc', value: '<p>Hello <b>World</b>!</p><p>Paragraph 2</p><ul><li>wefdwedewdw</li></ul>' } })
+        onChange({ target: { name: 'desc', value: '<p>Hello <b>World</b>!</p><p>Paragraph 2</p><ul><li>wefdwedewdw</li></ul>', inputName:'desc', groupNme:'jobDescription' } })
     };
 
     const iconHtml = {
