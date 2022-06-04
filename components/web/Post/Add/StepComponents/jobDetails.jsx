@@ -44,12 +44,18 @@ const JobDetailsComponent = () => {
   }
 
   const childExperienceSelectConfig = {
-    data : [{label:'Plus year',value:'plus-year'},{label:'Min Year',value:'min-year'},{label:'Year',value:'year'}],
+    data : [{label:'plus year',value:'plus-year'},{label:'min year',value:'min-year'},{label:'Year',value:'year'}],
     name : 'numberTag',
     label: 'Experience Tag'
   }
 
-  const { jobDetail, jobSalary, experience } = postDetails;
+  const childWorkingHoursSelectConfig = {
+    data : [{label:'h / week',value:'h-week'},{label:'h / day',value:'h-day'},{label:'h / month',value:'h-month'}],
+    name : 'hourTag',
+    label: 'Working Hour Tag'
+  }
+
+  const { jobDetail, jobSalary, experience,workingHours } = postDetails;
 
   return (
     <>
@@ -169,6 +175,24 @@ const JobDetailsComponent = () => {
                   element: e,
                   inputName: "number",
                   groupNme: "experience",
+                })
+              }
+            />
+          </div>
+
+          <div className="col-span-3 sm:col-span-1 pt-8">
+            <DoubleSelectInput
+              type="text"
+              label="Working Hours"
+              name="hour"
+              value={workingHours}
+              placeholder="00"
+              childSelect = {childWorkingHoursSelectConfig}
+              onChange={(e) =>
+                handleInputChange({
+                  element: e,
+                  inputName: "hour",
+                  groupNme: "workingHours",
                 })
               }
             />
