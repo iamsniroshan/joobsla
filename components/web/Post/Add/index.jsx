@@ -1,7 +1,7 @@
 import { AddPostWizardContext } from 'components/context';
 import React, { useState } from 'react';
-import MultiStepForm from './MultiStepForm';
-import { JobDetailsComponent, JobDescriptionComponent, OrderConfirmation } from './StepComponents';
+import MultiStepForm from './StepComponents/MultiStepForm';
+import { JobDetailsComponent, JobDescriptionComponent, JobPreviewComponent } from './StepComponents';
 
 
 
@@ -9,7 +9,7 @@ import { JobDetailsComponent, JobDescriptionComponent, OrderConfirmation } from 
 const componentsList = [
   { id: 1, headerText: 'Job Detail', status: 'current', component: <JobDetailsComponent /> },
   { id: 2, headerText: 'Job Description', status: 'upcoming', component: <JobDescriptionComponent /> },
-  { id: 3, headerText: 'Preview', status: 'upcoming', component: <OrderConfirmation /> },
+  { id: 3, headerText: 'Preview', status: 'upcoming', component: <JobPreviewComponent /> },
 ];
 
 // Supplying initial state values to use with different components.

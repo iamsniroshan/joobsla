@@ -95,27 +95,8 @@ export default function PostDetailsComponent() {
       {/* Profile header */}
       {/* Page heading */}
       <header className="bg-gray-50 py-8 min-w-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 xl:flex xl:items-center xl:justify-between">
           <div className="flex-1 min-w-0">
-            <nav className="flex" aria-label="Breadcrumb">
-              <ol className="flex items-center space-x-4" role="list">
-                <li>
-                  <div>
-                    <a href="#" className="text-sm font-medium text-gray-500 hover:text-gray-700">
-                      Jobs
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div className="flex items-center">
-                    <ChevronRightIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
-                    <a href="#" className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
-                      Engineering
-                    </a>
-                  </div>
-                </li>
-              </ol>
-            </nav>
             <h1 className="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
               Back End Developer
             </h1>

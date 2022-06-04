@@ -40,18 +40,21 @@ input[type=number] {
 
 /* // css for editor */
 
-ol {
-    padding: 20px;
+
+
+.description ol li {
+    margin-left: 17px;
+    display: list-item;
+    text-align: -webkit-match-parent;
+    list-style: auto;
 }
 
-li {
-    list-style-type: initial;
+.description ul li {
+    margin-left: 20px;
+    display: list-item;
+    text-align: -webkit-match-parent;
+    list-style: disc;
 }
-
-li li {
-    list-style-type: square;
-}
-
 /* // date picker css start */
 
 .react-datepicker__input-container input {
