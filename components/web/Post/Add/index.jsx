@@ -16,7 +16,8 @@ const componentsList = [
 const InitialValues = {
   jobDetail: { jobTitle: "", jobType: "", jobCategory: "" },
   jobDescription: { desc: "" },
-  jobSalary: { minAmount: "", maxAmount: "", currency: "LKR" }
+  jobSalary: { minAmount: "", maxAmount: "", currency: "LKR" },
+  experience: { number: "", numberTag: "" }
 }
 
 function PostAddComponent() {

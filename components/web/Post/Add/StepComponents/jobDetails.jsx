@@ -4,7 +4,7 @@ import * as myConstClass from "constant";
 import {
   TextInput,
   SelectInput,
-  CurrencyInput,
+  DoubleSelectInput,
   DatePickerInput
 } from "components/common/Inputs";
 import { useAtom } from 'jotai'
@@ -37,7 +37,19 @@ const JobDetailsComponent = () => {
     else setError({ ...error, [inputName]: "" });
   };
 
-  const { jobDetail, jobSalary } = postDetails;
+  const childSalarySelectConfig = {
+    data : [{label:'LKR / Month',value:'lkr-month'},{label:'LKR / Year',value:'lkr-year'}],
+    name : 'currency',
+    label: 'Currency'
+  }
+
+  const childExperienceSelectConfig = {
+    data : [{label:'Plus year',value:'plus-year'},{label:'Min Year',value:'min-year'},{label:'Year',value:'year'}],
+    name : 'numberTag',
+    label: 'Experience Tag'
+  }
+
+  const { jobDetail, jobSalary, experience } = postDetails;
 
   return (
     <>
@@ -109,12 +121,13 @@ const JobDetailsComponent = () => {
           </div>
 
           <div className="col-span-3 sm:col-span-1 pt-8">
-            <CurrencyInput
+            <DoubleSelectInput
               type="number"
               label="Min Salary"
               name="minAmount"
               value={jobSalary}
               placeholder="00.00"
+              childSelect = {childSalarySelectConfig}
               onChange={(e) =>
                 handleInputChange({
                   element: e,
@@ -126,12 +139,13 @@ const JobDetailsComponent = () => {
           </div>
 
           <div className="col-span-3 sm:col-span-1 pt-8">
-            <CurrencyInput
+            <DoubleSelectInput
               type="text"
               label="Max Salary"
               name="maxAmount"
               value={jobSalary}
               placeholder="00.00"
+              childSelect = {childSalarySelectConfig}
               onChange={(e) =>
                 handleInputChange({
                   element: e,
@@ -142,22 +156,23 @@ const JobDetailsComponent = () => {
             />
           </div>
 
-          {/* <div className="col-span-3 sm:col-span-1 pt-8">
-            <CurrencyInput
+          <div className="col-span-3 sm:col-span-1 pt-8">
+            <DoubleSelectInput
               type="text"
               label="Experience"
-              name="experience"
-              value={jobDetail.experience}
+              name="number"
+              value={experience}
               placeholder="00"
+              childSelect = {childExperienceSelectConfig}
               onChange={(e) =>
                 handleInputChange({
                   element: e,
-                  inputName: "experience",
-                  groupNme: "jobDetail",
+                  inputName: "number",
+                  groupNme: "experience",
                 })
               }
             />
-          </div> */}
+          </div>
 
         </div>
       </div>
