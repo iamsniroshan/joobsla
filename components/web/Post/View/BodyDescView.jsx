@@ -11,7 +11,7 @@ export default function BodyDescComponent(jobDescription) {
               <div className="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200">
                 <div>
                   <div>
-                    <div className="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
+                    <div className="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6 description">
                     <dd className="col-span-2 xl:border-b"  dangerouslySetInnerHTML={{ __html: jobDescription.desc }}/>
                     </div>
                   </div>

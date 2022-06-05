@@ -4,7 +4,6 @@ import MultiStepForm from './StepComponents/MultiStepForm';
 import { JobDetailsComponent, JobDescriptionComponent, JobPreviewComponent } from './StepComponents';
 
 
-
 // List of components to switch inside the multi-form container
 const componentsList = [
   { id: 1, headerText: 'Job Detail', status: 'current', component: <JobDetailsComponent /> },
