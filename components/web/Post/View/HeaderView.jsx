@@ -5,14 +5,13 @@ import {
     LocationMarkerIcon,
     PencilIcon,
 } from '@heroicons/react/solid'
-
+import { format } from 'date-fns'
 
 export default function HeaderViewComponent({jobDetail,jobSalary}) {
 
 
     return (
         <>
-              {JSON.stringify(jobDetail)}{JSON.stringify(jobSalary)}
             <header className="min-w-lg mt-4">
                 <div className="max-w-7xl bg-gray-50 mx-auto py-8  px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
                     <div className="flex-1 min-w-0">
@@ -34,7 +33,7 @@ export default function HeaderViewComponent({jobDetail,jobSalary}) {
                             </div>
                             <div className="mt-2 flex items-center text-sm text-gray-500">
                                 <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                {jobDetail?.expirationDate}
+                                {format(new Date(jobDetail?.expirationDate), 'dd MMMM yyyy')}
                             </div>
                         </div>
                     </div>

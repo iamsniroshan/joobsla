@@ -1,9 +1,9 @@
 import DatePicker from 'react-datepicker'
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef} from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { format } from 'date-fns'
 
-export default function DatePickerInput({label,value = new Date(),onChange}) {
+export default function DatePickerInput({label,value,onChange}) {
 
     return (
         <>
@@ -15,7 +15,7 @@ export default function DatePickerInput({label,value = new Date(),onChange}) {
           {label}
         </label>}
             <DatePicker
-                selected={value}
+                selected={new Date(value)}
                 onChange={onChange}
                 popperProps={{positionFixed: true}}
                 nextMonthButtonLabel=">"

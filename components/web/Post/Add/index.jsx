@@ -2,6 +2,7 @@ import { AddPostWizardContext } from 'components/context';
 import React, { useState } from 'react';
 import MultiStepForm from './StepComponents/MultiStepForm';
 import { JobDetailsComponent, JobDescriptionComponent, JobPreviewComponent } from './StepComponents';
+import { AddPostWizardContextInitialValues } from 'components/context/AddPostWizardContext';
 
 
 // List of components to switch inside the multi-form container
@@ -11,20 +12,12 @@ const componentsList = [
   { id: 3, headerText: 'Preview', status: 'upcoming', component: <JobPreviewComponent /> },
 ];
 
-// Supplying initial state values to use with different components.
-const InitialValues = {
-  jobDetail: { jobTitle: "", jobType: "", jobCategory: "" },
-  jobDescription: { desc: "" },
-  jobSalary: { minAmount: "", maxAmount: "", currency: "lkr-month" },
-  experience: { number: "", numberTag: "plus-year" },
-  workingHours: {hour: "", hourTag:"h-week"}
-}
 
 function PostAddComponent() {
 
   // State to store checkout details
   // This is used to prevent losing unsaved changes when you switch the component.
-  const [postDetails, setPostDetails] = useState(InitialValues);
+  const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
 
 
   return (
