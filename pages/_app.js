@@ -4,15 +4,15 @@ import "tailwindcss/tailwind.css";
 import { Provider } from "next-auth/client";
 import { AuthGuard } from "hoc/AuthGuard";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from 'react-query/devtools'
-
+import { ReactQueryDevtools } from "react-query/devtools";
+import { Hydrate } from "react-query/hydration";
+import { useState } from "react";
 
 export default App;
 
 function App({ Component, pageProps }) {
-
   const getLayout = Component.getLayout || ((page) => page);
-  const queryClient = new QueryClient()
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <>
@@ -20,16 +20,17 @@ function App({ Component, pageProps }) {
         <title>Next.js Admin</title>
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Provider session={pageProps.session}>
-          {Component.auth ? (
-            <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
-          ) : (
-            getLayout(<Component {...pageProps} />)
-          )}
-        </Provider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <Hydrate state={pageProps.dehydratedState}>
+          <Provider session={pageProps.session}>
+            {Component.auth ? (
+              <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
+            ) : (
+              getLayout(<Component {...pageProps} />)
+            )}
+          </Provider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Hydrate>
       </QueryClientProvider>
-   
     </>
   );
 }

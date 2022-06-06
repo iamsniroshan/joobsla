@@ -12,7 +12,9 @@ import getJobPostApi from "services/api/getJobPost";
 export default function PostCardListComponent() {
 
   const { makeContextualHref, returnHref } = useContextualRouting();
-  const { isLoading, error, data }  = useQuery('todos', () => getJobPostApi(),{staleTime:5000});
+  const { isLoading, error, data }  = useQuery('todos', () => getJobPostApi(),{
+    staleTime: 10000,
+  });
 
   if (isLoading) return "Loading...";
 
