@@ -2,7 +2,7 @@
 import { SearchIcon } from "@heroicons/react/solid";
 import { useContextualRouting } from "next-use-contextual-routing";
 import Link from "next/link";
-
+import { format } from 'date-fns'
 
 import { CalendarIcon, LocationMarkerIcon, UsersIcon, ArrowCircleRightIcon } from '@heroicons/react/solid'
 import { useQuery } from "react-query";
@@ -12,7 +12,7 @@ import getJobPostApi from "services/api/getJobPost";
 export default function PostCardListComponent() {
 
   const { makeContextualHref, returnHref } = useContextualRouting();
-  const { isLoading, error, data }  = useQuery('todos', () => getJobPostApi());
+  const { isLoading, error, data }  = useQuery('jobPostUseQuery', () => getJobPostApi());
 
   if (isLoading) return "Loading...";
 
@@ -135,7 +135,7 @@ export default function PostCardListComponent() {
                             <span className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                               <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
                               <p>
-                                Closing on 
+                                Closing on {format(new Date(eachPost.jobDetail.expirationDate), 'dd MMMM yyyy')}
                               </p>
                             </span>
                             <span className="px-2 ml-5 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

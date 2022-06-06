@@ -7,6 +7,7 @@ import { addPostSuccessAtom, jobDescriptionErrorAtom } from "atoms-store";
 import { useAtom } from "jotai";
 import BounceLoader from "components/common/Loader/bounce";
 import { createJobPostApi } from "services/api";
+import { useQuery } from "react-query";
 
 const NavigationButton = ({ goNext, goPrevious, selectedIndex, list }) => {
 
@@ -14,12 +15,14 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list }) => {
     const { returnHref } = useContextualRouting();
     const [loader, setLoader] = useAtom(addPostSuccessAtom)
     const router = useRouter();
+    const { refetch } = useQuery('jobPostUseQuery');
 
     const submitData = (postDetails) => {
         setLoader(true)
         createJobPostApi(postDetails).then(item => {
             if (item.status === 'success') {
                 router.push(returnHref, undefined, { shallow: true })
+                refetch()
                 setLoader(false)
             } else {
                 router.push(returnHref, undefined, { shallow: true })
