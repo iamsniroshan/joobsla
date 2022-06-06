@@ -21,9 +21,10 @@ const NavigationButton = ({ goNext, goPrevious, selectedIndex, list }) => {
         setLoader(true)
         createJobPostApi(postDetails).then(item => {
             if (item.status === 'success') {
-                router.push(returnHref, undefined, { shallow: true })
-                refetch().then(e => setLoader(false))
-                
+                refetch().then(e =>{ 
+                    setLoader(false)
+                    router.push(returnHref, undefined, { shallow: true })
+                })
             } else {
                 router.push(returnHref, undefined, { shallow: true })
             }

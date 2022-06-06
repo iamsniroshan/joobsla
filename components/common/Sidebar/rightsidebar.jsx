@@ -48,7 +48,7 @@ export default function RightSideBar({ open = false, children }) {
                             leaveFrom="translate-x-0"
                             leaveTo="translate-x-full"
                         >
-                                <div className="w-screen max-w-xl">
+                                <div className="w-auto">
                                     <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                                         <div className="flex-1">
                                             {/* Header */}
@@ -57,7 +57,7 @@ export default function RightSideBar({ open = false, children }) {
                                                     <div className="space-y-1">
                                                         <Dialog.Title className="text-lg font-medium text-white">New project</Dialog.Title>
                                                         <p className="text-sm text-white">
-                                                            Get started by filling in the information below to create your new project.
+                                                            Update your user profile
                                                         </p>
                                                     </div>
                                                     <div className="h-7 flex items-center">

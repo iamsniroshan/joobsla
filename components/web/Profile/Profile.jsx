@@ -333,7 +333,7 @@ export default function ProfileComponent() {
                       href={makeContextualHref({ userInfoEditModal: true })}
                     >
                       <span className="flex absolute right-4 top-4 text-yellow-300 pr-3 hover:text-gray-600 cursor-pointer">
-                        <PencilAltIcon width="20" /> Edit
+                        <PencilAltIcon width="20" /> Editxxx
                       </span>
                     </Link>
                     <div className="flow-root mt-6">

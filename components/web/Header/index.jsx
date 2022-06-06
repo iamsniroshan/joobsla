@@ -14,12 +14,6 @@ import InjectorComponent from '../Injectors'
 import MobileMenuComponent from '../MobileMenu'
 
 
-const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'Popular', href: '#', icon: FireIcon, current: false },
-  { name: 'Communities', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Trending', href: '#', icon: TrendingUpIcon, current: false },
-]
 const user = {
   name: 'Chelsea Hagon',
   email: 'chelseahagon@example.com',
@@ -28,19 +22,15 @@ const user = {
 }
 
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export default function HeaderComponent() {
   const router = useRouter();
   const { makeContextualHref, returnHref } = useContextualRouting();
-  const [isOpenMenu, setOpenMenu] = useState(false);
   const [session, loading] = useSession();
-  const isAppMenuHandleClick = () => setOpenMenu(!isOpenMenu)
+
 
   return (
     <>
+    {JSON.stringify(session)}
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
       <div
         as="header"
