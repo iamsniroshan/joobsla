@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-export default function Checkbox() {
+export default function Checkbox({ value, data = [], label, onChange, validate }) {
     const [checkedItems, setCheckedItems] = useState({});
 
     const handleChange = event => {

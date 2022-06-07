@@ -1,23 +1,24 @@
-import { DatePickerInput, DoubleSelectInput, TextInput } from "components/common/Inputs";
-import React, {useState} from "react";
+import { DatePickerInput, DoubleSelectInput, TextareaInput, TextInput } from "components/common/Inputs";
+import RadioBoxInput from "components/common/Inputs/RadioBoxInpt";
+import React, { useState } from "react";
 
 
 
 export default function UserInformationFormComponent() {
     const initialFormValue = {
-        userInfo : {firstName: "",lastName: "",emailAddress: "",salaryExpectation: "",dateOfBirth: new Date()},
-        salary: {salaryExpectation:"",currency:""}
+        userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: new Date(),gender:"" },
+        salary: { salaryExpectation: "", currency: "" }
     };
     const initialError = {
-        userInfo : {firstName: "",lastName: "",emailAddress: "",salaryExpectation: "",dateOfBirth: ""},
-        salary: {salaryExpectation:"",currency:""}
+        userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: "",gender:"" },
+        salary: { salaryExpectation: "", currency: "" }
     }
     const [value, setValue] = useState(initialFormValue)
     const [error, setError] = useState(initialError)
 
 
     const handleInputChange = ({ element, inputName, groupNme }) => {
-        const data = { ...postDetails };
+        const data = { ...value };
         if (groupNme) {
             element.target
                 ? ((data[groupNme][element.target.name] = element.target.value),
@@ -30,7 +31,7 @@ export default function UserInformationFormComponent() {
                     formValidator(element.target.value, inputName))
                 : ((data[inputName] = element), formValidator(element, inputName));
         }
-        setPostDetails(data);
+        setValue(data);
     };
 
     const formValidator = (value, inputName) => {
@@ -40,7 +41,7 @@ export default function UserInformationFormComponent() {
     };
 
     const handleSubmit = () => {
-        console.log('success')
+        console.log(value)
     }
 
     const childSalarySelectConfig = {
@@ -61,7 +62,7 @@ export default function UserInformationFormComponent() {
 
     return (
 
-        <form onSubmit={handleSubmit}>
+        <form>
             {/* Divider container */}
             <div className="py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
 
@@ -116,12 +117,28 @@ export default function UserInformationFormComponent() {
                             label="Email address"
                             required="true"
                             name="emailAddress"
-                            value={value.userInfo.lastName}
+                            value={value.userInfo.emailAddress}
                             placeholder=""
                             onChange={(e) =>
                                 handleInputChange({
                                     element: e,
                                     inputName: "emailAddress",
+                                    groupNme: "userInfo",
+                                })
+                            }
+                        />
+                    </div>
+                </div>
+                {/* Date of birth */}
+                <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5">
+                    <div className="sm:col-span-2">
+                        <DatePickerInput
+                            label="Date of birth"
+                            value={value.userInfo.dateOfBirth}
+                            onChange={(e) =>
+                                handleInputChange({
+                                    element: e,
+                                    inputName: "dateOfBirth",
                                     groupNme: "userInfo",
                                 })
                             }
@@ -148,91 +165,56 @@ export default function UserInformationFormComponent() {
                         />
                     </div>
                 </div>
-                {/* Date of birth */}
+                {/* About you */}
                 <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5">
                     <div className="sm:col-span-2">
-                        <DatePickerInput
-                            label="Date of birth"
-                            value={value.userInfo.dateOfBirth}
+                        <TextareaInput
+                            validate={error.userInfo.aboutYou}
+                            type="text"
+                            label="About you"
+                            required="true"
+                            name="aboutYou"
+                            value={value.userInfo.aboutYou}
+                            placeholder="Tell us yourself"
+                            rows={3}
                             onChange={(e) =>
                                 handleInputChange({
                                     element: e,
-                                    inputName: "dateOfBirth",
+                                    inputName: "aboutYou",
                                     groupNme: "userInfo",
                                 })
                             }
                         />
                     </div>
                 </div>
-                {/* About you */}
-                {/* <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5">
-                    <div>
-                        <label
-                            htmlFor="project-description"
-                            className="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2"
-                        >
-                            About you
-                        </label>
-                    </div>
-                    <div className="sm:col-span-2">
-                        <textarea
-                            {...register("aboutYou")}
-                            name="aboutYou"
-                            rows={3}
-                            className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
-                            defaultValue={''}
-                        />
-                    </div>
-                </div> */}
 
-                {/* Privacy */}
-                {/* <fieldset>
-                    <div className="space-y-2 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:px-6 sm:py-5">
-                        <div>
-                            <legend className="text-sm font-medium text-gray-900">Gender</legend>
-                        </div>
+                {/* Gender */}
+                <fieldset>
+                    <div className="space-y-2 px-4 sm:space-y-0 sm:grid sm:items-start sm:px-6 sm:py-5">
                         <div className="space-y-5 sm:col-span-2">
                             <div className="space-y-5 sm:mt-0">
-                                <div className="relative flex items-start">
-                                    <div className="absolute flex items-center h-5">
-                                        <input
-                                            {...register("gender")}
-                                            value="male"
-                                            name="gender"
-                                            aria-describedby="public-access-description"
-                                            type="radio"
-                                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                                            defaultChecked
-                                        />
-                                    </div>
-                                    <div className="pl-7 text-sm">
-                                        <label htmlFor="public-access" className="font-medium text-gray-900">
-                                            Male
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="relative flex items-start">
-                                    <div className="absolute flex items-center h-5">
-                                        <input
-                                            {...register("gender")}
-                                            value="female"
-                                            name="gender"
-                                            aria-describedby="restricted-access-description"
-                                            type="radio"
-                                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                                        />
-                                    </div>
-                                    <div className="pl-7 text-sm">
-                                        <label htmlFor="restricted-access" className="font-medium text-gray-900">
-                                            Female
-                                        </label>
-                                    </div>
-                                </div>
+                                <RadioBoxInput
+                                    validate={error.userInfo.gender}
+                                    type="radio"
+                                    label="Gender"
+                                    name="gender"
+                                    data={[{ value: "male", label: "Male" }, { value: "female", label: "Female" }]}
+                                    value={value.userInfo.gender}
+                                    placeholder=""
+                                    onChange={(e) =>
+                                        handleInputChange({
+                                            element: e,
+                                            inputName: "gender",
+                                            groupNme: "userInfo",
+                                        })
+                                    }
+                                />
+
                             </div>
                             <hr className="border-gray-200" />
                         </div>
                     </div>
-                </fieldset> */}
+                </fieldset>
             </div>
 
             {/* Action buttons */}
@@ -246,7 +228,8 @@ export default function UserInformationFormComponent() {
                         Cancel
                     </button>
                     <button
-                        type="submit"
+                        onClick={handleSubmit}
+                        type="button"
                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Update
