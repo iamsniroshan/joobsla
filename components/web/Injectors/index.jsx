@@ -2,7 +2,7 @@
 import RightSideBar from 'components/common/Sidebar/rightsidebar';
 import TopSideBar from 'components/common/Sidebar/topsidebar';
 import { useRouter } from 'next/router'
-import UserInformationFormComponent from '../Forms/UserInformation';
+import UserInformationFormComponent from '../Forms/UserInformationForm';
 import LoginComponent from '../Login'
 import OverlayModalComponent from '../OverlayModal';
 import PostAddComponent from '../Post/Add';

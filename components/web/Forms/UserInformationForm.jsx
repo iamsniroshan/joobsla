@@ -6,11 +6,11 @@ import React, { useState } from "react";
 
 export default function UserInformationFormComponent() {
     const initialFormValue = {
-        userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: new Date(),gender:"" },
+        userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: new Date(), gender: "" },
         salary: { salaryExpectation: "", currency: "" }
     };
     const initialError = {
-        userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: "",gender:"" },
+        userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: "", gender: "" },
         salary: { salaryExpectation: "", currency: "" }
     }
     const [value, setValue] = useState(initialFormValue)
@@ -64,8 +64,7 @@ export default function UserInformationFormComponent() {
 
         <form>
             {/* Divider container */}
-            <div className="py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
-
+            <div className="py-6 space-y-6 sm:py-0 sm:space-y-0">
                 {/* First name */}
                 <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
                     <div className="sm:col-span-2">
@@ -211,7 +210,7 @@ export default function UserInformationFormComponent() {
                                 />
 
                             </div>
-                            <hr className="border-gray-200" />
+                            {/* <hr className="border-gray-200" /> */}
                         </div>
                     </div>
                 </fieldset>
