@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build:prod": "next build && next export -o _static",
+        "build:prod": "npm install && next build && next export -o _static",
         "start:prod": "next start -H 0.0.0.0 -p ${PORT:-8080}",
         "build": "next build",
         "start": "next start"
