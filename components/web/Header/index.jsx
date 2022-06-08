@@ -161,8 +161,7 @@ export default function HeaderComponent() {
                   </>
                 )}
               </Menu>
-
-              {loading !== 'authenticated' && (
+              {loading === 'unauthenticated' && (
                 <>
                   <Link
                     href={makeContextualHref({ openLoginModal: true })}
