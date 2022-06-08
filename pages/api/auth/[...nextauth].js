@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import Providers from 'next-auth/providers';
+import Providers from 'next-auth/react';
 
 import { verifyPassword } from 'helpers/auth';
 import { connectToDatabase } from 'helpers/db';
