@@ -5,7 +5,6 @@ import ThumbnailGenerator from "@uppy/thumbnail-generator"
 import XHRUpload from "@uppy/xhr-upload"
 
 const uppy = new Uppy({
-  meta: { type: "iphoneAdPix" },
   restrictions: {
     maxNumberOfFiles: 3,
     maxFileSize: 1048576 * 4,
@@ -16,7 +15,6 @@ const uppy = new Uppy({
 
 uppy.use(XHRUpload, {
   endpoint: "/api/upload/file",
-  fieldName: "iphoneAdPix",
   formData: true,
 })
 
