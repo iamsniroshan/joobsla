@@ -1,4 +1,4 @@
-import { DatePickerInput, DoubleSelectInput, TextareaInput, TextInput } from "components/common/Inputs";
+import { DatePickerInput, DoubleSelectInput, FileInput, TextareaInput, TextInput } from "components/common/Inputs";
 import RadioBoxInput from "components/common/Inputs/RadioBoxInpt";
 import React, { useState } from "react";
 
@@ -214,6 +214,7 @@ export default function UserInformationFormComponent() {
                         </div>
                     </div>
                 </fieldset>
+                <FileInput/>
             </div>
 
             {/* Action buttons */}
