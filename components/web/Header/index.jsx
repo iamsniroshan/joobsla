@@ -30,7 +30,6 @@ export default function HeaderComponent() {
 
   return (
     <>
-    {JSON.stringify(session)}
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
       <div
         as="header"
@@ -83,7 +82,7 @@ export default function HeaderComponent() {
             </div>
             <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
               {/* View notifications */}
-              {loading === 'authenticated' && (<a
+              {session && loading === 'authenticated' && (<a
                 href="#"
                 className="ml-5 mr-3 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
               >
@@ -100,7 +99,7 @@ export default function HeaderComponent() {
               <Menu as="div" className="flex-shrink-0 relative ml-5">
                 {({ isOpenMenu }) => (
                   <>
-                    {loading === 'authenticated' && (
+                    {session && loading === 'authenticated' && (
                       <>
                         <div>
                           <Menu.Button className="bg-white flex focus:outline-none rounded-full hover:bg-gray-200  border-gray-200">

@@ -10,7 +10,7 @@ import { useState } from "react";
 
 
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps:{ session, ...pageProps } }) {
   const getLayout = Component.getLayout || ((page) => page);
   const [queryClient] = useState(() => new QueryClient());
 
@@ -21,7 +21,7 @@ function App({ Component, pageProps }) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <SessionProvider  session={pageProps.session}>
+          <SessionProvider  session={session}>
             {Component.auth ? (
               <AuthGuard>{getLayout(<Component {...pageProps} />)}</AuthGuard>
             ) : (
