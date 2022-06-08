@@ -32,13 +32,13 @@ function MyLink(props) {
 }
 
 export default function AppMenuComponent() {
-  const [session, loading] = useSession();
+  const {data:session, status:loading }= useSession();
 
   return (
     <Menu as="div" className="flex-shrink-0 relative ml-5">
       {({ open }) => (
         <>
-          {session && !loading && (
+          {session && loading === 'authenticated' && (
             <>
               <div>
                 <Menu.Button className="bg-gray-200 text-sm text-gray-500 leading-none  border-gray-200 rounded-full inline-flex">

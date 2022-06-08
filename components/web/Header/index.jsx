@@ -25,7 +25,7 @@ const user = {
 export default function HeaderComponent() {
   const router = useRouter();
   const { makeContextualHref, returnHref } = useContextualRouting();
-  const [session, loading] = useSession();
+  const {data:session, status:loading } = useSession();
 
 
   return (
@@ -83,7 +83,7 @@ export default function HeaderComponent() {
             </div>
             <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
               {/* View notifications */}
-              {session && !loading && (<a
+              {session && loading === 'authenticated' && (<a
                 href="#"
                 className="ml-5 mr-3 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
               >
@@ -100,7 +100,7 @@ export default function HeaderComponent() {
               <Menu as="div" className="flex-shrink-0 relative ml-5">
                 {({ isOpenMenu }) => (
                   <>
-                    {session && !loading && (
+                    {session && loading === 'authenticated' && (
                       <>
                         <div>
                           <Menu.Button className="bg-white flex focus:outline-none rounded-full hover:bg-gray-200  border-gray-200">
@@ -163,7 +163,7 @@ export default function HeaderComponent() {
                 )}
               </Menu>
 
-              {!session && !loading && (
+              {!session && loading === 'authenticated' && (
                 <>
                   <Link
                     href={makeContextualHref({ openLoginModal: true })}

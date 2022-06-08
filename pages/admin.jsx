@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 const LoginComponent = dynamic(() => import("components/admin/Login"));
 
 function AdminLogin() {
-  const [session, loading] = useSession();
+  const {data:session, status:loading } = useSession();
   const router = useRouter();
-  if(loading) null
+  if(loading !== 'authenticated') null
   useEffect(() => {
     // Update the document title using the browser API
     if (session?.user.role === 'admin') {

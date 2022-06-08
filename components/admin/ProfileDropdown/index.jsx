@@ -11,7 +11,7 @@ function classNames(...classes) {
 }
 
 function ProfileDropdownComponent() {
-  const [session, loading] = useSession();
+  const {data:session} = useSession();
 
 
 

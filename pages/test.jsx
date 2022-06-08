@@ -1,5 +1,4 @@
 import { userLayout } from "components/web/Layout";
-import Example from "components/web/Test/Test";
 import dynamic from "next/dynamic";
 
 
