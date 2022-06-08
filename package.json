@@ -4,10 +4,8 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build:prod": "next build && next export -o _static",
-        "start:prod": "next start -H 0.0.0.0 -p ${PORT:-8080}",
         "build": "next build",
-        "start": "next start"
+        "start": "next start -H 0.0.0.0 -p ${PORT:-8080}"
     },
     "dependencies": {
         "@headlessui/react": "^1.6.3",
