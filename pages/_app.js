@@ -1,7 +1,7 @@
 import Head from "next/head";
 import "styles/globals.css";
 import "tailwindcss/tailwind.css";
-import { Provider } from "next-auth/client";
+import { Provider } from "next-auth/react";
 import { AuthGuard } from "hoc/AuthGuard";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";

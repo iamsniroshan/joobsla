@@ -8,7 +8,7 @@ import AppMenuComponent from './AppMenu'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContextualRouting } from 'next-use-contextual-routing';
-import { useSession, signOut } from 'next-auth/client';
+import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image'
 import InjectorComponent from '../Injectors'
 import MobileMenuComponent from '../MobileMenu'

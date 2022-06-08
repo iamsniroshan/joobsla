@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { signIn } from 'next-auth/client';
+import { signIn } from 'next-auth/react';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { ArrowNarrowLeftIcon } from "@heroicons/react/outline";

@@ -2,7 +2,7 @@
 import { Fragment } from 'react'
 import { Transition, Menu } from '@headlessui/react'
 import { ViewBoardsIcon, DocumentAddIcon } from '@heroicons/react/solid'
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link'
 
 const appsMenuData = [
