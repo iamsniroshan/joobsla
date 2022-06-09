@@ -52,7 +52,7 @@ export default function ImageUploadInput() {
 
   return (
     <div className="App">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center relative">
         <span className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-gray-500">
           <span className="text-xl font-medium leading-none text-white">
             {/* SN */}
