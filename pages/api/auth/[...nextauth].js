@@ -69,16 +69,12 @@ export default NextAuth({
   callbacks: {
 
     async signIn({ user, account, profile, email, credentials }) {
-      console.log(credentials);
       return true;
     },
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
     async session({ session, user, token }) {
-      console.log(user);
-      console.log(session);
-      console.log(token);
       session.user.id = token.sub;
       return session;
     },

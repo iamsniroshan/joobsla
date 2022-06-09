@@ -68,6 +68,12 @@ export default function UserInformationFormComponent() {
                 {/* First name */}
                 <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
                     <div className="sm:col-span-2">
+                        <FileInput/>
+                    </div>
+                </div>
+                {/* First name */}
+                <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
+                    <div className="sm:col-span-2">
                         <TextInput
                             validate={error.userInfo.firstName}
                             type="text"
@@ -214,7 +220,6 @@ export default function UserInformationFormComponent() {
                         </div>
                     </div>
                 </fieldset>
-                <FileInput/>
             </div>
 
             {/* Action buttons */}

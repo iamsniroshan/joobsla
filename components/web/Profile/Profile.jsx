@@ -5,20 +5,21 @@ import {
   BellIcon,
   MenuIcon,
   XIcon,
-  PencilAltIcon 
+  PencilAltIcon
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import ExperienceComponent from './Experience'
 import UserInformationComponent from './UserInformation'
 import { useContextualRouting } from 'next-use-contextual-routing';
 import Link from 'next/link'
+import Image from 'next/image'
 
 const user = {
   name: 'Chelsea Hagon',
   email: 'chelseahagon@example.com',
   role: 'Human Resources Manager',
-  imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  //imageUrl:
+  //  'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
   { name: 'Home', href: '#', current: true },
@@ -213,11 +214,7 @@ export default function ProfileComponent() {
                       <div className="pt-4 pb-2">
                         <div className="flex items-center px-5">
                           <div className="flex-shrink-0">
-                            <img
-                              className="h-10 w-10 rounded-full"
-                              src={user.imageUrl}
-                              alt=""
-                            />
+                            <Image src={user.imageUrl ? user.imageUrl : '/public/apps/profile.jpg'} alt="profile logo" width="80" height="80" />
                           </div>
                           <div className="ml-3 min-w-0 flex-1">
                             <div className="text-base font-medium text-gray-800 truncate">
@@ -269,11 +266,10 @@ export default function ProfileComponent() {
                     <div className="sm:flex sm:items-center sm:justify-between">
                       <div className="sm:flex sm:space-x-5">
                         <div className="flex-shrink-0">
-                          <img
-                            className="mx-auto h-20 w-20 rounded-full"
-                            src={user.imageUrl}
-                            alt=""
-                          />
+                          <span className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-gray-500">
+                            <span className="text-xl font-medium leading-none text-white">SN</span>
+                          </span>
+                          {/* <Image src={user.imageUrl ? user.imageUrl : '/apps/profile.jpg'} alt="profile logo" width="80" height="80" className="rounded-full"/> */}
                         </div>
                         <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
                           <p className="text-sm font-medium text-gray-600">
