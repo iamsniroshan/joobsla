@@ -1,6 +1,7 @@
 import fs from "fs"
 import formidable from "formidable";
 import AWS from 'aws-sdk'
+import { getSession } from "next-auth/react";
 
 export const config = {
   api: {
@@ -9,26 +10,25 @@ export const config = {
 };
 
 async function handler(req, res){
+
+  const session = await getSession({ req: req });
+  if (!session) {
+    res.status(401).json({ message: "Not authenticated!" });
+    return;
+  }
+
+const endPoint = `sgp1.digitaloceanspaces.com/uploads/${session.user.id}`
+console.log(session)
+console.log(endPoint)
+
   const s3 = new AWS.S3({
-    endpoint: 'https://lotjobs.sgp1.digitaloceanspaces.com/uploads',
+    endpoint: new AWS.Endpoint('sgp1.digitaloceanspaces.com/uploads'),
     accessKeyId: 'JZ4FOQOQ3XK55RPT3XSJ',//process.env.SPACES_KEY,
     secretAccessKey: 'Ir/tsV7Jai93a1N9vTkTuFomyBvyzbxy82fNyQpQrG4',//process.env.SPACES_SECRET,
     region: 'sgp1',
     // sslEnabled: true,
   });
-  function paths({ id, ct }) {
-    console.log('id', id, ct);
-    switch (ct) {
-      case 'tck':
-        return `nor-platforms/${id}/tickets`;
-      case 'prd':
-        return `nor-platforms/${id}/products`;
-      case 'pcs':
-        return `nor-platforms/${id}`;
-      default:
-        return false;
-    }
-  }
+
   try {
     const form = new formidable.IncomingForm({ multiples: true, maxFileSize: 50 * 1024 * 1024 });
     form.parse(req, async function (err, fields, files) {
@@ -42,7 +42,7 @@ async function handler(req, res){
       // console.log('se', s3);
       await s3
         .upload({
-          Bucket: 'test-path',//paths({ id: req.user._id, ct: fields?.ct }),
+          Bucket: 'lotjobs',
           ACL: 'public-read',
           Key: key,
           Body: body,
@@ -50,11 +50,11 @@ async function handler(req, res){
         })
         .send((err, data) => {
           if (err) {
-            console.log(err)
+            //console.log(err)
             return res.status(500).json('Internal Error Please try again');
           }
           if (data) {
-            console.log('data', data);
+            //console.log('data', data);
             return res.status(200).json({ files: data.Location });
           }
         });
