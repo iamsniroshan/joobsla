@@ -5,4 +5,5 @@ export { default as SelectInput } from "./SelectInput";
 export { default as DoubleSelectInput } from "./DoubleSelectInput";
 export { default as DatePickerInput } from "./DatePickerInput";
 export { default as TextareaInput } from "./TextareaInput";
-export { default as FileInput } from "./FileInput";
+export { default as FileUploadInput } from "./FileUploadInput";
+export { default as ImageUploadInput } from "./ImageUploadInput";

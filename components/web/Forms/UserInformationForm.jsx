@@ -1,4 +1,4 @@
-import { DatePickerInput, DoubleSelectInput, FileInput, TextareaInput, TextInput } from "components/common/Inputs";
+import { DatePickerInput, DoubleSelectInput, FileUploadInput, ImageUploadInput, TextareaInput, TextInput } from "components/common/Inputs";
 import RadioBoxInput from "components/common/Inputs/RadioBoxInpt";
 import React, { useState } from "react";
 
@@ -68,7 +68,13 @@ export default function UserInformationFormComponent() {
                 {/* First name */}
                 <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
                     <div className="sm:col-span-2">
-                        <FileInput/>
+                        <ImageUploadInput/>
+                    </div>
+                </div>
+                {/* First name */}
+                <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
+                    <div className="sm:col-span-2">
+                        <FileUploadInput/>
                     </div>
                 </div>
                 {/* First name */}

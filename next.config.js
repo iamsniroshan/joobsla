@@ -3,7 +3,7 @@ module.exports = {
         secret: 'THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING'
     },
     images: {
-        domains: ['images.unsplash.com']
+        domains: ['lotjobs.sgp1.digitaloceanspaces.com']
     }
     // publicRuntimeConfig: {
     //     apiUrl: process.env.NODE_ENV === 'development'
