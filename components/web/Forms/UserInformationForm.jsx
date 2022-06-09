@@ -65,16 +65,10 @@ export default function UserInformationFormComponent() {
         <form>
             {/* Divider container */}
             <div className="py-6 space-y-6 sm:py-0 sm:space-y-0">
-                {/* First name */}
+                {/* Profile image upload */}
                 <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
                     <div className="sm:col-span-2">
                         <ImageUploadInput/>
-                    </div>
-                </div>
-                {/* First name */}
-                <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
-                    <div className="sm:col-span-2">
-                        <FileUploadInput/>
                     </div>
                 </div>
                 {/* First name */}
@@ -226,6 +220,12 @@ export default function UserInformationFormComponent() {
                         </div>
                     </div>
                 </fieldset>
+                {/* File Upload */}
+                <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
+                    <div className="sm:col-span-2">
+                        <FileUploadInput/>
+                    </div>
+                </div>
             </div>
 
             {/* Action buttons */}
