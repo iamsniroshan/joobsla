@@ -33,11 +33,11 @@ console.log(endPoint)
     const form = new formidable.IncomingForm({ multiples: true, maxFileSize: 50 * 1024 * 1024 });
     form.parse(req, async function (err, fields, files) {
       // console.log(err)
-      // console.log('files', files, 'fields', fields);
-      const { file } = files;
-      const body = file.length > 0 ? file.map((itm) => fs.readFileSync(itm.filepath)) : fs.readFileSync(file.filepath);
-      const contentType = file.length > 0 ? file.map((itm) => itm.mimetype) : file.mimetype;
-      const key = file.length > 0 ? file.map((itm) => itm.originalFilename) : file.originalFilename;
+      console.log('files', files, 'fields', fields);
+      const { image } = files;
+      const body = image.length > 0 ? image.map((itm) => fs.readFileSync(itm.filepath)) : fs.readFileSync(image.filepath);
+      const contentType = image.length > 0 ? image.map((itm) => itm.mimetype) : image.mimetype;
+      const key = image.length > 0 ? image.map((itm) => itm.originalFilename) : image.originalFilename;
       // console.log('body', body, 'key', key, 'contenttype', contentType);
       // console.log('se', s3);
       await s3
