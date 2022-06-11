@@ -1,13 +1,17 @@
 import { DatePickerInput, DoubleSelectInput, FileUploadInput, ImageUploadInput, TextareaInput, TextInput } from "components/common/Inputs";
 import RadioBoxInput from "components/common/Inputs/RadioBoxInpt";
+import { useContextualRouting } from "next-use-contextual-routing";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { updateUserInfoApi } from "services/api";
+
 
 
 
 export default function UserInformationFormComponent() {
     const initialFormValue = {
         userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: new Date(), gender: "" },
-        salary: { salaryExpectation: "", currency: "" },
+        salary: { salaryExpectation: "", currency: "lkr-month" },
         profile: { imgUrl: "", imgName: "" },
         cv: { fileUrl: "", fileName: "" }
     };
@@ -17,6 +21,8 @@ export default function UserInformationFormComponent() {
     }
     const [formData, setFormData] = useState(initialFormValue)
     const [error, setError] = useState(initialError)
+    const router = useRouter();
+    const { returnHref } = useContextualRouting();
 
 
     const handleInputChange = ({ element, inputName, groupNme }) => {
@@ -42,8 +48,21 @@ export default function UserInformationFormComponent() {
         else setError({ ...error, [inputName]: "" });
     };
 
+
+
     const handleSubmit = () => {
-        console.log(userInfo)
+        //setLoader(true)
+        updateUserInfoApi(formData).then(item => {
+            if (item.status === 'success') {
+                // refetch().then(e =>{ 
+                //     setLoader(false)
+                //     router.push(returnHref, undefined, { shallow: true })
+                // })
+                router.push(returnHref, undefined, { shallow: true })
+            } else {
+                router.push(returnHref, undefined, { shallow: true })
+            }
+        });
     }
 
     const childSalarySelectConfig = {
