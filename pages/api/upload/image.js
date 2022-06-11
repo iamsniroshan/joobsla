@@ -51,7 +51,7 @@ const endPoint = `sgp1.digitaloceanspaces.com/uploads/${session.user.id}`
             return res.status(500).json('Internal Error Please try again');
           }
           if (data) {
-            return res.status(200).json({ files: data.Location });
+            return res.status(200).json({ imgUrl:data.Location, imgName:data.key });
           }
         });
     });

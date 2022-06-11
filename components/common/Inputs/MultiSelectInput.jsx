@@ -42,7 +42,7 @@ export default function MultiSelectInput({ value, data = [], label, onChange, re
   }
 
   return (
-    <div className="relative my-6">
+    <div className="relative">
       <div className="w-full max-w-xs mx-auto">
         <Listbox
           as="div"

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 export default function RadioBoxInput({ value,name, data = [], label, onChange, validate }) {
 
     return (
-        <div className="relative my-6">
+        <div className="relative">
             <label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">{label}</label>
             <fieldset className="grid grid-cols-2 gap-3 p-3 border border-gray-300 rounded-md">
                 {data.map((item, index) => (

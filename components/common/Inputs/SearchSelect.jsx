@@ -36,7 +36,7 @@ export default function SearchSelectInput({ value, data = [], label, onChange, r
   }
 
   return (
-    <div className="relative my-6">
+    <div className="relative">
       <div className="w-full max-w-xs mx-auto">
         <Listbox
           as="div"

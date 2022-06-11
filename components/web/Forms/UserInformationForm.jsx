@@ -7,18 +7,20 @@ import React, { useState } from "react";
 export default function UserInformationFormComponent() {
     const initialFormValue = {
         userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: new Date(), gender: "" },
-        salary: { salaryExpectation: "", currency: "" }
+        salary: { salaryExpectation: "", currency: "" },
+        profile: { imgUrl: "", imgName: "" },
+        cv: { fileUrl: "", fileName: "" }
     };
     const initialError = {
         userInfo: { firstName: "", lastName: "", emailAddress: "", salaryExpectation: "", dateOfBirth: "", gender: "" },
         salary: { salaryExpectation: "", currency: "" }
     }
-    const [value, setValue] = useState(initialFormValue)
+    const [formData, setFormData] = useState(initialFormValue)
     const [error, setError] = useState(initialError)
 
 
     const handleInputChange = ({ element, inputName, groupNme }) => {
-        const data = { ...value };
+        const data = { ...formData };
         if (groupNme) {
             element.target
                 ? ((data[groupNme][element.target.name] = element.target.value),
@@ -31,7 +33,7 @@ export default function UserInformationFormComponent() {
                     formValidator(element.target.value, inputName))
                 : ((data[inputName] = element), formValidator(element, inputName));
         }
-        setValue(data);
+        setFormData(data);
     };
 
     const formValidator = (value, inputName) => {
@@ -41,7 +43,7 @@ export default function UserInformationFormComponent() {
     };
 
     const handleSubmit = () => {
-        console.log(value)
+        console.log(userInfo)
     }
 
     const childSalarySelectConfig = {
@@ -50,7 +52,7 @@ export default function UserInformationFormComponent() {
         label: 'Currency'
     }
 
-    async function updateUserInformationHttpCall(postData) {
+    const updateUserInformationHttpCall = async (postData) => {
         const response = await fetch("/api/auth/update-userinfo", {
             method: "POST",
             body: JSON.stringify(postData),
@@ -68,7 +70,17 @@ export default function UserInformationFormComponent() {
                 {/* Profile image upload */}
                 <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
                     <div className="sm:col-span-2">
-                        <ImageUploadInput/>
+                        <ImageUploadInput
+                            type="file"
+                            label="Upload your profile image"
+                            name="profile"
+                            onChange={(e) =>
+                                handleInputChange({
+                                    element: e,
+                                    inputName: "profile",
+                                    groupNme: "",
+                                })
+                            } />
                     </div>
                 </div>
                 {/* First name */}
@@ -80,7 +92,7 @@ export default function UserInformationFormComponent() {
                             label="First name"
                             required="true"
                             name="firstName"
-                            value={value.userInfo.firstName}
+                            value={formData.userInfo.firstName}
                             placeholder=""
                             onChange={(e) =>
                                 handleInputChange({
@@ -101,7 +113,7 @@ export default function UserInformationFormComponent() {
                             label="Last Name"
                             required="true"
                             name="lastName"
-                            value={value.userInfo.lastName}
+                            value={formData.userInfo.lastName}
                             placeholder=""
                             onChange={(e) =>
                                 handleInputChange({
@@ -122,7 +134,7 @@ export default function UserInformationFormComponent() {
                             label="Email address"
                             required="true"
                             name="emailAddress"
-                            value={value.userInfo.emailAddress}
+                            value={formData.userInfo.emailAddress}
                             placeholder=""
                             onChange={(e) =>
                                 handleInputChange({
@@ -139,7 +151,7 @@ export default function UserInformationFormComponent() {
                     <div className="sm:col-span-2">
                         <DatePickerInput
                             label="Date of birth"
-                            value={value.userInfo.dateOfBirth}
+                            value={formData.userInfo.dateOfBirth}
                             onChange={(e) =>
                                 handleInputChange({
                                     element: e,
@@ -157,7 +169,7 @@ export default function UserInformationFormComponent() {
                             type="number"
                             label="Salary expectation"
                             name="salaryExpectation"
-                            value={value.salary}
+                            value={formData.salary}
                             placeholder="00.00"
                             childSelect={childSalarySelectConfig}
                             onChange={(e) =>
@@ -179,7 +191,7 @@ export default function UserInformationFormComponent() {
                             label="About you"
                             required="true"
                             name="aboutYou"
-                            value={value.userInfo.aboutYou}
+                            value={formData.userInfo.aboutYou}
                             placeholder="Tell us yourself"
                             rows={3}
                             onChange={(e) =>
@@ -192,41 +204,46 @@ export default function UserInformationFormComponent() {
                         />
                     </div>
                 </div>
-
                 {/* Gender */}
-                <fieldset>
-                    <div className="space-y-2 px-4 sm:space-y-0 sm:grid sm:items-start sm:px-6 sm:py-5">
-                        <div className="space-y-5 sm:col-span-2">
-                            <div className="space-y-5 sm:mt-0">
-                                <RadioBoxInput
-                                    validate={error.userInfo.gender}
-                                    type="radio"
-                                    label="Gender"
-                                    name="gender"
-                                    data={[{ value: "male", label: "Male" }, { value: "female", label: "Female" }]}
-                                    value={value.userInfo.gender}
-                                    placeholder=""
-                                    onChange={(e) =>
-                                        handleInputChange({
-                                            element: e,
-                                            inputName: "gender",
-                                            groupNme: "userInfo",
-                                        })
-                                    }
-                                />
-
-                            </div>
-                            {/* <hr className="border-gray-200" /> */}
-                        </div>
+                <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5">
+                    <div className="sm:col-span-2">
+                        <RadioBoxInput
+                            validate={error.userInfo.gender}
+                            type="radio"
+                            label="Gender"
+                            name="gender"
+                            data={[{ value: "male", label: "Male" }, { value: "female", label: "Female" }]}
+                            value={formData.userInfo.gender}
+                            placeholder=""
+                            onChange={(e) =>
+                                handleInputChange({
+                                    element: e,
+                                    inputName: "gender",
+                                    groupNme: "userInfo",
+                                })
+                            }
+                        />
                     </div>
-                </fieldset>
+                </div>
                 {/* File Upload */}
                 <div className="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:px-6 sm:py-5 w-[25rem]">
                     <div className="sm:col-span-2">
-                        <FileUploadInput/>
+                        <FileUploadInput
+                            type="file"
+                            label="Attache your CV"
+                            name="cv"
+                            onChange={(e) =>
+                                handleInputChange({
+                                    element: e,
+                                    inputName: "cv",
+                                    groupNme: "",
+                                })
+                            }
+                        />
                     </div>
                 </div>
             </div>
+            {/* {JSON.stringify(formData)} */}
 
             {/* Action buttons */}
             <div className="flex-shrink-0 px-4 border-t border-gray-200 py-5 sm:px-6">

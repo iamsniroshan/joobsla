@@ -1,14 +1,13 @@
 import { PaperClipIcon } from "@heroicons/react/solid";
-import Image from "next/image";
 import React, { useState } from "react";
 
 
 
-export default function FileUploadInput() {
+export default function FileUploadInput({label,onChange}) {
 
   const [fileDetail, setFileDetail] = useState({})
 
-  const onChange = async (event) => {
+  const fileChangeChange = async (event) => {
     setFileDetail({})
     const file = event.target.files[0];
     const formData = new FormData();
@@ -19,7 +18,8 @@ export default function FileUploadInput() {
     });
 
     const data = await response.json();
-    setFileDetail(data)
+    setFileDetail(data);
+    onChange(data)
   };
 
   const deleteFile = (key) => {
@@ -27,7 +27,10 @@ export default function FileUploadInput() {
       {
         method: 'DELETE',
         body: key,
-      }).then(() => setFileDetail({}));
+      }).then(() => {
+        setFileDetail({});
+        onChange({ fileUrl: "", fileName: "" });
+      });
   }
 
 
@@ -59,8 +62,8 @@ export default function FileUploadInput() {
                   d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
               <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                Attached your CV</p>
-              <input onChange={onChange} type="file" className="opacity-0 absolute cursor-pointer h-24" />
+                {label}</p>
+              <input onChange={fileChangeChange} type="file" className="opacity-0 absolute cursor-pointer h-24" />
             </div>
           </div>
         </div>

@@ -30,12 +30,15 @@ const dataURIToBlob = (dataURI) => {
   return new Blob([ia], { type: mimeString });
 };
 
-export default function ImageUploadInput() {
+export default function ImageUploadInput({label,onChange}) {
 
-  const [profileImage, setProfileImage] = useState("")
+  const [profileImage, setProfileImage] = useState({})
 
-  const onChange = async (event) => {
-    setProfileImage("")
+  const fileChangeChange = async (event) => {
+    if(profileImage.imgName){
+      await deleteFile(profileImage.imgName)
+    }
+    setProfileImage({})
     const file = event.target.files[0];
     const image = await resizeFile(file);
     const newFile = dataURIToBlob(image);
@@ -47,8 +50,20 @@ export default function ImageUploadInput() {
     });
 
     const data = await response.json();
-    setProfileImage(data.files)
+    setProfileImage(data)
+    onChange(data)
   };
+
+  const deleteFile = async (key) => {
+    await fetch('/api/upload/delete',
+      {
+        method: 'DELETE',
+        body: key,
+      }).then(() => {
+        onChange({ imgUrl: "", imgName: "" })
+        console.log('img delete success')
+      });
+  }
 
   return (
     <div className="App">
@@ -56,13 +71,12 @@ export default function ImageUploadInput() {
         <span className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-gray-500">
           <span className="text-xl font-medium leading-none text-white">
             {/* SN */}
-            {profileImage ? (<Image src={profileImage} alt="profile logo" width="80" height="80" className="rounded-full" />) : ('SN')}
-
+            {profileImage.imgUrl ? (<Image src={profileImage.imgUrl} alt="profile logo" width="80" height="80" className="rounded-full" />) : ('SN')}
           </span>
         </span>
         <div className="w-20 h-20 text-lg group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500">
           <img className="hidden group-hover:block w-6" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" />
-          <input onChange={onChange} type="file" className="opacity-0 absolute w-20 h-20 cursor-pointer" />
+          <input onChange={fileChangeChange} type="file" className="opacity-0 absolute w-20 h-20 cursor-pointer" />
         </div>
       </div>
     </div>
