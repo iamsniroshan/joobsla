@@ -17,10 +17,10 @@ async function handler(req, res){
     return;
   }
 
-const endPoint = `sgp1.digitaloceanspaces.com/uploads/${session.user.id}`
+const spacesEndpoint = `sgp1.digitaloceanspaces.com/uploads/${session.user.id}`
 
   const s3 = new AWS.S3({
-    endpoint: new AWS.Endpoint(endPoint),
+    endpoint: new AWS.Endpoint(spacesEndpoint),
     accessKeyId: 'JZ4FOQOQ3XK55RPT3XSJ',//process.env.SPACES_KEY,
     secretAccessKey: 'Ir/tsV7Jai93a1N9vTkTuFomyBvyzbxy82fNyQpQrG4',//process.env.SPACES_SECRET,
     region: 'sgp1',
@@ -40,7 +40,7 @@ const endPoint = `sgp1.digitaloceanspaces.com/uploads/${session.user.id}`
       // console.log('se', s3);
       await s3
         .upload({
-          Bucket: 'lotjobs',
+          Bucket: 'lotjobs',//process.env.BUCKET_NAME,
           ACL: 'public-read',
           Key: new Date().getTime()+'_'+key,
           Body: body,
@@ -56,7 +56,6 @@ const endPoint = `sgp1.digitaloceanspaces.com/uploads/${session.user.id}`
         });
     });
   } catch (err) {
-    console.log('3')
     res.status(500).json('Internal Error Please try again');
   }
 };
