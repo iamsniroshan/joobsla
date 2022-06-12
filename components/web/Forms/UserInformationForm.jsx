@@ -3,7 +3,7 @@ import RadioBoxInput from "components/common/Inputs/RadioBoxInpt";
 import { useContextualRouting } from "next-use-contextual-routing";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { updateUserInfoApi } from "services/api";
+import createUserInfoApi from "services/api/createUserInfo";
 
 
 
@@ -52,7 +52,7 @@ export default function UserInformationFormComponent() {
 
     const handleSubmit = () => {
         //setLoader(true)
-        updateUserInfoApi(formData).then(item => {
+        createUserInfoApi(formData).then(item => {
             if (item.status === 'success') {
                 // refetch().then(e =>{ 
                 //     setLoader(false)

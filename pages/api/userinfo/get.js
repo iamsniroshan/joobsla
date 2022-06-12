@@ -1,4 +1,6 @@
-import { connectToDatabase } from "helpers/db";
+import dbConnect from "helpers/dbConnect";
+import userInfo from "models/userInfo";
+import mongoose from "mongoose";
 import { getSession } from "next-auth/react";
 
 async function handler(req, res) {
@@ -12,20 +14,31 @@ async function handler(req, res) {
     return;
   }
 
-  const client = await connectToDatabase();
-  const db = client.db();
+  await dbConnect();
 
   const userId = session.user.id;
-  var ObjectId = require("mongodb").ObjectId;
+  const id = mongoose.Types.ObjectId(userId)
 
-  try {
-    const result = await (db.collection("users").find({"_id" : ObjectId(userId),select:{"password":1}})).toArray();
-    res.status(200).json({ "status": "success", message: "Fetch user info success!", "data": result });
-  } catch (err) {
-    res.status(500).json({ "status": "error", message: "Fetch all job posts failed!", "data": err });
-  }
-
-  client.close();
+  userInfo.find({ userId: id }, function (err, result) {
+    if (err) {
+      res
+      .status(500)
+      .json({
+        status: "error",
+        message: "Fetch all job posts failed!",
+        data: [],
+        err
+      });
+      return;
+    }
+    res
+    .status(200)
+    .json({
+      status: "success",
+      message: "Fetch user info success!",
+      data: result,
+    });
+  });
 }
 
 export default handler;

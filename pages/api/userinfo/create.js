@@ -1,5 +1,5 @@
 import dbConnect from "helpers/dbConnect";
-import jobPosts from "models/jobPosts";
+import userInfo from "models/userInfo";
 import { getSession } from "next-auth/react";
 
 async function handler(req, res) {
@@ -19,13 +19,13 @@ async function handler(req, res) {
   const userId = session.user.id;
   const buildData = { ...data, userId };
 
-  jobPosts.create(buildData, function (err, result) {
+  userInfo.create(buildData, function (err, result) {
     if (err) {
       res
         .status(500)
         .json({
           status: "error",
-          message: "Job post creation failed!",
+          message: "User Info  creation failed!",
           data: err,
         });
     }
@@ -33,7 +33,7 @@ async function handler(req, res) {
       .status(201)
       .json({
         status: "success",
-        message: "Job post creation success!",
+        message: "User Info creation success!",
         data: result,
       });
   });

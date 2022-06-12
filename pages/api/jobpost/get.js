@@ -1,4 +1,5 @@
-import { connectToDatabase } from "helpers/db";
+import dbConnect from "helpers/dbConnect";
+import jobPosts from "models/jobPosts";
 import { getSession } from "next-auth/react";
 
 async function handler(req, res) {
@@ -11,21 +12,20 @@ async function handler(req, res) {
     res.status(401).json({ message: "Not authenticated!" });
     return;
   }
-
-  const client = await connectToDatabase();
-  const db = client.db();
+  await dbConnect()
 
   const userId = session.user.id;
-  //var ObjectId = require("mongodb").ObjectId;
 
-  try {
-    const result = await (db.collection("jobPosts").find()).toArray();
-    res.status(200).json({ "status": "success", message: "Fetch all job posts success!", "data": result });
-  } catch (err) {
-    res.status(500).json({ "status": "error", message: "Fetch all job posts failed!", "data": err });
-  }
 
-  client.close();
+
+    jobPosts.find({}, function(err, result) {
+       if (err) {
+        res.status(500).json({ "status": "error", message: "Fetch all job posts failed!", "data": [],err });
+          return;
+      }
+      res.status(200).json({ "status": "success", message: "Fetch all job posts success!", "data": result });
+    });
+
 }
 
 export default handler;
