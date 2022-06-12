@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 
 
-const ProfileComponent = dynamic(() => import("components/web/Profile/Profile"));
+const ProfileComponent = dynamic(() => import("components/web/Profile"));
 
 const Profile = () => {
   return <ProfileComponent/>

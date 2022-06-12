@@ -16,11 +16,11 @@ async function handler(req, res) {
   const db = client.db();
 
   const userId = session.user.id;
-  //var ObjectId = require("mongodb").ObjectId;
+  var ObjectId = require("mongodb").ObjectId;
 
   try {
-    const result = await (db.collection("jobPosts").find()).toArray();
-    res.status(200).json({ "status": "success", message: "Fetch all job posts success!", "data": result });
+    const result = await (db.collection("users").find({"_id" : ObjectId(userId),select:{"password":1}})).toArray();
+    res.status(200).json({ "status": "success", message: "Fetch user info success!", "data": result });
   } catch (err) {
     res.status(500).json({ "status": "error", message: "Fetch all job posts failed!", "data": err });
   }
