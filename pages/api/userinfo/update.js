@@ -1,4 +1,4 @@
-import { connectToDatabase } from "helpers/db";
+import users from "models/users";
 import { getSession } from "next-auth/react";
 
 async function handler(req, res) {
@@ -13,16 +13,14 @@ async function handler(req, res) {
     return;
   }
 
-  const client = await connectToDatabase();
-  const db = client.db();
+  await dbConnect();
 
   const userId = session.user.id;
   const buildData = { ...data, userId };
   var ObjectId = require("mongodb").ObjectId;
 
   try {
-    const result = await db.collection("users")
-    .findOneAndUpdate(
+    const result = await users.findOneAndUpdate(
       { _id: new ObjectId(userId) },
       { $set: buildData, $currentDate: { lastUpdated: true } },
       { upsert: true }
@@ -32,7 +30,6 @@ async function handler(req, res) {
     res.status(500).json({ "status": "error", message: "user info update failed!", "data": err });
   }
 
-  //client.close();
 }
 
 export default handler;

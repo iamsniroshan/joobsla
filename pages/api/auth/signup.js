@@ -1,5 +1,6 @@
 import { hashPassword } from 'helpers/auth';
-import { connectToDatabase } from 'helpers/db';
+import dbConnect from 'helpers/dbConnect';
+import users from 'models/users';
 
 async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -23,11 +24,9 @@ async function handler(req, res) {
     return;
   }
 
-  const client = await connectToDatabase();
+  await dbConnect();
 
-  const db = client.db();
-
-  const existingUser = await db.collection('users').findOne({ email: email });
+  const existingUser = await users.findOne({ email: email }).exec();
 
   if (existingUser) {
     res.status(422).json({ message: 'User exists already!' });

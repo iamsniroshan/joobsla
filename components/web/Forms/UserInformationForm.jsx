@@ -71,15 +71,6 @@ export default function UserInformationFormComponent() {
         label: 'Currency'
     }
 
-    const updateUserInformationHttpCall = async (postData) => {
-        const response = await fetch("/api/auth/update-userinfo", {
-            method: "POST",
-            body: JSON.stringify(postData),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-    }
 
     return (
 

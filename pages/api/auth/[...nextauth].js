@@ -1,10 +1,9 @@
 import NextAuth from "next-auth";
 import { verifyPassword } from "helpers/auth";
-import { connectToDatabase } from "helpers/db";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from "jsonwebtoken";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import clientPromise from "helpers/mongodb";
+import users from "models/users";
+import dbConnect from "helpers/dbConnect";
 
 export default NextAuth({
   session: {
@@ -24,23 +23,18 @@ export default NextAuth({
   },
   providers: [
     CredentialsProvider({
-      adapter: MongoDBAdapter(clientPromise),
+      //adapter: MongoDBAdapter(clientPromise),
       name: "credentials",
       credentials: {
         username: { label: "username", type: "text" },
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        const client = await connectToDatabase();
 
-        const usersCollection = client.db().collection("users");
-
-        const userObj = await usersCollection.findOne({
-          email: credentials.email,
-        });
+        await dbConnect();
+        const userObj = await users.findOne({ email: credentials.email }).exec();
 
         if (!userObj) {
-          client.close();
           throw new Error("No user found!");
         }
 
@@ -50,11 +44,9 @@ export default NextAuth({
         );
 
         if (!isValid) {
-          client.close();
           throw new Error("Could not log you in!");
         }
 
-        client.close();
         const user = {
           email: userObj.email,
           id: userObj._id,

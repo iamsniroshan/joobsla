@@ -1,7 +1,8 @@
 import { getSession } from 'next-auth/react';
 
 import { hashPassword, verifyPassword } from 'helpers/auth';
-import { connectToDatabase } from 'helpers/db';
+import dbConnect from 'helpers/dbConnect';
+import users from 'models/users';
 
 async function handler(req, res) {
   if (req.method !== 'PATCH') {
@@ -19,11 +20,9 @@ async function handler(req, res) {
   const oldPassword = req.body.oldPassword;
   const newPassword = req.body.newPassword;
 
-  const client = await connectToDatabase();
+  await dbConnect();
 
-  const usersCollection = client.db().collection('users');
-
-  const user = await usersCollection.findOne({ email: userEmail });
+  const user = await users.findOne({ email: userEmail }).exec();
 
   if (!user) {
     res.status(404).json({ message: 'User not found.' });
