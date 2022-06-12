@@ -7,19 +7,21 @@ import UserMenuComponent from './UserMenu'
 import UserProfileComponent from './UserProfile'
 import { useQuery } from 'react-query';
 import { getUserInfoApi } from 'services/api';
+import { useState } from 'react';
 
 
 
 
 export default function ProfileComponent() {
 
-    const { isLoading, error, data } = useQuery('userInfoUseQuery', () => getUserInfoApi());
-    const { makeContextualHref, returnHref } = useContextualRouting();
+    const [userDetail, setUserDetail] = useState({})
 
+    const { isLoading, error, data } = useQuery('userInfoUseQuery', () => getUserInfoApi(),{
+        onSuccess: (data) => setUserDetail(data.data[0])});
+    const { makeContextualHref, returnHref } = useContextualRouting();
 
     return (
         <>
-            {JSON.stringify(data)}
             <div className="relative bg-grayBg">
                 <UserMenuComponent />
                 <main className="-mt-24 pb-8 main-height">
@@ -30,10 +32,10 @@ export default function ProfileComponent() {
                             {/* Left column */}
                             <div className="grid grid-cols-1 gap-4 lg:col-span-2">
                                 {/* user Profile */}
-                                <UserProfileComponent />
+                                <UserProfileComponent profile={userDetail.profile} userInfo={userDetail.userInfo}/>
                                 {/* Actions panel */}
                                 <section aria-labelledby="quick-links-title">
-                                    <UserInformationComponent />
+                                    <UserInformationComponent userInfo={userDetail.userInfo} cv={userDetail.cv}/>
                                 </section>
                             </div>
 
