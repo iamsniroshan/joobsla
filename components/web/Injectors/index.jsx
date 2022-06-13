@@ -2,6 +2,7 @@
 import RightSideBar from 'components/common/Sidebar/rightsidebar';
 import TopSideBar from 'components/common/Sidebar/topsidebar';
 import { useRouter } from 'next/router'
+import ExperienceFormComponent from '../Forms/ExperienceForm';
 import UserInformationFormComponent from '../Forms/UserInformationForm';
 import LoginComponent from '../Login'
 import OverlayModalComponent from '../OverlayModal';
@@ -11,7 +12,7 @@ import PostAddComponent from '../Post/Add';
 export default function InjectorComponent() {
 
   const router = useRouter()
-  const { openLoginModal, userInfoEditModal, openPostAddModal } = router.query
+  const { openLoginModal, userInfoEditModal, openPostAddModal,experienceEditModal } = router.query
   //const [openLogin, setOpenLogin] = useAtom(openLoginAtom)
 
   return (
@@ -21,6 +22,9 @@ export default function InjectorComponent() {
       </OverlayModalComponent>
       <RightSideBar open={userInfoEditModal}>
         <UserInformationFormComponent />
+      </RightSideBar>
+      <RightSideBar open={experienceEditModal}>
+        <ExperienceFormComponent/>
       </RightSideBar>
       {/* <OverlayModalComponent open={openPostAddModal} width="md:max-w-7xl">
         <PostAddComponent />

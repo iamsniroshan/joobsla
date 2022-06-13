@@ -2,11 +2,10 @@ import { DatePickerInput, DoubleSelectInput, FileUploadInput, ImageUploadInput, 
 import RadioBoxInput from "components/common/Inputs/RadioBoxInpt";
 import { useContextualRouting } from "next-use-contextual-routing";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getUserInfoApi, updateUserInfoApi } from "services/api";
-import createUserInfoApi from "services/api/createUserInfo";
-import getJobPostApi from "services/api/getJobPost";
+
 
 
 

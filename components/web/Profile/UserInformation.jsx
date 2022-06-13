@@ -1,13 +1,24 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { PaperClipIcon,PencilAltIcon,PencilIcon } from '@heroicons/react/solid'
+import { PaperClipIcon, PencilAltIcon, PencilIcon } from '@heroicons/react/solid'
+import { useContextualRouting } from 'next-use-contextual-routing';
+import Link from 'next/link';
 
-export default function UserInformationComponent({userInfo,cv}) {
+export default function UserInformationComponent({ userInfo, cv }) {
+
+  const { makeContextualHref, returnHref } = useContextualRouting();
+
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6 relative">
         <h3 className="text-lg leading-6 font-medium text-gray-900">User Information</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
-        <span className="flex absolute right-4 top-4 text-yellow-300 pr-3 hover:text-gray-600 cursor-pointer"><PencilAltIcon width="20" />  Edit</span>
+        <Link scroll={false}
+          href={makeContextualHref({ userInfoEditModal: true })}
+        >
+          <span className="flex absolute right-4 top-4 font-bold text-sm text-blue-600 pr-3 hover:text-green-600 cursor-pointer">
+            <PencilAltIcon width="20" /> Edit
+          </span>
+        </Link>
       </div>
       <div className="border-t border-gray-200">
         <dl>
