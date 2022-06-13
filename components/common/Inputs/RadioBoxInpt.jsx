@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 export default function RadioBoxInput({ value,name, data = [], label, onChange, validate }) {
 
+
     return (
         <div className="relative">
             <label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">{label}</label>
@@ -13,7 +14,8 @@ export default function RadioBoxInput({ value,name, data = [], label, onChange, 
                             <CheckboxChild
                                 name={name}
                                 value={item.label}
-                                checked={value}
+                                checkedValue={value}
+                                checked={'male'}
                                 onChange={onChange}
                             />
                             {validate && <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -31,9 +33,9 @@ export default function RadioBoxInput({ value,name, data = [], label, onChange, 
 };
 
 
-const CheckboxChild = ({ type = "radio", name,value, checked = true, onChange }) => {
+const CheckboxChild = ({ type = "radio", name,value, checked = true, onChange,checkedValue }) => {
     return (
-        <input type={type} name={name}  value={value} onChange={onChange} className="focus:ring-0 h-4 w-4 text-sky-800 border-gray-300 rounded" />
+        <input type={type} name={name}  value={value} onChange={onChange} className="focus:ring-0 h-4 w-4 text-sky-800 border-gray-300 rounded" checked={checkedValue === value}/>
     );
 };
 

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Resizer from "react-image-file-resizer";
 
 const resizeFile = (file) =>
@@ -30,7 +30,7 @@ const dataURIToBlob = (dataURI) => {
   return new Blob([ia], { type: mimeString });
 };
 
-export default function ImageUploadInput({label,onChange}) {
+export default function ImageUploadInput({label,onChange,value}) {
 
   const [profileImage, setProfileImage] = useState({})
 
@@ -53,6 +53,11 @@ export default function ImageUploadInput({label,onChange}) {
     setProfileImage(data)
     onChange(data)
   };
+
+  useEffect(() => {
+    setProfileImage(value)
+  }, [value])
+  
 
   const deleteFile = async (key) => {
     await fetch('/api/upload/delete',

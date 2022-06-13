@@ -14,10 +14,11 @@ import { useState } from 'react';
 
 export default function ProfileComponent() {
 
-    const [userDetail, setUserDetail] = useState({})
+    const [userDetail, setUserDetail] = useState({});
 
     const { isLoading, error, data } = useQuery('userInfoUseQuery', () => getUserInfoApi(),{
-        onSuccess: (data) => setUserDetail(data.data[0])});
+        onSuccess: (data) => setUserDetail(data.data[0])
+    });
     const { makeContextualHref, returnHref } = useContextualRouting();
 
     return (

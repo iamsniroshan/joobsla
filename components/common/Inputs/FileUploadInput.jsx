@@ -1,9 +1,9 @@
 import { PaperClipIcon } from "@heroicons/react/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
 
-export default function FileUploadInput({label,onChange}) {
+export default function FileUploadInput({label,onChange,value}) {
 
   const [fileDetail, setFileDetail] = useState({})
 
@@ -21,6 +21,11 @@ export default function FileUploadInput({label,onChange}) {
     setFileDetail(data);
     onChange(data)
   };
+
+  useEffect(() => {
+    setFileDetail(value);
+  }, [value])
+  
 
   const deleteFile = (key) => {
     fetch('/api/upload/delete',
