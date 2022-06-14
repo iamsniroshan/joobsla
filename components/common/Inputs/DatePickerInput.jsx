@@ -37,7 +37,7 @@ export default function DatePickerInput({ label, value, onChange }) {
                     }) => (
                         <div className="flex items-center justify-between px-2 py-2">
                             <span className="text-lg text-gray-700">
-                                {isValid(date) ? (format(date, 'MMMM')) : ''}
+                                {isValid(date) ? (format(date, 'MMMM')) : 'MMMM'}
                                 {CustomYearDropdownPicker({ years,date, changeYear })}
                             </span>
                             <div className="space-x-2">
@@ -80,7 +80,7 @@ const ButtonInput = forwardRef(({ value, onClick }, ref) => (
         type="button"
         className='inline-flex justify-start h-[38px] w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border shadow-sm hover:bg-gray-50 border-gray-300 rounded-md focus:ring-0 focus:border-teal-600'
     >
-        {isValid(new Date(value)) ? (format(new Date(value), 'dd MMMM yyyy')) : ''}
+        {isValid(new Date(value)) ? (format(new Date(value), 'dd MMMM yyyy')) : <span className='text-gray-500 text-opacity-25'>dd MMMM yyyy</span>}
     </button>
 ))
 

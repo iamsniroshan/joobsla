@@ -29,7 +29,7 @@ export default function TextareaInput({ value, label, name, placeholder,rows, ty
           onChange={onChange}
           onFocus={() => setFocusToggle(!focusToggle)}
           onBlur={() => setFocusToggle(!focusToggle)}
-          className={classNames(validate && focusToggle ? "block w-full pr-10 sm:text-sm border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-0 rounded-md" : "mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-0 focus:border-teal-600")}
+          className={classNames(validate && focusToggle ? "block w-full pr-10 sm:text-sm border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-0 rounded-md" : "placeholder-gray-500 placeholder-opacity-50 mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-0 focus:border-teal-600")}
         />
         {validate && focusToggle && <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
           <span className="text-xs text-red-600 mb-1 mr-2">{validate}</span> <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
