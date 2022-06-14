@@ -1,7 +1,7 @@
 import DatePicker from 'react-datepicker'
 import { forwardRef, useState } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
-import { format } from 'date-fns'
+import { format, isValid } from 'date-fns'
 import range from 'lodash/range'
 
 export default function DatePickerInput({ label, value, onChange }) {
@@ -18,7 +18,7 @@ export default function DatePickerInput({ label, value, onChange }) {
                     {label}
                 </label>}
                 <DatePicker
-                    selected={new Date(value)}
+                    selected={value}
                     onChange={onChange}
                     popperProps={{ positionFixed: true }}
                     yearDropdownItemNumber={10}
@@ -37,7 +37,7 @@ export default function DatePickerInput({ label, value, onChange }) {
                     }) => (
                         <div className="flex items-center justify-between px-2 py-2">
                             <span className="text-lg text-gray-700">
-                                {format(date, 'MMMM')}
+                                {isValid(date) ? (format(date, 'MMMM')) : ''}
                                 {CustomYearDropdownPicker({ years,date, changeYear })}
                             </span>
                             <div className="space-x-2">
@@ -78,9 +78,9 @@ const ButtonInput = forwardRef(({ value, onClick }, ref) => (
         onClick={onClick}
         ref={ref}
         type="button"
-        className='inline-flex justify-start w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border shadow-sm hover:bg-gray-50 border-gray-300 rounded-md focus:ring-0 focus:border-teal-600'
+        className='inline-flex justify-start h-[38px] w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border shadow-sm hover:bg-gray-50 border-gray-300 rounded-md focus:ring-0 focus:border-teal-600'
     >
-        {format(new Date(value), 'dd MMMM yyyy')}
+        {isValid(new Date(value)) ? (format(new Date(value), 'dd MMMM yyyy')) : ''}
     </button>
 ))
 

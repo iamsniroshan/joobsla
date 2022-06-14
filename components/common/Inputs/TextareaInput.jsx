@@ -7,7 +7,7 @@ function classNames(...classes) {
 }
 
 
-export default function TextareaInput({ value, label, name, placeholder, type, onChange, validate }) {
+export default function TextareaInput({ value, label, name, placeholder,rows, type, onChange, validate }) {
   const [focusToggle, setFocusToggle] = useState(true)
 
   return (
@@ -24,6 +24,7 @@ export default function TextareaInput({ value, label, name, placeholder, type, o
           type={type}
           value={value}
           name={name}
+          rows={rows}
           placeholder={placeholder}
           onChange={onChange}
           onFocus={() => setFocusToggle(!focusToggle)}
