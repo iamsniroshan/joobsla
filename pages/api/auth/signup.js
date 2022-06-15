@@ -1,5 +1,6 @@
 import { hashPassword } from 'helpers/auth';
 import dbConnect from 'helpers/dbConnect';
+import userInfo from 'models/userInfo';
 import users from 'models/users';
 
 async function handler(req, res) {
@@ -30,20 +31,21 @@ async function handler(req, res) {
 
   if (existingUser) {
     res.status(422).json({ message: 'User exists already!' });
-    client.close();
     return;
   }
 
   const hashedPassword = await hashPassword(password);
 
-  const result = await db.collection('users').insertOne({
+
+  const result = await users.create({
     role: userRole,
     email: email,
     password: hashedPassword,
   });
 
-  res.status(201).json({ message: 'Created user!' });
-  client.close();
+  const result2 = await userInfo.create({userId:result._id})
+
+  res.status(201).json({ message: 'Created user!', data:result2 });
 }
 
 export default handler;
