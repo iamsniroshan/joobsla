@@ -3,6 +3,7 @@ import { useContextualRouting } from "next-use-contextual-routing";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import * as myConstClass from "constant";
+import { updateUserInfoApi } from "services/api";
 
 
 
@@ -52,17 +53,18 @@ export default function ExperienceFormComponent() {
 
     const handleSubmit = () => {
         //setLoader(true)
-        // updateUserInfoApi(formData).then(item => {
-        //     if (item.status === 'success') {
-        //         // refetch().then(e =>{ 
-        //         //     setLoader(false)
-        //         //     router.push(returnHref, undefined, { shallow: true })
-        //         // })
-        //         router.push(returnHref, undefined, { shallow: true })
-        //     } else {
-        //         router.push(returnHref, undefined, { shallow: true })
-        //     }
-        // });
+        const generatedData = {lastUpdated:"xxxx",experience:[{...formData.experience}]}
+        updateUserInfoApi(generatedData).then(item => {
+            if (item.status === 'success') {
+                // refetch().then(e =>{ 
+                //     setLoader(false)
+                //     router.push(returnHref, undefined, { shallow: true })
+                // })
+                router.push(returnHref, undefined, { shallow: true })
+            } else {
+                router.push(returnHref, undefined, { shallow: true })
+            }
+        });
     }
 
 

@@ -69,7 +69,11 @@ const userInfoSchema = new mongoose.Schema({
             type: String,
             default: ''
           }
-    }
+    },
+    experience: {
+      type: Array,
+      default: []
+    },
 });
 
 export default mongoose.models.userInfo || mongoose.model('userInfo', userInfoSchema, 'userinfo')
