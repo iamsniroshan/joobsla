@@ -12,7 +12,13 @@ import { useState } from "react";
 
 function App({ Component, pageProps:{ session, ...pageProps } }) {
   const getLayout = Component.getLayout || ((page) => page);
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  }));
 
   return (
     <>

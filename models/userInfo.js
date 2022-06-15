@@ -4,55 +4,70 @@ import mongoose from 'mongoose'
 const userInfoSchema = new mongoose.Schema({ 
     cv : {
         fileUrl : {
-            type: String
+            type: String,
+            default: ''
           }, 
         fileName : {
-            type: String
+            type: String,
+            default: ''
           }
     }, 
     lastUpdated : {
-        type: String
+        type: String,
+        default: ''
       }, 
     profile : {
         imgUrl : {
-            type: String
+            type: String,
+            default: ''
           }, 
         imgName : {
-            type: String
+            type: String,
+            default: ''
           }
     }, 
     salary : {
         salaryExpectation : {
-            type: String
+            type: String,
+            default: ''
           }, 
         currency : {
-            type: String
+            type: String,
+            default: ''
           }
     }, 
     userId : {
-        type: String
+        type: String,
+        default: ''
       }, 
     userInfo : {
         firstName : {
-            type: String
+            type: String,
+            default: ''
           }, 
         lastName : {
-            type: String
+            type: String,
+            default: ''
           }, 
         emailAddress : {
-            type: String
+            type: String,
+            default: ''
           }, 
         salaryExpectation :{
-            type: String
+            type: String,
+            default: ''
           }, 
         dateOfBirth : {
-            type: String
+            type: String,
+            default: ''
           }, 
         gender : {
-            type: String
+            type: String,
+            default: ''
           }, 
         aboutYou :{
-            type: String
+            type: String,
+            default: ''
           }
     }
 });

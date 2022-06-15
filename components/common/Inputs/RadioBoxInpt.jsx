@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 
-export default function RadioBoxInput({ value,name, data = [], label, onChange, validate }) {
+export default function RadioBoxInput({ value, name, data = [], label, onChange, validate }) {
 
 
     return (
@@ -33,9 +33,9 @@ export default function RadioBoxInput({ value,name, data = [], label, onChange, 
 };
 
 
-const CheckboxChild = ({ type = "radio", name,value, checked = true, onChange,checkedValue }) => {
+const CheckboxChild = ({ type = "radio", name, value, onChange, checkedValue }) => {
     return (
-        <input type={type} name={name}  value={value} onChange={onChange} className="focus:ring-0 h-4 w-4 text-sky-800 border-gray-300 rounded" checked={checkedValue === value}/>
+        <input type={type} name={name} value={value} onChange={onChange} className="focus:ring-0 h-4 w-4 text-sky-800 border-gray-300 rounded" checked={checkedValue === value} />
     );
 };
 

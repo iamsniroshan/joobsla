@@ -36,7 +36,7 @@ export default function ProfileComponent() {
                                 <UserProfileComponent profile={userDetail.profile} userInfo={userDetail.userInfo}/>
                                 {/* Actions panel */}
                                 <section aria-labelledby="quick-links-title">
-                                    <UserInformationComponent userInfo={userDetail.userInfo} cv={userDetail.cv}/>
+                                    <UserInformationComponent userInfo={userDetail.userInfo} cv={userDetail.cv} salary={userDetail.salary}/>
                                 </section>
                             </div>
 

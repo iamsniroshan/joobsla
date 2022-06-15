@@ -1,9 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { PaperClipIcon, PencilAltIcon, PencilIcon } from '@heroicons/react/solid'
+import { format } from 'date-fns';
 import { useContextualRouting } from 'next-use-contextual-routing';
 import Link from 'next/link';
 
-export default function UserInformationComponent({ userInfo, cv }) {
+export default function UserInformationComponent({ userInfo, cv,salary }) {
 
   const { makeContextualHref, returnHref } = useContextualRouting();
 
@@ -21,35 +22,35 @@ export default function UserInformationComponent({ userInfo, cv }) {
         </Link>
       </div>
       <div className="border-t border-gray-200">
-        <dl>
-          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        {userInfo && <dl>
+          {userInfo.firstName && <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Full name</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo?.firstName} {userInfo?.lastName}</dd>
-          </div>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo.firstName} {userInfo?.lastName}</dd>
+          </div>}
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Application for</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">Backend Developer</dd>
           </div>
-          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          {userInfo.emailAddress && <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Email address</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo?.emailAddress}</dd>
-          </div>
-          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo.emailAddress}</dd>
+          </div>}
+          {salary.salaryExpectation && <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Salary expectation</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo?.salaryExpectation}</dd>
-          </div>
-          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{salary.salaryExpectation} {salary.currency}</dd>
+          </div>}
+          {userInfo.dateOfBirth && <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Date of birth</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo?.dateOfBirth}</dd>
-          </div>
-          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{format(new Date(userInfo.dateOfBirth), 'dd MMMM yyyy')}</dd>
+          </div>}
+          {userInfo.gender && <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Gender</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo?.gender}</dd>
-          </div>
-          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo.gender}</dd>
+          </div>}
+          {userInfo.aboutYou && <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">About</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo?.aboutYou}</dd>
-          </div>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userInfo.aboutYou}</dd>
+          </div>}
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Attachments</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -68,7 +69,7 @@ export default function UserInformationComponent({ userInfo, cv }) {
               </ul>
             </dd>
           </div>
-        </dl>
+        </dl>}
       </div>
     </div>
   )
