@@ -18,7 +18,7 @@ export default function DatePickerInput({ label, value, onChange }) {
                     {label}
                 </label>}
                 <DatePicker
-                    selected={new Date(value)}
+                    selected={isValid(new Date(value)) ? new Date(value) : value }
                     onChange={onChange}
                     popperProps={{ positionFixed: true }}
                     yearDropdownItemNumber={10}
