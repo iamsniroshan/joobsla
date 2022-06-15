@@ -12,10 +12,6 @@ const userInfoSchema = new mongoose.Schema({
             default: ''
           }
     }, 
-    lastUpdated : {
-        type: String,
-        default: ''
-      }, 
     profile : {
         imgUrl : {
             type: String,
@@ -74,6 +70,6 @@ const userInfoSchema = new mongoose.Schema({
       type: Array,
       default: []
     },
-});
+}, { timestamps: true });
 
 export default mongoose.models.userInfo || mongoose.model('userInfo', userInfoSchema, 'userinfo')

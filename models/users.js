@@ -13,6 +13,6 @@ const userInfoSchema = new mongoose.Schema({
     image :{
         type: String
       }
-});
+}, { timestamps: true });
 
 export default mongoose.models.users || mongoose.model('users', userInfoSchema, 'users')

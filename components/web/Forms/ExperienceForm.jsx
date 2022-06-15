@@ -53,7 +53,7 @@ export default function ExperienceFormComponent() {
 
     const handleSubmit = () => {
         //setLoader(true)
-        const generatedData = {lastUpdated:"xxxx",experience:[{...formData.experience}]}
+        const generatedData = {experience:[{...formData.experience}]}
         updateUserInfoApi(generatedData).then(item => {
             if (item.status === 'success') {
                 // refetch().then(e =>{ 

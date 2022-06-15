@@ -60,7 +60,7 @@ export default function ProfileComponent() {
                                                 </span>
                                             </Link>
                                             <div className="flow-root mt-6">
-                                                <ExperienceComponent />
+                                                <ExperienceComponent experience={userDetail.experience}/>
                                             </div>
                                         </div>
                                     </div>

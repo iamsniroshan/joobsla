@@ -65,7 +65,7 @@ const JobPostSchema = new mongoose.Schema({
       userId: {
         type: String
       }
-})
+}, { timestamps: true })
 
 
 export default mongoose.models.jobPosts || mongoose.model('jobPosts', JobPostSchema, 'jobpost')
