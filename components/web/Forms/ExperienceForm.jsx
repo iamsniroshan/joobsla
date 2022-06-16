@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import * as myConstClass from "constant";
 import { updateUserInfoApi } from "services/api";
+import { useQuery } from "react-query";
 
 
 
@@ -24,6 +25,8 @@ export default function ExperienceFormComponent() {
 
     const router = useRouter();
     const { returnHref } = useContextualRouting();
+
+    const { refetch } = useQuery('userInfoUseQuery');
 
 
     const handleInputChange = ({ element, inputName, groupNme }) => {
@@ -53,18 +56,18 @@ export default function ExperienceFormComponent() {
 
     const handleSubmit = () => {
         //setLoader(true)
-        const generatedData = {experience:[{...formData.experience}]}
-        updateUserInfoApi(generatedData).then(item => {
-            if (item.status === 'success') {
-                // refetch().then(e =>{ 
-                //     setLoader(false)
-                //     router.push(returnHref, undefined, { shallow: true })
-                // })
-                router.push(returnHref, undefined, { shallow: true })
-            } else {
-                router.push(returnHref, undefined, { shallow: true })
-            }
-        });
+        refetch().then(element =>{ 
+            console.log(element.data.data[0].experience)
+            const generatedData = {experience:[...element.data.data[0].experience,{...formData.experience}]}
+            updateUserInfoApi(generatedData).then(item => {
+                if (item.status === 'success') {
+                    refetch().then(element => console.log('refetch is done'))
+                    router.push(returnHref, undefined, { shallow: true })
+                } else {
+                    router.push(returnHref, undefined, { shallow: true })
+                }
+            });
+        })
     }
 
 
