@@ -7,7 +7,8 @@ const Home = (props) => {
   return (
     <>
       <div>
-        <ListComponent data={props.data} />
+        {/* <ListComponent data={props.data} /> */}
+        <ListComponent/>
       </div>
     </>
   );
@@ -17,13 +18,13 @@ Home.getLayout = userLayout
 export default Home;
 
 
-export const getStaticProps = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
-  const data = await res.json();
-  return {
-    props: { data }
-  };
-};
+// export const getStaticProps = async () => {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
+//   const data = await res.json();
+//   return {
+//     props: { data }
+//   };
+// };
 
 
 

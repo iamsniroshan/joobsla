@@ -54,7 +54,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ListComponent({ data }) {
+export default function ListComponent() {
   return (
     <>
       <div className="py-10">
@@ -112,7 +112,7 @@ export default function ListComponent({ data }) {
             </div>
             <div className="mt-4">
               <h1 className="sr-only">Recent questions</h1>
-              <InfiniteScrollComponent data={data} />
+              <InfiniteScrollComponent/>
             </div>
           </main>
           <aside className="hidden xl:block xl:col-span-3">
