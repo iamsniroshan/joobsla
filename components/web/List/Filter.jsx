@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { useState } from "react";
 import Checkbox from "components/common/Inputs/checkbox";
-import * as myConstClass from 'constant';
+import * as constData from 'constant';
 import { SelectInput, TextInput, MultiSelectInput } from "components/common/Inputs";
 
 
@@ -10,7 +10,7 @@ import { SelectInput, TextInput, MultiSelectInput } from "components/common/Inpu
 
 
 export default function FilterComponent() {
-  const [filterObj, setFilterObj] = useState({ "jobType": [], "jobCategory": {} })
+  const [filterObj, setFilterObj] = useState({ "jobType": [], "jobCategory": {},"skills":[] })
 
 
   const handleInputChange = ({ element, inputName, groupNme }) => {
@@ -30,13 +30,23 @@ export default function FilterComponent() {
         <div className="bg-white rounded-lg shadow">
           <div className="p-6">
             <div className="flow-root">
-              {/* <MultiSelectInput label="Type" data={myConstClass.jobTypeData} 
+              {/* <MultiSelectInput label="Type" data={constData.jobTypeData} 
               value={filterObj.jobType || []} onChange={(e) => handleInputChange({element:e,inputName:'jobType'})}/> */}
+              <div className="pb-5">
+              <MultiSelectInput label="Skills" 
+              data={constData.skillsData}
+                value={filterObj.skills || []} isMultiple="true"
+                onChange={(e) => handleInputChange({ element: e, inputName: 'skills', groupNme: '' })} 
+                />
+              </div>
+
+
 
               <SelectInput label="Job Category" 
-              data={myConstClass.jobCatData}
-                value={filterObj.jobCategory || {}}
-                onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme: '' })} />
+              data={constData.jobCatData}
+                value={filterObj.jobCategory || {}} isMultiple="true"
+                onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme: '' })} 
+                />
 
               {/* <Select placeholder="Type"
                 value={filterObj.jobType || []} isMultiple={false} isClearable={false}
@@ -50,9 +60,9 @@ export default function FilterComponent() {
               /> */}
 
 
-              {/* <MultiSelectInput label="Type" data={myConstClass.jobTypeData} value={filterObj.jobType || []} onChange={(e) => handleInputChange({element:e,inputName:'jobType'})}/> */}
-              {/* <SelectInput label="Job Category" data={myConstClass.jobCatData} value={filterObj.jobCategory || {}} onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme:'' })} />
-              <SelectInput label="Job Type" data={myConstClass.jobTypeData} value={filterObj.jobType || {}} onChange={(e) => handleInputChange({ element: e, inputName: 'jobType', groupNme:'' })} /> */}
+              {/* <MultiSelectInput label="Type" data={constData.jobTypeData} value={filterObj.jobType || []} onChange={(e) => handleInputChange({element:e,inputName:'jobType'})}/> */}
+              {/* <SelectInput label="Job Category" data={constData.jobCatData} value={filterObj.jobCategory || {}} onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme:'' })} />
+              <SelectInput label="Job Type" data={constData.jobTypeData} value={filterObj.jobType || {}} onChange={(e) => handleInputChange({ element: e, inputName: 'jobType', groupNme:'' })} /> */}
               {/* <TextInput type="text" label="Job Type"
                 name="jobType"/>
               <Checkbox/> */}

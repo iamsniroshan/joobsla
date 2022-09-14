@@ -1,7 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState, useEffect } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, SelectorIcon, ExclamationCircleIcon } from '@heroicons/react/solid'
+import { useState, useEffect } from 'react'
+import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import Select from 'react-tailwindcss-select';
 
 
@@ -21,8 +20,6 @@ export default function SelectInput({ value, data = [], label, onChange, validat
 
   return (
     <>
-
-
       <div className="mt-1 relative rounded-md shadow-sm">
         {label && <label
           htmlFor="name"
