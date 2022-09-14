@@ -32,7 +32,7 @@ export default function Checkbox({ value, data = [], label, onChange, validate }
 
     return (
         <div className="relative">
-            <label className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">Job Type</label> 
+            <label className="absolute -top-2 left-2 -mt-px z-[5] inline-block px-1 bg-white text-xs font-medium text-gray-400 z-10">Job Type</label> 
             <fieldset className="grid grid-cols-2 gap-3 p-3 border border-gray-300 rounded-md">
                 {checkboxes.map((item,index) => (
                   <div className="flex" key={index}>
