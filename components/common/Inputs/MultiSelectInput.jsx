@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Select from 'react-tailwindcss-select';
 
 
-export default function MultiSelectInput({ value, data = [], label, onChange,validate }) {
+export default function MultiSelectInput({ value, data = [], label, onChange, validate }) {
   const [selectedOption, setSelectedOption] = useState([])
   const [focusToggle, setFocusToggle] = useState(true)
 
@@ -22,8 +22,9 @@ export default function MultiSelectInput({ value, data = [], label, onChange,val
           {label}
         </label>}
         <div></div>
-        <div  className={`container ${ validate && focusToggle ? 'non-validate': 'validate'}`}>
+        <div className={`container ${validate && focusToggle ? 'non-validate' : 'validate'}`}>
           <Select
+          styles={{fontSize: '10px'}}
             placeholder={'label'}
             options={data}
             value={selectedOption}

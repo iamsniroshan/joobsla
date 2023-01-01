@@ -1,17 +1,17 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { useState } from "react";
 import Checkbox from "components/common/Inputs/checkbox";
 import * as constData from 'constant';
-import { SelectInput, TextInput, MultiSelectInput } from "components/common/Inputs";
+import { SelectInput, MultiSelectInput } from "components/common/Inputs";
+import { useAtom } from "jotai";
+import { jobsFilterAtom } from "atoms-store";
 
 
 
 
 
 
-export default function FilterComponent() {
-  const [filterObj, setFilterObj] = useState({ "jobType": [], "jobCategory": {},"skills":[] })
-
+const FilterComponent = () => {
+  const [filterObj, setFilterObj] = useAtom(jobsFilterAtom)
 
   const handleInputChange = ({ element, inputName, groupNme }) => {
     const data = { ...filterObj }
@@ -79,7 +79,8 @@ export default function FilterComponent() {
           </div>
         </div>
       </section>
-      {JSON.stringify(filterObj)}
     </div>
   );
 }
+
+export default  FilterComponent;

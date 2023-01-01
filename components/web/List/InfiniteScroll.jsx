@@ -12,6 +12,8 @@ import {
   StarIcon,
   ThumbUpIcon,
 } from "@heroicons/react/solid";
+import { jobsFilterAtom } from "atoms-store";
+import { useAtom } from "jotai";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -20,6 +22,7 @@ function classNames(...classes) {
 const InfiniteScrollComponent = () => {
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  const [filterObj, setFilterObj] = useAtom(jobsFilterAtom)
 
   useEffect(() => {
     getMorePost()
@@ -57,6 +60,7 @@ const InfiniteScrollComponent = () => {
 
   return (
     <>
+    {JSON.stringify(filterObj)}
       <InfiniteScroll
         dataLength={posts.length}
         next={getMorePost}

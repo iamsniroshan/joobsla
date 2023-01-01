@@ -60,7 +60,7 @@ export default function ListComponent() {
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-0 lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="hidden lg:block lg:col-span-3 xl:col-span-3">
-            <FilterComponent/>
+            <FilterComponent />
           </div>
           <main className="lg:col-span-9 xl:col-span-6">
             <div className="px-4 sm:px-0">
@@ -111,8 +111,8 @@ export default function ListComponent() {
               </div>
             </div>
             <div className="mt-4">
-              <h1 className="sr-only">Recent questions</h1>
-              <InfiniteScrollComponent/>
+              <h1 className="sr-only">Recent job post</h1>
+              <InfiniteScrollComponent />
             </div>
           </main>
           <aside className="hidden xl:block xl:col-span-3">
