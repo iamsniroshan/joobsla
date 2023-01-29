@@ -8,7 +8,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function SelectInput({ value, data = [], label, onChange, validate }) {
+export default function SelectInput({ value, data = [], label, onChange, validate}) {
   const [selectedOption, setSelectedOption] = useState({})
   const [focusToggle, setFocusToggle] = useState(true)
 
@@ -28,7 +28,7 @@ export default function SelectInput({ value, data = [], label, onChange, validat
           {label}
         </label>}
         <div></div>
-        <div  className={`container ${ validate && focusToggle ? 'non-validate': 'validate'}`}>
+        <div  className={`container ${label.split(" ").join("-").toLowerCase()} ${ validate && focusToggle ? 'non-validate': 'validate'}`}>
           <Select
             placeholder={'label'}
             options={data}

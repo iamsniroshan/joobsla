@@ -132,3 +132,7 @@ input[type=number] {
     @apply bg-blue-500 text-white cursor-pointer
 }
 
+/* // select dropdown font size */
+.job-category .items-stretch.ring-2 .gap-1,.job-category .shadow-lg .transition {
+    font-size:12px;
+}
