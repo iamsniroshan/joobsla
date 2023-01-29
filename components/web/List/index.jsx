@@ -64,7 +64,7 @@ export default function ListComponent() {
           </div>
           <main className="lg:col-span-9 xl:col-span-6">
             <div className="px-4 sm:px-0">
-              <div className="sm:hidden">
+              {/* <div className="sm:hidden">
                 <label htmlFor="question-tabs" className="sr-only">
                   Select a tab
                 </label>
@@ -77,8 +77,8 @@ export default function ListComponent() {
                     <option key={tab.name}>{tab.name}</option>
                   ))}
                 </select>
-              </div>
-              <div className="hidden sm:block">
+              </div> */}
+              {/* <div className="hidden sm:block">
                 <nav
                   className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
                   aria-label="Tabs"
@@ -108,9 +108,9 @@ export default function ListComponent() {
                     </a>
                   ))}
                 </nav>
-              </div>
+              </div> */}
             </div>
-            <div className="mt-4">
+            <div className="mt-0">
               <h1 className="sr-only">Recent job post</h1>
               <InfiniteScrollComponent />
             </div>

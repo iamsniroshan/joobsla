@@ -35,7 +35,7 @@ const InfiniteScrollComponent = () => {
       body: JSON.stringify({
         filters: cleanObj(filterObj),
         limit: 4,
-        page: (posts.length/4) + 1,
+        page: (posts.length / 4) + 1,
         query: ''
       }),
       headers: {
@@ -43,6 +43,9 @@ const InfiniteScrollComponent = () => {
       },
     });
     const response = await res.json();
+    if (response.data.length === 0) {
+      setHasMore(false)
+    }
     const newPosts = response.data.map((e) => {
       return {
         id: e.id,
