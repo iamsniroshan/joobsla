@@ -25,15 +25,25 @@ const InfiniteScrollComponent = () => {
   const [filterObj, setFilterObj] = useAtom(jobsFilterAtom)
 
   useEffect(() => {
+    setPosts([]);
     getMorePost()
-  }, []);
+  }, [filterObj]);
 
   const getMorePost = async () => {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/todos?_start=${posts.length}&_limit=10`
-    );
-    const y = await res.json();
-    const newPosts = y.map((e) => {
+    const res = await fetch(`/api/jobpost/search`, {
+      method: 'POST',
+      body: JSON.stringify({
+        filters: cleanObj(filterObj),
+        limit: 4,
+        page: (posts.length/4) + 1,
+        query: ''
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const response = await res.json();
+    const newPosts = response.data.map((e) => {
       return {
         id: e.id,
         likes: "29",
@@ -48,7 +58,7 @@ const InfiniteScrollComponent = () => {
         date: "December 9 at 11:43 AM",
         datetime: "2020-12-09T11:43:00",
         href: "#",
-        title: "What would you have done differently if you ran Jurassic Park?",
+        title: e.jobDetail.jobTitle,
         body: `
               <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
               
@@ -58,9 +68,21 @@ const InfiniteScrollComponent = () => {
     setPosts((post) => [...post, ...newPosts]);
   };
 
+  const cleanObj = (obj) => {
+    var cloneObj = { ...obj }
+    for (var propName in cloneObj) {
+      if (cloneObj[propName] === null || cloneObj[propName] === undefined || JSON.stringify(cloneObj[propName]) === '[]' || JSON.stringify(cloneObj[propName]) === '{}') {
+        console.log(cloneObj[propName])
+        delete cloneObj[propName];
+      }
+    }
+    return cloneObj
+  }
+
+
   return (
     <>
-    {JSON.stringify(filterObj)}
+      {/* {JSON.stringify(filterObj)} */}
       <InfiniteScroll
         dataLength={posts.length}
         next={getMorePost}
