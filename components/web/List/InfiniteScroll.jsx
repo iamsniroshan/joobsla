@@ -22,70 +22,52 @@ function classNames(...classes) {
 const InfiniteScrollComponent = () => {
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [filterObj, setFilterObj] = useAtom(jobsFilterAtom)
+  const [filterObj, setFilterObj] = useAtom(jobsFilterAtom);
 
   useEffect(() => {
     setPosts([]);
-    getMorePost()
+    getMorePost();
   }, [filterObj]);
 
   const getMorePost = async () => {
     const res = await fetch(`/api/jobpost/search`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({
         filters: cleanObj(filterObj),
         limit: 4,
-        page: (posts.length / 4) + 1,
-        query: ''
+        page: posts.length / 4 + 1,
+        query: "",
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
-    const response = await res.json();
-    if (response.data.length === 0) {
-      setHasMore(false)
+    const newPosts = await res.json();
+    if (newPosts.data.length === 0) {
+      setHasMore(false);
     }
-    const newPosts = response.data.map((e) => {
-      return {
-        id: e.id,
-        likes: "29",
-        replies: "11",
-        views: "2.7k",
-        author: {
-          name: e.title,
-          imageUrl:
-            "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-          href: "#",
-        },
-        date: "December 9 at 11:43 AM",
-        datetime: "2020-12-09T11:43:00",
-        href: "#",
-        title: e.jobDetail.jobTitle,
-        body: `
-              <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-              
-            `,
-      };
-    });
-    setPosts((post) => [...post, ...newPosts]);
+    setPosts((post) => [...post, ...newPosts.data]);
   };
 
   const cleanObj = (obj) => {
-    var cloneObj = { ...obj }
+    var cloneObj = { ...obj };
     for (var propName in cloneObj) {
-      if (cloneObj[propName] === null || cloneObj[propName] === undefined || JSON.stringify(cloneObj[propName]) === '[]' || JSON.stringify(cloneObj[propName]) === '{}') {
-        console.log(cloneObj[propName])
+      if (
+        cloneObj[propName] === null ||
+        cloneObj[propName] === undefined ||
+        JSON.stringify(cloneObj[propName]) === "[]" ||
+        JSON.stringify(cloneObj[propName]) === "{}"
+      ) {
+        console.log(cloneObj[propName]);
         delete cloneObj[propName];
       }
     }
-    return cloneObj
-  }
-
+    return cloneObj;
+  };
 
   return (
     <>
-      {/* {JSON.stringify(filterObj)} */}
+    {JSON.stringify(posts[0])}
       <InfiniteScroll
         dataLength={posts.length}
         next={getMorePost}
@@ -94,34 +76,40 @@ const InfiniteScrollComponent = () => {
         endMessage={<h4>Nothing more to show</h4>}
       >
         <ul className="space-y-4">
-          {posts.map((question) => (
+          {posts.map((job) => (
             <li
-              key={question.id}
+              key={job._id}
               className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg"
             >
-              <article aria-labelledby={"question-title-" + question.id}>
+              <article aria-labelledby={"job-title-" + job._id}>
                 <div>
                   <div className="flex space-x-3">
                     <div className="flex-shrink-0">
                       <img
                         className="h-10 w-10 rounded-full"
-                        src={question.author.imageUrl}
+                        src={'https://lotjobs.sgp1.digitaloceanspaces.com/uploads/629615c95c218a49fe017cfb/1654976273179_blob'}
                         alt=""
                       />
                     </div>
                     <div className="min-w-0 flex-1">
+                      <h2
+                        id={"job-title-" + job._id}
+                        className="mt-0 text-base font-medium text-gray-900"
+                      >
+                        {job.jobDetail.jobTitle}
+                      </h2>
                       <p className="text-sm font-medium text-gray-900">
                         <a
-                          href={question.author.href}
+                          href={'www.google.com'}
                           className="hover:underline"
                         >
-                          {question.author.name}
+                          {'company name'}
                         </a>
                       </p>
                       <p className="text-sm text-gray-500">
-                        <a href={question.href} className="hover:underline">
-                          <time dateTime={question.datetime}>
-                            {question.date}
+                        <a  className="hover:underline">
+                          <time dateTime={job.createdAt}>
+                            {job.createdAt}
                           </time>
                         </a>
                       </p>
@@ -223,16 +211,10 @@ const InfiniteScrollComponent = () => {
                       </Menu>
                     </div>
                   </div>
-                  <h2
-                    id={"question-title-" + question.id}
-                    className="mt-4 text-base font-medium text-gray-900"
-                  >
-                    {question.title}
-                  </h2>
                 </div>
                 <div
                   className="mt-2 text-sm text-gray-700 space-y-4"
-                  dangerouslySetInnerHTML={{ __html: question.body }}
+                  dangerouslySetInnerHTML={{ __html: job.jobDescription.desc }}
                 />
                 <div className="mt-6 flex justify-between space-x-8">
                   <div className="flex space-x-6">
@@ -240,21 +222,21 @@ const InfiniteScrollComponent = () => {
                       <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
                         <span className="font-medium text-gray-900">
-                          {question.likes}
+                          {job.jobDetail.jobType.label}
                         </span>
-                        <span className="sr-only">likes</span>
+                        <span className="sr-only">Job type</span>
                       </button>
                     </span>
                     <span className="inline-flex items-center text-sm">
                       <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <ChatAltIcon className="h-5 w-5" aria-hidden="true" />
                         <span className="font-medium text-gray-900">
-                          {question.replies}
+                          {job.jobDetail.jobCategory.label}
                         </span>
-                        <span className="sr-only">replies</span>
+                        <span className="sr-only">Job category</span>
                       </button>
                     </span>
-                    <span className="inline-flex items-center text-sm">
+                    {/* <span className="inline-flex items-center text-sm">
                       <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <EyeIcon className="h-5 w-5" aria-hidden="true" />
                         <span className="font-medium text-gray-900">
@@ -262,7 +244,7 @@ const InfiniteScrollComponent = () => {
                         </span>
                         <span className="sr-only">views</span>
                       </button>
-                    </span>
+                    </span> */}
                   </div>
                   <div className="flex text-sm">
                     <span className="inline-flex items-center text-sm">

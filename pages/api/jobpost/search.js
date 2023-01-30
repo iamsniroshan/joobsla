@@ -1,6 +1,8 @@
 import dbConnect from "helpers/dbConnect";
 import jobPosts from "models/jobPosts";
+import userInfo from "models/userInfo";
 import { getSession } from "next-auth/react";
+import mongoose from "mongoose";
 
 async function handler(req, res) {
   if (req.method !== "POST") {
@@ -15,34 +17,16 @@ async function handler(req, res) {
     return;
   }
   await dbConnect();
-
-  const userId = session.user.id;
-
   try {
-    // execute query with page and limit values
-    const posts = await jobPosts
-      .find(filters)
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec();
+    const userId = session.user.id;
+    const id = mongoose.Types.ObjectId(userId)
+    const userInfoData = await userInfo.find({ userId: id }).exec();
 
-    // return response with posts, total pages, and current page
-    res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Fetch all job posts success!",
-        data: posts,
-      });
+    const posts = await jobPosts.find(filters).limit(limit * 1).skip((page - 1) * limit).exec();
+    
+    res.status(200).json({ status: "success", message: "Fetch all job posts success!", data: posts });
   } catch (err) {
-    res
-      .status(500)
-      .json({
-        status: "error",
-        message: "Fetch all job posts failed!",
-        data: [],
-        err,
-      });
+    res.status(500).json({ status: "error", message: "Fetch all job posts failed!", data: [], err });
   }
 }
 
