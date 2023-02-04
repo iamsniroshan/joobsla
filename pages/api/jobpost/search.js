@@ -1,6 +1,5 @@
 import dbConnect from "helpers/dbConnect";
 import jobPosts from "models/jobPosts";
-import userInfo from "models/userInfo";
 import { getSession } from "next-auth/react";
 import mongoose from "mongoose";
 
@@ -17,17 +16,25 @@ async function handler(req, res) {
     return;
   }
   await dbConnect();
-  try {
-    const userId = session.user.id;
-    const id = mongoose.Types.ObjectId(userId)
-    const userInfoData = await userInfo.find({ userId: id }).exec();
-
-    const posts = await jobPosts.find(filters).limit(limit * 1).skip((page - 1) * limit).exec();
-    
-    res.status(200).json({ status: "success", message: "Fetch all job posts success!", data: posts });
-  } catch (err) {
-    res.status(500).json({ status: "error", message: "Fetch all job posts failed!", data: [], err });
-  }
+  const newFilter = {'jobDetail.jobCategory.id':filters.jobCategory ? filters.jobCategory.id : '' }
+  console.log(newFilter)
+  // const posts = await jobPosts.find(newFilter).limit(limit * 1).skip((page - 1) * limit).exec();
+  // const ids = posts.map(el => mongoose.Types.ObjectId(el._id));
+  jobPosts.aggregate([
+    { "$match": newFilter },
+    {
+      $lookup: {
+        from: 'userinfo',
+        localField: 'userId',
+        foreignField: 'userId',
+        as: 'userDetail'
+      }
+    }], function (err, result) {
+      if (err) {
+        res.status(500).json({ status: "error", message: "Fetch all job posts failed!", data: [], err });
+      }
+      res.status(200).json({ status: "success", message: "Fetch all job posts success!", data: result });
+    });
 }
 
 export default handler;
