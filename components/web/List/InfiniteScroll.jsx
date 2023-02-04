@@ -26,6 +26,7 @@ const InfiniteScrollComponent = () => {
 
   useEffect(() => {
     setPosts([]);
+    setHasMore(true);
     getMorePost();
   }, [filterObj]);
 
@@ -34,8 +35,8 @@ const InfiniteScrollComponent = () => {
       method: "POST",
       body: JSON.stringify({
         filters: cleanObj(filterObj),
-        limit: 4,
-        page: posts.length / 4 + 1,
+        limit: 5,
+        page: posts.length / 5 + 1,
         query: "",
       }),
       headers: {
@@ -67,7 +68,6 @@ const InfiniteScrollComponent = () => {
 
   return (
     <>
-    {JSON.stringify(posts[0])}
       <InfiniteScroll
         dataLength={posts.length}
         next={getMorePost}

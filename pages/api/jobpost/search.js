@@ -16,12 +16,17 @@ async function handler(req, res) {
     return;
   }
   await dbConnect();
-  const newFilter = {'jobDetail.jobCategory.id':filters.jobCategory ? filters.jobCategory.id : '' }
-  console.log(newFilter)
-  // const posts = await jobPosts.find(newFilter).limit(limit * 1).skip((page - 1) * limit).exec();
-  // const ids = posts.map(el => mongoose.Types.ObjectId(el._id));
+  const filterObj = { 
+    'jobDetail.jobCategory.id': filters.jobCategory ? filters.jobCategory.id : '',
+    'jobDetail.jobType.value': filters.jobType ? filters.jobType.value : '' 
+  }
+  //Filter all falsy values ( "", 0, false, null, undefined )
+  const newFilter = Object.entries(filterObj).reduce((a,[k,v]) => (v ? (a[k]=v, a) : a), {})
+   const posts = await jobPosts.find(newFilter).limit(limit * 1).skip((page - 1) * limit).exec();
+   const ids = posts.map(el => mongoose.Types.ObjectId(el._id));
+   
   jobPosts.aggregate([
-    { "$match": newFilter },
+    { "$match": { _id: { $in: ids}}},
     {
       $lookup: {
         from: 'userinfo',
