@@ -16,7 +16,7 @@ export default function TextEditInput({ value, label, placeholder, onChange, val
 
 
     const handleChange = () => {
-        onChange({ target: { name: 'desc', value: jobTemplate1} })
+        onChange({ target: { name: 'sortDesc', value: jobTemplate1} })
     };
 
     const iconHtml = {

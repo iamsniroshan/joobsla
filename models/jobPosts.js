@@ -31,7 +31,10 @@ const jobDetailSchema = new mongoose.Schema({
 const JobPostSchema = new mongoose.Schema({
     jobDetail : jobDetailSchema, 
     jobDescription: {
-        desc: {
+        longDesc: {
+          type: String
+        },
+        sortDesc: {
           type: String
         }
       },

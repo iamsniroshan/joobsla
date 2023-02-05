@@ -18,26 +18,12 @@ async function handler(req, res) {
 
   const userId = session.user.id;
   const buildData = { ...data, userId };
-
-  jobPosts.create(buildData, function (err, result) {
-    if (err) {
-      res
-        .status(500)
-        .json({
-          status: "error",
-          message: "Job post creation failed!",
-          data: err,
-        });
-    }
-    res
-      .status(201)
-      .json({
-        status: "success",
-        message: "Job post creation success!",
-        data: result,
-      });
-  });
-
+  try {
+    const result = await jobPosts.create(buildData);
+    res.status(201).json({ status: "success", message: "Job post creation success!", data: result, });
+  } catch (error) {
+    res.status(500).json({ status: "error", message: "Job post creation failed!", data: error });
+  }
 }
 
 export default handler;

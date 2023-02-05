@@ -4,19 +4,17 @@ import { Menu, Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import {
   ArrowRightIcon,
-  ChatAltIcon,
   CodeIcon,
-  DotsVerticalIcon,
   EyeIcon,
   FlagIcon,
   ShareIcon,
   StarIcon,
-  ThumbUpIcon,
 } from "@heroicons/react/solid";
 import { jobsFilterAtom } from "atoms-store";
 import { useAtom } from "jotai";
 import { format } from 'date-fns';
 import Date from "components/common/Date";
+import { BriefcaseIcon, ClockIcon, DotsVerticalIcon, TagIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -71,7 +69,6 @@ const InfiniteScrollComponent = () => {
 
   return (
     <>
-      {/* {JSON.stringify(posts[0])} */}
       <InfiniteScroll
         dataLength={posts.length}
         next={getMorePost}
@@ -113,50 +110,15 @@ const InfiniteScrollComponent = () => {
 
                     </div>
                     <div className="flex-shrink-0 self-center flex">
-                      <p className="text-sm text-gray-500">
-                        <a className="hover:underline">
-                          <Date dateString={job.createdAt} dateFormate={'LLLL d, yyyy'} />
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="mt-2 text-sm text-gray-700 space-y-4"
-                  dangerouslySetInnerHTML={{ __html: job.jobDescription.desc }}
-                />
-                <div className="mt-6 flex justify-between space-x-8">
-                  <div className="flex space-x-6">
-                    <span className="inline-flex items-center text-sm">
-                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-900">
-                          {job.jobDetail.jobType.label}
-                        </span>
-                        <span className="sr-only">Job type</span>
-                      </button>
-                    </span>
-                    <span className="inline-flex items-center text-sm">
-                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <ChatAltIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-900">
-                          {job.jobDetail.jobCategory.label}
-                        </span>
-                        <span className="sr-only">Job category</span>
-                      </button>
-                    </span>
-                    {/* <span className="inline-flex items-center text-sm">
-                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <EyeIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-900">
-                          {question.views}
-                        </span>
-                        <span className="sr-only">views</span>
-                      </button>
-                    </span> */}
-                  </div>
-                  <div className="flex text-sm">
-                    <span className="inline-flex items-center text-sm">
+                      <span className="inline-flex items-center text-sm mr-4">
+                        <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                          <ClockIcon className="h-5 w-5" aria-hidden="true" />
+                          <span className="font-medium">
+                            <Date dateString={job.createdAt} dateFormate={'LLLL d, yyyy'} />
+                          </span>
+                          <span className="sr-only">Created date</span>
+                        </button>
+                      </span>
                       <Menu
                         as="div"
                         className="relative inline-block text-left"
@@ -164,9 +126,16 @@ const InfiniteScrollComponent = () => {
                         {({ open }) => (
                           <>
                             <div>
-                              <Menu.Button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                                <ShareIcon className="h-5 w-5 leading-3" aria-hidden="true" />
-                                <span className="font-medium text-gray-900 pr-6">Share</span>
+                              <Menu.Button className="inline-flex align-sub">
+                                <span className="inline-flex items-center text-sm">
+                                  <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                                    <ShareIcon className="h-5 w-5" aria-hidden="true" />
+                                    <span className="font-medium">
+                                      Share
+                                    </span>
+                                    <span className="sr-only">Share</span>
+                                  </button>
+                                </span>
                               </Menu.Button>
                             </div>
                             <Transition
@@ -247,9 +216,60 @@ const InfiniteScrollComponent = () => {
                           </>
                         )}
                       </Menu>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="mt-2 text-sm text-gray-700 space-y-4"
+                  dangerouslySetInnerHTML={{ __html: job.jobDescription.sortDesc }}
+                />
+                <div className="mt-6 flex justify-between space-x-8">
+                  <div className="flex space-x-6">
+                    <span className="inline-flex items-center text-sm">
                       <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <span className="font-medium text-blue-900">Apply</span>
-                        <ArrowRightIcon className="h-5 w-5 text-blue-900" aria-hidden="true" />
+                        <BriefcaseIcon className="h-5 w-5" aria-hidden="true" />
+                        <span className="font-medium text-gray-400 hover:text-gray-500">
+                          {job.jobDetail.jobType.label}
+                        </span>
+                        <span className="sr-only">Job type</span>
+                      </button>
+                    </span>
+                    <span className="inline-flex items-center text-sm">
+                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                        <TagIcon className="h-5 w-5" aria-hidden="true" />
+                        <span className="font-medium text-gray-400 hover:text-gray-500">
+                          {job.jobDetail.jobCategory.label}
+                        </span>
+                        <span className="sr-only">Job category</span>
+                      </button>
+                    </span>
+                    <span className="inline-flex items-center text-sm">
+                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                        <EyeIcon className="h-5 w-5" aria-hidden="true" />
+                        <span className="font-medium text-gray-400 hover:text-gray-500">
+                          {job.jobSalary.minAmount} - {job.jobSalary.maxAmount} {job.jobSalary.currency}
+                        </span>
+                        <span className="sr-only">views</span>
+                      </button>
+                    </span>
+                    {/* <span className="inline-flex items-center text-sm">
+                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                        <EyeIcon className="h-5 w-5" aria-hidden="true" />
+                        <span className="font-medium text-gray-900">
+                          {question.views}
+                        </span>
+                        <span className="sr-only">views</span>
+                      </button>
+                    </span> */}
+                  </div>
+                  <div className="flex text-sm">
+                  <span className="inline-flex items-center text-sm align-sub">
+                      <button className="inline-flex space-x-2 text-blue-600 hover:text-blue-900">     
+                        <span className="font-medium">
+                          Apply  
+                        </span>
+                        <span className="sr-only">Apply</span>
+                        <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
                       </button>
                     </span>
                   </div>

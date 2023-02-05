@@ -3,6 +3,7 @@ import { AddPostWizardContext } from "components/context";
 import TextEditInput from "components/common/Inputs/TextEditorInput";
 import { jobDescriptionErrorAtom } from "atoms-store";
 import { useAtom } from "jotai";
+import { TextareaInput } from "components/common/Inputs";
 
 const JobDescriptionComponent = () => {
   const { postDetails, setPostDetails } = useContext(AddPostWizardContext); // Context API
@@ -12,7 +13,7 @@ const JobDescriptionComponent = () => {
     const data = { ...postDetails };
     data[groupNme][inputName] = element.target.value
     setPostDetails(data);
-    formValidator(element.target.value,inputName)
+    formValidator(element.target.value, inputName)
   };
 
   const formValidator = (value, inputName) => {
@@ -26,22 +27,41 @@ const JobDescriptionComponent = () => {
 
   return (
     <>
+    <div className="container mx-auto max-w-7xl">
       <form>
-        <TextEditInput
-          validate={error.desc}
-          value={jobDescription.desc}
-          label="Job Description"
-          name="desc"
-          placeholder={" Write Your job post..."}
+        <TextareaInput
+          type="text"
+          label="Job Sort Description"
+          name="sortDesc"
+          validate={error.sortDesc}
+          value={jobDescription.sortDesc}
+          placeholder="Write Your job sort description ..."
+          rows={5}
           onChange={(e) =>
             handleInputChange({
               element: e,
-              inputName: "desc",
+              inputName: "sortDesc",
+              groupNme: "jobDescription",
+            })
+          }
+        />
+        <br></br>
+        <TextEditInput
+          validate={error.longDesc}
+          value={jobDescription.longDesc}
+          label="Job Long Description"
+          name="longDesc"
+          placeholder={" Write Your job post long description..."}
+          onChange={(e) =>
+            handleInputChange({
+              element: e,
+              inputName: "longDesc",
               groupNme: "jobDescription",
             })
           }
         />
       </form>
+      </div>
     </>
   );
 };

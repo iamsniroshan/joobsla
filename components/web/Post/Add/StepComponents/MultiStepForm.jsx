@@ -99,14 +99,15 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
 
     const checkValidation = (props, selectedIndex) => {
         let { jobTitle, jobType, jobCategory } = props.jobDetail
-        let { desc } = props.jobDescription
+        let { sortDesc,longDesc } = props.jobDescription
 
         if (selectedIndex === 0) { // step one validation
             const errorObj = {
                 jobTitle : "",
                 jobType: "",
                 jobCategory: "",
-                desc: ""
+                sortDesc: "",
+                longDesc:""
             }
             for (var key in props.jobDetail) {
                 if(props.jobDetail[key] === '') {
@@ -121,7 +122,8 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
                 jobTitle : "",
                 jobType: "",
                 jobCategory: "",
-                desc: ""
+                sortDesc: "",
+                longDesc:""
             }
             for (var key in props.jobDescription) {
                 if(props.jobDescription[key] === '') {
@@ -129,7 +131,7 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
                 }
             }
             setError(errorObj)
-            return desc ? true : false
+            return longDesc ? true : false
         }
 
     }
