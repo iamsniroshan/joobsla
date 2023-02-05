@@ -37,7 +37,7 @@ const InfiniteScrollComponent = () => {
       body: JSON.stringify({
         filters: cleanObj(filterObj),
         limit: 5,
-        page: posts.length / 5 + 1,
+        page: (posts.length / 5) + 1,
         query: "",
       }),
       headers: {
