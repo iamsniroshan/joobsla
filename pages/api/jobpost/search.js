@@ -24,22 +24,22 @@ async function handler(req, res) {
   const newFilter = Object.entries(filterObj).reduce((a,[k,v]) => (v ? (a[k]=v, a) : a), {})
    const posts = await jobPosts.find(newFilter).limit(limit * 1).skip((page - 1) * limit).exec();
    const ids = posts.map(el => mongoose.Types.ObjectId(el._id));
-   
-  jobPosts.aggregate([
-    { "$match": { _id: { $in: ids}}},
-    {
-      $lookup: {
-        from: 'userinfo',
-        localField: 'userId',
-        foreignField: 'userId',
-        as: 'userDetail'
-      }
-    }], function (err, result) {
-      if (err) {
-        res.status(500).json({ status: "error", message: "Fetch all job posts failed!", data: [], err });
-      }
+   try {
+    const result = await  jobPosts.aggregate([
+      { "$match": { _id: { $in: ids}}},
+      {
+        $lookup: {
+          from: 'userinfo',
+          localField: 'userId',
+          foreignField: 'userId',
+          as: 'userDetail'
+        }
+      }]).exec()
       res.status(200).json({ status: "success", message: "Fetch all job posts success!", data: result });
-    });
+   } catch (error) {
+    res.status(500).json({ status: "error", message: "Fetch all job posts failed!", data: [], error });
+   }
+   
 }
 
 export default handler;
