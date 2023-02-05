@@ -3,6 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import {
+  ArrowRightIcon,
   ChatAltIcon,
   CodeIcon,
   DotsVerticalIcon,
@@ -14,6 +15,8 @@ import {
 } from "@heroicons/react/solid";
 import { jobsFilterAtom } from "atoms-store";
 import { useAtom } from "jotai";
+import { format } from 'date-fns';
+import Date from "components/common/Date";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -68,6 +71,7 @@ const InfiniteScrollComponent = () => {
 
   return (
     <>
+      {/* {JSON.stringify(posts[0])} */}
       <InfiniteScroll
         dataLength={posts.length}
         next={getMorePost}
@@ -87,7 +91,7 @@ const InfiniteScrollComponent = () => {
                     <div className="flex-shrink-0">
                       <img
                         className="h-10 w-10 rounded-full"
-                        src={'https://lotjobs.sgp1.digitaloceanspaces.com/uploads/629615c95c218a49fe017cfb/1654976273179_blob'}
+                        src={'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}
                         alt=""
                       />
                     </div>
@@ -101,20 +105,58 @@ const InfiniteScrollComponent = () => {
                       <p className="text-sm font-medium text-gray-900">
                         <a
                           href={'www.google.com'}
-                          className="hover:underline"
+                          className="hover:underline text-orange-600"
                         >
                           {'company name'}
                         </a>
                       </p>
+
+                    </div>
+                    <div className="flex-shrink-0 self-center flex">
                       <p className="text-sm text-gray-500">
-                        <a  className="hover:underline">
-                          <time dateTime={job.createdAt}>
-                            {job.createdAt}
-                          </time>
+                        <a className="hover:underline">
+                          <Date dateString={job.createdAt} dateFormate={'LLLL d, yyyy'} />
                         </a>
                       </p>
                     </div>
-                    <div className="flex-shrink-0 self-center flex">
+                  </div>
+                </div>
+                <div
+                  className="mt-2 text-sm text-gray-700 space-y-4"
+                  dangerouslySetInnerHTML={{ __html: job.jobDescription.desc }}
+                />
+                <div className="mt-6 flex justify-between space-x-8">
+                  <div className="flex space-x-6">
+                    <span className="inline-flex items-center text-sm">
+                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                        <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
+                        <span className="font-medium text-gray-900">
+                          {job.jobDetail.jobType.label}
+                        </span>
+                        <span className="sr-only">Job type</span>
+                      </button>
+                    </span>
+                    <span className="inline-flex items-center text-sm">
+                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                        <ChatAltIcon className="h-5 w-5" aria-hidden="true" />
+                        <span className="font-medium text-gray-900">
+                          {job.jobDetail.jobCategory.label}
+                        </span>
+                        <span className="sr-only">Job category</span>
+                      </button>
+                    </span>
+                    {/* <span className="inline-flex items-center text-sm">
+                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                        <EyeIcon className="h-5 w-5" aria-hidden="true" />
+                        <span className="font-medium text-gray-900">
+                          {question.views}
+                        </span>
+                        <span className="sr-only">views</span>
+                      </button>
+                    </span> */}
+                  </div>
+                  <div className="flex text-sm">
+                    <span className="inline-flex items-center text-sm">
                       <Menu
                         as="div"
                         className="relative inline-block text-left"
@@ -122,15 +164,11 @@ const InfiniteScrollComponent = () => {
                         {({ open }) => (
                           <>
                             <div>
-                              <Menu.Button className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600">
-                                <span className="sr-only">Open options</span>
-                                <DotsVerticalIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
+                              <Menu.Button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                                <ShareIcon className="h-5 w-5 leading-3" aria-hidden="true" />
+                                <span className="font-medium text-gray-900 pr-6">Share</span>
                               </Menu.Button>
                             </div>
-
                             <Transition
                               show={open}
                               as={Fragment}
@@ -209,48 +247,9 @@ const InfiniteScrollComponent = () => {
                           </>
                         )}
                       </Menu>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="mt-2 text-sm text-gray-700 space-y-4"
-                  dangerouslySetInnerHTML={{ __html: job.jobDescription.desc }}
-                />
-                <div className="mt-6 flex justify-between space-x-8">
-                  <div className="flex space-x-6">
-                    <span className="inline-flex items-center text-sm">
                       <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-900">
-                          {job.jobDetail.jobType.label}
-                        </span>
-                        <span className="sr-only">Job type</span>
-                      </button>
-                    </span>
-                    <span className="inline-flex items-center text-sm">
-                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <ChatAltIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-900">
-                          {job.jobDetail.jobCategory.label}
-                        </span>
-                        <span className="sr-only">Job category</span>
-                      </button>
-                    </span>
-                    {/* <span className="inline-flex items-center text-sm">
-                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <EyeIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-900">
-                          {question.views}
-                        </span>
-                        <span className="sr-only">views</span>
-                      </button>
-                    </span> */}
-                  </div>
-                  <div className="flex text-sm">
-                    <span className="inline-flex items-center text-sm">
-                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <ShareIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-900">Share</span>
+                        <span className="font-medium text-blue-900">Apply</span>
+                        <ArrowRightIcon className="h-5 w-5 text-blue-900" aria-hidden="true" />
                       </button>
                     </span>
                   </div>

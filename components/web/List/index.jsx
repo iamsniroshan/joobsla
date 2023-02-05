@@ -62,7 +62,7 @@ export default function ListComponent() {
           <div className="hidden lg:block lg:col-span-3 xl:col-span-3">
             <FilterComponent />
           </div>
-          <main className="lg:col-span-9 xl:col-span-6">
+          <main className="lg:col-span-9 xl:col-span-9">
             <div className="px-4 sm:px-0">
               {/* <div className="sm:hidden">
                 <label htmlFor="question-tabs" className="sr-only">
@@ -115,7 +115,7 @@ export default function ListComponent() {
               <InfiniteScrollComponent />
             </div>
           </main>
-          <aside className="hidden xl:block xl:col-span-3">
+          {/* <aside className="hidden xl:block xl:col-span-3">
             <div className="sticky top-4 space-y-4">
               <section aria-labelledby="who-to-follow-heading">
                 <div className="bg-white rounded-lg shadow">
@@ -229,7 +229,7 @@ export default function ListComponent() {
                 </div>
               </section>
             </div>
-          </aside>
+          </aside> */}
         </div>
       </div>
     </>
