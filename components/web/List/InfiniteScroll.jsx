@@ -26,9 +26,11 @@ const InfiniteScrollComponent = () => {
   const [filterObj, setFilterObj] = useAtom(jobsFilterAtom);
 
   useEffect(() => {
-    setPosts([]);
-    setHasMore(true);
-    getMorePost();
+    getMorePost()
+    return () => {
+      setPosts([]);
+      setHasMore(true);
+    }
   }, [filterObj]);
 
   const getMorePost = async () => {
@@ -263,10 +265,10 @@ const InfiniteScrollComponent = () => {
                     </span> */}
                   </div>
                   <div className="flex text-sm">
-                  <span className="inline-flex items-center text-sm align-sub">
-                      <button className="inline-flex space-x-2 text-blue-600 hover:text-blue-900">     
+                    <span className="inline-flex items-center text-sm align-sub">
+                      <button className="inline-flex space-x-2 text-blue-600 hover:text-blue-900">
                         <span className="font-medium">
-                          Apply  
+                          Apply
                         </span>
                         <span className="sr-only">Apply</span>
                         <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
