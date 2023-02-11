@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Menu, Popover, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import {
   ArrowRightIcon,
@@ -14,7 +14,7 @@ import { jobsFilterAtom } from "atoms-store";
 import { useAtom } from "jotai";
 import { format } from 'date-fns';
 import Date from "components/common/Date";
-import { BriefcaseIcon, ClockIcon, DotsVerticalIcon, TagIcon } from "@heroicons/react/outline";
+import { BriefcaseIcon, ClockIcon, TagIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -26,20 +26,20 @@ const InfiniteScrollComponent = () => {
   const [filterObj, setFilterObj] = useAtom(jobsFilterAtom);
 
   useEffect(() => {
-    getMorePost()
-    return () => {
-      setPosts([]);
-      setHasMore(true);
-    }
+    setPosts([]);
+    setHasMore(true);
+    getMorePost('initial-call')
   }, [filterObj]);
 
-  const getMorePost = async () => {
+  const getMorePost = async (tag) => {
+    const pageLimit = 5
+    const pageNumber = tag === 'initial-call' ? 1 : Math.round((posts.length / pageLimit) + 1)
     const res = await fetch(`/api/jobpost/search`, {
       method: "POST",
       body: JSON.stringify({
         filters: cleanObj(filterObj),
-        limit: 5,
-        page: (posts.length / 5) + 1,
+        limit: pageLimit,
+        page: pageNumber,
         query: "",
       }),
       headers: {
@@ -73,7 +73,7 @@ const InfiniteScrollComponent = () => {
     <>
       <InfiniteScroll
         dataLength={posts.length}
-        next={getMorePost}
+        next={() => getMorePost('scroll-to-call')}
         hasMore={hasMore}
         loader={<h3> Loading...</h3>}
         endMessage={<h4>Nothing more to show</h4>}
