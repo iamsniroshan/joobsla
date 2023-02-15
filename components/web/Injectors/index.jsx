@@ -7,12 +7,13 @@ import UserInformationFormComponent from '../Forms/UserInformationForm';
 import LoginComponent from '../Login'
 import OverlayModalComponent from '../OverlayModal';
 import PostAddComponent from '../Post/Add';
+import PostViewComponent from '../Post/View';
 
 
 export default function InjectorComponent() {
 
   const router = useRouter()
-  const { openLoginModal, userInfoEditModal, openPostAddModal,experienceEditModal } = router.query
+  const { openLoginModal, userInfoEditModal, openPostAddModal,experienceEditModal,openPostViewAndApply } = router.query
   //const [openLogin, setOpenLogin] = useAtom(openLoginAtom)
 
   return (
@@ -31,6 +32,10 @@ export default function InjectorComponent() {
       </OverlayModalComponent> */}
       <TopSideBar open={openPostAddModal} title="Post New Job">
         <PostAddComponent />
+      </TopSideBar>
+      {/* Job post view and apply */}
+      <TopSideBar open={openPostViewAndApply} title="Job Detail">
+        <PostViewComponent />
       </TopSideBar>
     </>
   );

@@ -149,13 +149,13 @@ const MultiStepForm = ({ list, displayProgressBar }) => {
                 </div>
             ) : (
                 <div className={"wrapper wrapper-content "}>
-                    <div className="p-0 mt-10">
+                    <div className="mt-10 p-2">
                         <div className="container mx-auto max-w-7xl">
                             {displayProgressBar && (<ProgressBar list={list} selectedIndex={selectedIndex} />)}
                         </div>
                     </div>
                     {/*-------------------------------*/}
-                    <div className="p-0 mt-10">
+                    <div className="mt-10 p-7">
                         <div className="container mx-auto max-w-7xl">
                             {list[selectedIndex].component}
                         </div>

@@ -15,6 +15,8 @@ import { useAtom } from "jotai";
 import { format } from 'date-fns';
 import Date from "components/common/Date";
 import { BriefcaseIcon, ClockIcon, TagIcon } from "@heroicons/react/outline";
+import Link from "next/dist/client/link";
+import { useContextualRouting } from "next-use-contextual-routing";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -24,6 +26,7 @@ const InfiniteScrollComponent = () => {
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [filterObj, setFilterObj] = useAtom(jobsFilterAtom);
+  const { makeContextualHref, returnHref } = useContextualRouting();
 
   useEffect(() => {
     setPosts([]);
@@ -266,13 +269,17 @@ const InfiniteScrollComponent = () => {
                   </div>
                   <div className="flex text-sm">
                     <span className="inline-flex items-center text-sm align-sub">
-                      <button className="inline-flex space-x-2 text-blue-600 hover:text-blue-900">
-                        <span className="font-medium">
-                          Apply
-                        </span>
-                        <span className="sr-only">Apply</span>
-                        <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
-                      </button>
+                      <Link scroll={false}
+                        href={makeContextualHref({ openPostViewAndApply: true })}
+                      >
+                        <button className="inline-flex space-x-2 text-blue-600 hover:text-blue-900">
+                          <span className="font-medium">
+                            Apply
+                          </span>
+                          <span className="sr-only">Apply</span>
+                          <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
+                        </button>
+                      </Link>
                     </span>
                   </div>
                 </div>

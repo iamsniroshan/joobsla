@@ -7,7 +7,7 @@ export default function BodyDescComponent(jobDescription) {
 
     return (
         <>
-          <div className="w-full mx-auto px-4 sm:px-6 lg:px-8  xl:grid xl:grid-cols-3 mt-8 text-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  xl:grid xl:grid-cols-3 mt-8 text-sm">
               <div className="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200">
                 <div>
                   <div>
@@ -34,7 +34,6 @@ export default function BodyDescComponent(jobDescription) {
               <aside className="xl:block xl:pl-8">
                 <h2 className="sr-only">Details</h2>
                 <BodyCompanyDetailViewComponent/>
-      
               </aside>
             </div>
         </>
