@@ -86,7 +86,7 @@ const InfiniteScrollComponent = () => {
           {posts.map((job) => (
             <li
               key={job._id}
-              className="bg-white px-4 py-6 drop-shadow-md sm:p-6 sm:rounded-lg hover:border-solid hover:cursor-pointer"
+              className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:border-solid hover:cursor-pointer"
             >
               <article aria-labelledby={"job-title-" + job._id}>
                 <div>
