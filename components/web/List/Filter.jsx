@@ -14,6 +14,7 @@ const FilterComponent = () => {
   const [filterObj, setFilterObj] = useAtom(jobsFilterAtom)
 
   const handleInputChange = ({ element, inputName, groupNme }) => {
+    console.log('xxxxxxxxxxxxxxx')
     const data = { ...filterObj }
     // this code for isClearable icon related code
     if(element === null) {
@@ -29,6 +30,25 @@ const FilterComponent = () => {
     }
     setFilterObj(data);
   }
+
+  const checkBoxOptions = [
+    {
+        value: "full-time",
+        label: "Full-Time"
+    },
+    {
+        value: "internship",
+        label: "Internship"
+    },
+    {
+        value: "part-time",
+        label: "Part-Time"
+    },
+    {
+        value: "contract",
+        label: "Contract"
+    },
+];
 
 
   return (
@@ -81,7 +101,10 @@ const FilterComponent = () => {
         <div className="bg-white rounded-lg">
           <div className="p-6">
             <div className="flow-root">
-              <Checkbox />
+              <Checkbox 
+              value={filterObj.jobType || []}
+              onChange={(e) => handleInputChange({ element: e, inputName: 'jobType', groupNme: '' })}
+              options={checkBoxOptions}/>
             </div>
           </div>
         </div>
