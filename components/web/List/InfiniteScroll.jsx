@@ -82,8 +82,8 @@ const InfiniteScrollComponent = () => {
         dataLength={posts.length}
         next={() => getMorePost('scroll-to-call')}
         hasMore={hasMore}
-        loader={<svg className="animate-bounce w-6 h-6"></svg>}
-        endMessage={<h4>Nothing more to show</h4>}
+        loader={<div className="w-full align-middle text-center pt-4"><svg className="animate-bounce animate-spin h-5 w-5 mr-3"></svg></div> }
+        endMessage={<div className="w-full align-middle text-center pt-4">Nothing more to show</div>}
       >
         {isLoading ? <ShimmerLoader repeatCount="12" type="home-page-job-list"/>:
                 <ul className="grid grid-cols-3 gap-4">
