@@ -34,14 +34,14 @@ export const jobCatData = [
 ];
 
 export const jobTypeData = [
-  { value: "Full-time", label: "Full-time" },
-  { value: "Part-time", label: "Part-time" },
-  { value: "Self-employed", label: "Self-employed" },
-  { value: "Freelance", label: "Freelance" },
-  { value: "Contract", label: "Contract" },
-  { value: "Internship", label: "Internship" },
-  { value: "Apprenticeship", label: "Apprenticeship" },
-  { value: "Seasonal", label: "Seasonal" },
+  { value: "full-time", label: "Full-time" },
+  { value: "part-time", label: "Part-time" },
+  { value: "self-employed", label: "Self-employed" },
+  { value: "freelance", label: "Freelance" },
+  { value: "contract", label: "Contract" },
+  { value: "internship", label: "Internship" },
+  { value: "apprenticeship", label: "Apprenticeship" },
+  { value: "seasonal", label: "Seasonal" },
 ];
 
 export const location = [

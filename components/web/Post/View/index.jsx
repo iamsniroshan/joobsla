@@ -12,7 +12,7 @@ function PostViewComponent(postDetails, postId) {
     "jobDetail": {
       "jobTitle": "Senior Software Engineer - Frontend",
       "jobType": {
-        "value": "Full-time",
+        "value": "full-time",
         "label": "Full-time"
       },
       "jobCategory": {

@@ -32,22 +32,11 @@ const FilterComponent = () => {
   }
 
   const checkBoxOptions = [
-    {
-        value: "full-time",
-        label: "Full-Time"
-    },
-    {
-        value: "internship",
-        label: "Internship"
-    },
-    {
-        value: "part-time",
-        label: "Part-Time"
-    },
-    {
-        value: "contract",
-        label: "Contract"
-    },
+    { value: "full-time", label: "Full-time" },
+    { value: "part-time", label: "Part-time" },
+    { value: "freelance", label: "Freelance" },
+    { value: "contract", label: "Contract" },
+    { value: "internship", label: "Internship" }
 ];
 
 
