@@ -3,8 +3,8 @@ export default function ShimmerLoader({ repeatCount, type = '' }) {
 
     for (let i = 0; i < repeatCount; i++) {
         if (type === 'home-page-job-list') {
-            skeletons.push(
-                <div className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:border-solid hover:cursor-pointer" key={i}>
+            {skeletons.push(
+                <li className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:border-solid hover:cursor-pointer" key={i}>
                     <div className="animate-pulse flex space-x-4">
                         <div className="rounded-full bg-slate-200 h-10 w-10"></div>
                         <div className="flex-1 space-y-6 py-1">
@@ -30,13 +30,12 @@ export default function ShimmerLoader({ repeatCount, type = '' }) {
                             <div class="space-y-2">
                                 <div class="animate-pulse w-3/4 h-3 bg-slate-200"></div>
                                 <div class="animate-pulse w-full h-3 bg-slate-200"></div>
-                                <div class="animate-pulse w-2/3 h-3 bg-slate-200"></div>
                             </div>
                         </div>
                     </div>
 
-                </div>
-            );
+                </li>
+            )}
         } else {
             skeletons.push(
                 <div className="divide-y divide-gray-200 shadow p-4 my-4 w-full mx-auto" key={i}>
@@ -58,6 +57,7 @@ export default function ShimmerLoader({ repeatCount, type = '' }) {
         }
 
     }
-
+     
+    if(type === 'home-page-job-list') return <><ul className="grid grid-cols-3 gap-4 mt-4">{skeletons}</ul></>
     return <>{skeletons}</>;
 };

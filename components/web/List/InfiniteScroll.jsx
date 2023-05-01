@@ -79,7 +79,7 @@ const InfiniteScrollComponent = () => {
         dataLength={posts.length}
         next={() => getMorePost('scroll-to-call')}
         hasMore={hasMore}
-        loader={<ShimmerLoader repeatCount="1" type="home-page-job-list"/>}
+        loader={<ShimmerLoader repeatCount="12" type="home-page-job-list"/>}
         endMessage={<h4>Nothing more to show</h4>}
       >
         <ul className="grid grid-cols-3 gap-4">
