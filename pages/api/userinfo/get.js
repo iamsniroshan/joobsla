@@ -16,8 +16,8 @@ async function handler(req, res) {
 
   await dbConnect();
 
-  const userId = session.user.id;
-  const id = mongoose.Types.ObjectId(userId)
+  const _userId = session.user.id;
+  const id = mongoose.Types.ObjectId(_userId)
 
   userInfo.find({ userId: id }, function (err, result) {
     if (err) {
@@ -27,6 +27,7 @@ async function handler(req, res) {
         status: "error",
         message: "Fetch all job posts failed!",
         data: [],
+        userId:id,
         err
       });
       return;
