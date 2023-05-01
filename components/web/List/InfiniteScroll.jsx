@@ -17,6 +17,7 @@ import Date from "components/common/Date";
 import { BriefcaseIcon, ClockIcon, TagIcon } from "@heroicons/react/outline";
 import Link from "next/dist/client/link";
 import { useContextualRouting } from "next-use-contextual-routing";
+import ShimmerLoader from "components/common/Loader/shimmerLoader";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -78,14 +79,14 @@ const InfiniteScrollComponent = () => {
         dataLength={posts.length}
         next={() => getMorePost('scroll-to-call')}
         hasMore={hasMore}
-        loader={<h3> Loading...</h3>}
+        loader={<ShimmerLoader repeatCount="1" type="home-page-job-list"/>}
         endMessage={<h4>Nothing more to show</h4>}
       >
         <ul className="grid grid-cols-3 gap-4">
           {posts.map((job) => (
             <li
               key={job._id}
-              className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:border-solid hover:cursor-pointer"
+              className="bg-white px-4 py-6 drop-shadow-md sm:p-6 sm:rounded-lg hover:border-solid hover:cursor-pointer"
             >
               <article aria-labelledby={"job-title-" + job._id}>
                 <div>
