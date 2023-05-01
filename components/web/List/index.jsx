@@ -59,10 +59,10 @@ export default function ListComponent() {
     <>
       <div className="px-0">
         <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-screen-2xl lg:px-6 lg:grid lg:grid-cols-12 lg:gap-0">
-          <div className="hidden lg:block lg:col-span-3 xl:col-span-3 w-80 bg-white shadow my-2">
+          <div className="hidden lg:block lg:col-span-3 xl:col-span-3 w-80 bg-white shadow my-2 min-h-screen">
             <FilterComponent />
           </div>
-          <main className="lg:col-span-9 xl:col-span-9 py-10">
+          <main className="lg:col-span-9 xl:col-span-9 py-10 min-h-screen">
             <div className="px-4 sm:px-0">
               {/* <div className="sm:hidden">
                 <label htmlFor="question-tabs" className="sr-only">
