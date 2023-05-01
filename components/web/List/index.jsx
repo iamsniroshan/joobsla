@@ -57,8 +57,8 @@ function classNames(...classes) {
 export default function ListComponent() {
   return (
     <>
-      <div className="py-0">
-        <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-screen-2xl lg:px-0 lg:grid lg:grid-cols-12 lg:gap-0">
+      <div className="px-0">
+        <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-screen-2xl lg:px-6 lg:grid lg:grid-cols-12 lg:gap-0">
           <div className="hidden lg:block lg:col-span-3 xl:col-span-3 w-80 bg-white shadow my-2">
             <FilterComponent />
           </div>

@@ -36,9 +36,9 @@ export default function HeaderComponent() {
         className='bg-white shadow-md lg:static lg:overflow-y-visible'
       >
 
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-0">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-6">
           <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
-            <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
+            <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-3">
               <div className="flex-shrink-0 flex items-center">
                 <Link href="/">
                   <a href="#">
@@ -52,9 +52,9 @@ export default function HeaderComponent() {
                 </Link>
               </div>
             </div>
-            <div className="hidden lg:block min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
+            <div className="hidden lg:block min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-5">
               <div className="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
-                <div className="w-80">
+                <div className="w-full">
                   <label htmlFor="search" className="sr-only">
                     Search
                   </label>
