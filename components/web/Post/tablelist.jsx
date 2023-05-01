@@ -7,14 +7,15 @@ import { format } from 'date-fns'
 import { CalendarIcon, LocationMarkerIcon, UsersIcon, ArrowCircleRightIcon } from '@heroicons/react/solid'
 import { useQuery } from "react-query";
 import getJobPostApi from "services/api/getJobPost";
+import ShimmerLoader from "components/common/Loader/shimmerLoader";
 
 
 export default function PostCardListComponent() {
 
   const { makeContextualHref, returnHref } = useContextualRouting();
-  const { isLoading, error, data }  = useQuery('jobPostUseQuery', () => getJobPostApi());
+  const { isLoading, error, data } = useQuery('jobPostUseQuery', () => getJobPostApi());
 
-  if (isLoading) return "Loading...";
+  // if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -81,77 +82,83 @@ export default function PostCardListComponent() {
                   </div>
                 </div>
               </div>
-              <ul className="divide-y divide-gray-200">
-                {data.data.map((eachPost) => (
-                  <li key={eachPost._id}>
-                    <a href="#" className="block hover:bg-gray-50">
-                      <div className="px-4 py-4 sm:px-6">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-indigo-600 truncate">{eachPost.jobDetail.jobTitle}</span>
+              {
+                isLoading
+                  ? <ShimmerLoader repeatCount="10" />
+                  :
+                  <ul className="divide-y divide-gray-200">
+                    {data.data.map((eachPost) => (
+                      <li key={eachPost._id}>
+                        <a href="#" className="block hover:bg-gray-50">
+                          <div className="px-4 py-4 sm:px-6">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm font-medium text-indigo-600 truncate">{eachPost.jobDetail.jobTitle}</span>
 
 
-                          <div className="ml-2 flex-shrink-0 flex">
+                              <div className="ml-2 flex-shrink-0 flex">
 
-                            <div className="flex -space-x-1 relative z-0 overflow-hidden">
-                              <span className="block mr-4">
-                                <img
-                                  className="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                                  src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt=""
-                                />
-                                <img
-                                  className="relative z-20 inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt=""
-                                />
-                                <img
-                                  className="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-                                  alt=""
-                                />
-                                <img
-                                  className="relative z-0 inline-block h-6 w-6 rounded-full ring-2 ring-white"
-                                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt=""
-                                />
-                              </span>
+                                <div className="flex -space-x-1 relative z-0 overflow-hidden">
+                                  <span className="block mr-4">
+                                    <img
+                                      className="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                      src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                      alt=""
+                                    />
+                                    <img
+                                      className="relative z-20 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                      alt=""
+                                    />
+                                    <img
+                                      className="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+                                      alt=""
+                                    />
+                                    <img
+                                      className="relative z-0 inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                      alt=""
+                                    />
+                                  </span>
 
-                              <span className="block"><ArrowCircleRightIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 mt-1" aria-hidden="true" /></span>
-                              <span className="block text-sm font-medium text-indigo-600 truncate p-1">View applications</span>
+                                  <span className="block"><ArrowCircleRightIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 mt-1" aria-hidden="true" /></span>
+                                  <span className="block text-sm font-medium text-indigo-600 truncate p-1">View applications</span>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div className="mt-2 sm:flex sm:justify-between">
+                              <div className="sm:flex">
+                                <p className="flex items-center text-sm text-gray-500">
+                                  <UsersIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                                  {eachPost.department}
+                                </p>
+                                <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                  <LocationMarkerIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                                  {eachPost.jobDetail.jobType.label}
+                                </p>
+                                <span className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                  <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                                  <p>
+                                    Closing on {format(new Date(eachPost.jobDetail.expirationDate), 'dd MMMM yyyy')}
+                                  </p>
+                                </span>
+                                <span className="px-2 ml-5 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                  {'approved'}
+                                </span>
+                              </div>
+                              <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                                <span className="block text-sm font-medium text-red-600 truncate p-0">Delete</span>
+                                <span className="block text-sm font-medium text-green-600 truncate p-0 ml-6">Edit</span>
+                              </div>
                             </div>
                           </div>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+              }
 
-                        </div>
-                        <div className="mt-2 sm:flex sm:justify-between">
-                          <div className="sm:flex">
-                            <p className="flex items-center text-sm text-gray-500">
-                              <UsersIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                              {eachPost.department}
-                            </p>
-                            <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                              <LocationMarkerIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                              {eachPost.jobDetail.jobType.label}
-                            </p>
-                            <span className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                              <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                              <p>
-                                Closing on {format(new Date(eachPost.jobDetail.expirationDate), 'dd MMMM yyyy')}
-                              </p>
-                            </span>
-                            <span className="px-2 ml-5 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              {'approved'}
-                            </span>
-                          </div>
-                          <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                            <span className="block text-sm font-medium text-red-600 truncate p-0">Delete</span>
-                            <span className="block text-sm font-medium text-green-600 truncate p-0 ml-6">Edit</span>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </main>

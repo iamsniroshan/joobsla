@@ -10,12 +10,8 @@ async function handler(req, res) {
 
   const { filters, limit, page, query } = req.body;
 
-  const session = await getSession({ req: req });
-  if (!session) {
-    res.status(401).json({ message: "Not authenticated!" });
-    return;
-  }
   await dbConnect();
+  
   const filterObj = { 
     'jobDetail.jobCategory.id': filters.jobCategory ? filters.jobCategory.id : '',
     'jobDetail.jobType.value': filters.jobType ? filters.jobType.value : '' 
