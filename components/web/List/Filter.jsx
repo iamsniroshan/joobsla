@@ -15,6 +15,13 @@ const FilterComponent = () => {
 
   const handleInputChange = ({ element, inputName, groupNme }) => {
     const data = { ...filterObj }
+    // this code for isClearable icon related code
+    if(element === null) {
+      data[inputName] = {}
+      setFilterObj(data);
+      return
+    }
+ 
     if (groupNme) {
       element.target ? data[groupNme][element.target.name] = element.target.value : data[groupNme][inputName] = element
     } else {
@@ -44,7 +51,7 @@ const FilterComponent = () => {
 
               <SelectInput label="Job Category" 
               data={constData.jobCatData}
-                value={filterObj.jobCategory || {}} isMultiple="true"
+                value={filterObj.jobCategory || {}} isMultiple="true" isClearable={true}
                 onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme: '' })} 
                 />
 

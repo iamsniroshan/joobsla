@@ -8,7 +8,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function SelectInput({ value, data = [], label, onChange, validate}) {
+export default function SelectInput({ value, data = [], label, onChange, validate, isClearable=false}) {
   const [selectedOption, setSelectedOption] = useState({})
   const [focusToggle, setFocusToggle] = useState(true)
 
@@ -25,7 +25,7 @@ export default function SelectInput({ value, data = [], label, onChange, validat
           htmlFor="name"
           className="absolute -top-2 left-2 -mt-px z-[5] inline-block px-1 bg-white text-xs font-medium text-gray-500"
         >
-          {label}
+          {label} {JSON.stringify(selectedOption.value)}
         </label>}
         <div></div>
         <div  className={`container ${label.split(" ").join("-").toLowerCase()} ${ validate && focusToggle ? 'non-validate': 'validate'}`}>
@@ -35,7 +35,7 @@ export default function SelectInput({ value, data = [], label, onChange, validat
             value={selectedOption}
             onChange={onChange}
             isMultiple={false}
-            isClearable={false}
+            isClearable={isClearable && !!selectedOption.value}
             onFocus={() => setFocusToggle(!focusToggle)}
             onBlur={() => setFocusToggle(!focusToggle)}
           />
