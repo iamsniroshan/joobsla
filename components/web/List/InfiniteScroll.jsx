@@ -52,6 +52,9 @@ const InfiniteScrollComponent = () => {
         "Content-Type": "application/json",
       },
     });
+    if(res.ok) {
+      setIsLoading(false)
+    }
     const newPosts = await res.json();
     if(newPosts.data.length > 0) setIsLoading(false)
     if (newPosts.data.length === 0) {
