@@ -1,4 +1,5 @@
-# next-js-11-jwt-authentication-example
+# next-js-11-jwt-authentication-example : 
+Node version : 16.13.0
 
 Next.js 11 - JWT Authentication Example
 

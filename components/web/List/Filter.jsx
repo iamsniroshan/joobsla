@@ -27,7 +27,7 @@ const FilterComponent = () => {
   return (
     <div className="sticky top-4 space-y-4">
       <section aria-labelledby="who-to-follow-heading">
-        <div className="bg-white rounded-lg shadow">
+        <div className="bg-white rounded-lg">
           <div className="p-6">
             <div className="flow-root">
               {/* <MultiSelectInput label="Type" data={constData.jobTypeData} 
@@ -71,7 +71,7 @@ const FilterComponent = () => {
         </div>
       </section>
       <section aria-labelledby="trending-heading">
-        <div className="bg-white rounded-lg shadow">
+        <div className="bg-white rounded-lg">
           <div className="p-6">
             <div className="flow-root">
               <Checkbox />

@@ -35,7 +35,7 @@ const InfiniteScrollComponent = () => {
   }, [filterObj]);
 
   const getMorePost = async (tag) => {
-    const pageLimit = 5
+    const pageLimit = 12
     const pageNumber = tag === 'initial-call' ? 1 : Math.round((posts.length / pageLimit) + 1)
     const res = await fetch(`/api/jobpost/search`, {
       method: "POST",
@@ -81,11 +81,11 @@ const InfiniteScrollComponent = () => {
         loader={<h3> Loading...</h3>}
         endMessage={<h4>Nothing more to show</h4>}
       >
-        <ul className="space-y-4">
+        <ul className="grid grid-cols-3 gap-4">
           {posts.map((job) => (
             <li
               key={job._id}
-              className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg"
+              className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:shadow-blue-600 hover:cursor-pointer"
             >
               <article aria-labelledby={"job-title-" + job._id}>
                 <div>
@@ -114,11 +114,13 @@ const InfiniteScrollComponent = () => {
                       </p>
 
                     </div>
-                    <div className="flex-shrink-0 self-center flex">
+
+                  </div>
+                  <div className="flex-shrink-0 self-center flex pt-2">
                       <span className="inline-flex items-center text-sm mr-4">
-                        <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                          <ClockIcon className="h-5 w-5" aria-hidden="true" />
-                          <span className="font-medium">
+                        <button className="inline-flex space-x-2 text-gray-600 hover:text-gray-500">
+                          <ClockIcon className="h-5 w-5 font-light" aria-hidden="true" />
+                          <span className="font-light">
                             <Date dateString={job.createdAt} dateFormate={'LLLL d, yyyy'} />
                           </span>
                           <span className="sr-only">Created date</span>
@@ -222,24 +224,23 @@ const InfiniteScrollComponent = () => {
                         )}
                       </Menu>
                     </div>
-                  </div>
                 </div>
                 <div
                   className="mt-2 text-sm text-gray-700 space-y-4"
                   dangerouslySetInnerHTML={{ __html: job.jobDescription.sortDesc }}
                 />
                 <div className="mt-6 flex justify-between space-x-8">
-                  <div className="flex space-x-6">
+                  <div className="flex">
                     <span className="inline-flex items-center text-sm">
-                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <BriefcaseIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-400 hover:text-gray-500">
+                      <button className="inline-flex space-x-2 text-green-400 hover:text-gray-500">
+                        {/* <BriefcaseIcon className="h-5 w-5" aria-hidden="true" /> */}
+                        <span className="text-xs inline-flex items-center leading-sm px-3 py-1 bg-green-100 text-green-700 font-bold">
                           {job.jobDetail.jobType.label}
                         </span>
                         <span className="sr-only">Job type</span>
                       </button>
                     </span>
-                    <span className="inline-flex items-center text-sm">
+                    {/* <span className="inline-flex items-center text-sm">
                       <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <TagIcon className="h-5 w-5" aria-hidden="true" />
                         <span className="font-medium text-gray-400 hover:text-gray-500">
@@ -247,21 +248,12 @@ const InfiniteScrollComponent = () => {
                         </span>
                         <span className="sr-only">Job category</span>
                       </button>
-                    </span>
-                    <span className="inline-flex items-center text-sm">
+                    </span> */}
+                    {/* <span className="inline-flex items-center text-sm">
                       <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <EyeIcon className="h-5 w-5" aria-hidden="true" />
                         <span className="font-medium text-gray-400 hover:text-gray-500">
                           {job.jobSalary.minAmount} - {job.jobSalary.maxAmount} {job.jobSalary.currency}
-                        </span>
-                        <span className="sr-only">views</span>
-                      </button>
-                    </span>
-                    {/* <span className="inline-flex items-center text-sm">
-                      <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <EyeIcon className="h-5 w-5" aria-hidden="true" />
-                        <span className="font-medium text-gray-900">
-                          {question.views}
                         </span>
                         <span className="sr-only">views</span>
                       </button>
