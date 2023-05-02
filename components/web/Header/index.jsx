@@ -178,7 +178,7 @@ export default function HeaderComponent() {
                     shallow
                     className="ml-6 inline-flex items-center cursor-hand"
                   >
-                    <button class="block text-md mr-4 shadow bg-rose-600 hover:bg-rose-500 border border-rose-700 hover:border-transparent focus:outline-none text-white  py-1 px-10 rounded font-bold cursor-hand">Log In</button>
+                    <button class="block text-md mr-4 shadow bg-white hover:bg-rose-600 border border-rose-700 hover:border-transparent focus:outline-none text-black hover:text-white  py-1 px-10 rounded font-bold cursor-hand">Log In</button>
                   </Link>
                 </>
               )}
