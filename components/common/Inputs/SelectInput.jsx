@@ -25,11 +25,12 @@ export default function SelectInput({ value, data = [], label, onChange, validat
           htmlFor="name"
           className="absolute -top-2 left-2 -mt-px z-[5] inline-block px-1 bg-white text-xs font-medium text-gray-500"
         >
-          {label} {JSON.stringify(selectedOption.value)}
+          {label}
         </label>}
         <div></div>
         <div  className={`container ${label.split(" ").join("-").toLowerCase()} ${ validate && focusToggle ? 'non-validate': 'validate'}`}>
           <Select
+            primaryColor={"sky"}
             placeholder={'label'}
             options={data}
             value={selectedOption}

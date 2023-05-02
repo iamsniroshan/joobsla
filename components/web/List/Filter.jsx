@@ -14,15 +14,14 @@ const FilterComponent = () => {
   const [filterObj, setFilterObj] = useAtom(jobsFilterAtom)
 
   const handleInputChange = ({ element, inputName, groupNme }) => {
-    console.log('xxxxxxxxxxxxxxx')
     const data = { ...filterObj }
     // this code for isClearable icon related code
-    if(element === null) {
+    if (element === null) {
       data[inputName] = {}
       setFilterObj(data);
       return
     }
- 
+
     if (groupNme) {
       element.target ? data[groupNme][element.target.name] = element.target.value : data[groupNme][inputName] = element
     } else {
@@ -37,32 +36,29 @@ const FilterComponent = () => {
     { value: "freelance", label: "Freelance" },
     { value: "contract", label: "Contract" },
     { value: "internship", label: "Internship" }
-];
+  ];
 
 
   return (
     <div className="sticky top-4 space-y-4">
       <section aria-labelledby="who-to-follow-heading">
         <div className="bg-white rounded-lg">
-          <div className="p-6">
+          <div className="p-6 mt-4">
             <div className="flow-root">
-              {/* <MultiSelectInput label="Type" data={constData.jobTypeData} 
-              value={filterObj.jobType || []} onChange={(e) => handleInputChange({element:e,inputName:'jobType'})}/> */}
-              <div className="pb-5">
+
+              {/* <div className="pb-5">
               <MultiSelectInput label="Skills" 
               data={constData.skillsData}
                 value={filterObj.skills || []} isMultiple="true"
                 onChange={(e) => handleInputChange({ element: e, inputName: 'skills', groupNme: '' })} 
                 />
-              </div>
+              </div> */}
 
-
-
-              <SelectInput label="Job Category" 
-              data={constData.jobCatData}
+              <SelectInput label="Job Category"
+                data={constData.jobCatData}
                 value={filterObj.jobCategory || {}} isMultiple="true" isClearable={true}
-                onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme: '' })} 
-                />
+                onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme: '' })}
+              />
 
               {/* <Select placeholder="Type"
                 value={filterObj.jobType || []} isMultiple={false} isClearable={false}
@@ -90,10 +86,10 @@ const FilterComponent = () => {
         <div className="bg-white rounded-lg">
           <div className="p-6">
             <div className="flow-root">
-              <Checkbox 
-              value={filterObj.jobType || []}
-              onChange={(e) => handleInputChange({ element: e, inputName: 'jobType', groupNme: '' })}
-              options={checkBoxOptions}/>
+              <Checkbox
+                value={filterObj.jobType || []}
+                onChange={(e) => handleInputChange({ element: e, inputName: 'jobType', groupNme: '' })}
+                options={checkBoxOptions} />
             </div>
           </div>
         </div>
@@ -102,4 +98,4 @@ const FilterComponent = () => {
   );
 }
 
-export default  FilterComponent;
+export default FilterComponent;
