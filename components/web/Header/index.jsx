@@ -169,16 +169,16 @@ export default function HeaderComponent() {
                     shallow
                     className="ml-6 inline-flex items-center"
                   >
-                    <button class="block text-md mx-auto shadow bg-yellow-400 hover:bg-yellow-400 border-yellow-500 focus:shadow-outline focus:outline-none text-gray-800  py-1 px-10 rounded">Create New Account</button>
+                    <button class="block text-md mr-4 shadow bg-yellow-400 hover:bg-yellow-400 border border-yellow-500 hover:border-transparent focus:outline-none text-gray-800  py-1 px-10 rounded font-bold cursor-pointer">Create New Account</button>
 
                   </Link>
                   <Link
                     href={makeContextualHref({ openLoginModal: true })}
                     as="/login"
                     shallow
-                    className="ml-6 inline-flex items-center"
+                    className="ml-6 inline-flex items-center cursor-hand"
                   >
-                    <button class="px-5 py-1 text-md text-white bg-gradient-to-r from-sky-800 to-cyan-600 rounded-md focus:shadow-outline hover:bg-indigo-800">Log In</button>
+                    <button class="block text-md mr-4 shadow bg-rose-600 hover:bg-rose-500 border border-rose-700 hover:border-transparent focus:outline-none text-white  py-1 px-10 rounded font-bold cursor-hand">Log In</button>
                   </Link>
                 </>
               )}
