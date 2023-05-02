@@ -270,7 +270,7 @@ const InfiniteScrollComponent = () => {
                         <div className="flex text-sm">
                           <span className="inline-flex items-center text-sm align-sub">
                             <Link scroll={false}
-                              href={makeContextualHref({ openPostViewAndApply: true })}
+                              href={makeContextualHref({ openPostViewAndApply: true, jobId: job._id })}
                             >
                               <button className="inline-flex space-x-2 text-blue-600 hover:text-blue-900">
                                 <span className="font-medium">
