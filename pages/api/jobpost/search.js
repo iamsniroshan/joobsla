@@ -1,6 +1,5 @@
 import dbConnect from "helpers/dbConnect";
 import jobPosts from "models/jobPosts";
-import { getSession } from "next-auth/react";
 import mongoose from "mongoose";
 
 async function handler(req, res) {

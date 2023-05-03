@@ -7,18 +7,12 @@ import Image from "next/image";
 
 
 
-export default function BodyCompanyDetailViewComponent() {
+export default function BodyCompanyDetailViewComponent({UserData}) {
 
-  const [UserData, setUserData] = useState({})
-
-  const { isLoading } = useQuery('userInfoUseQuery', () => getUserInfoApi(), {
-    onSuccess: (data) => setUserData(data.data[0])
-  });
 
   if (!UserData || !UserData['experience']) {
     return <p>Loading</p>;
   }
-
 
   return (
          <>
@@ -32,35 +26,33 @@ export default function BodyCompanyDetailViewComponent() {
                 )}
               </div>
               <span className="relative ml-4 text-indigo-300 font-semibold leading-6 sm:ml-20 sm:pl-1">
-                <p className="text-white font-semibold sm:inline">{UserData?.userInfo?.firstName}</p>{' '}
-                <p className="sm:inline">{UserData['experience'][0].title} at {UserData['experience'][0].companyName}</p>
+                <p className="text-white font-semibold sm:inline">{UserData?.userInfo?.firstName} {UserData?.userInfo?.lastName}</p>{' '}
+                <p className="sm:inline">{UserData.experience[0].title}</p>
+                <p className="sm:inline"> at {UserData.experience[0].companyName}</p>
               </span>
             </cite>
           </blockquote>
-
           <dl className="space-y-8 px-4 sm:px-6 sm:space-y-6">
             <div className='block mt-20'>
-              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">Biox</dt>
+              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">About Us</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                 <p>
-                  Enim feugiat ut ipsum, neque ut. Tristique mi id elementum praesent. Gravida in tempus
-                  feugiat netus enim aliquet a, quam scelerisque. Dictumst in convallis nec in bibendum
-                  aenean arcu.
+                  {UserData.userInfo.aboutYou}
                 </p>
               </dd>
             </div>
             <div>
               <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">Location</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">New York, NY, USA</dd>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">{UserData.userInfo.location || 'Sri Lanka'}</dd>
             </div>
             <div>
-              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">Website</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">ashleyporter.com</dd>
+              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">Email Address</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">{UserData.userInfo.emailAddress || 'Sri Lanka'}</dd>
             </div>
             <div>
               <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">Birthday</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                <time dateTime="1988-06-23">June 23, 1988</time>
+                <time dateTime="1988-06-23">{UserData.userInfo.dateOfBirth || 'Sri Lanka'}</time>
               </dd>
             </div>
           </dl>

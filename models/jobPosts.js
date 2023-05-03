@@ -1,73 +1,73 @@
 import mongoose from 'mongoose'
 
 const jobDetailSchema = new mongoose.Schema({
-    jobTitle: {
+  jobTitle: {
+    type: String
+  },
+  jobType: {
+    value: {
       type: String
     },
-    jobType: {
-      value: {
-        type: String
-      },
-      label: {
-        type: String
-      }
-    },
-    jobCategory: {
-      label: {
-        type: String
-      },
-      value: {
-        type: String
-      },
-      id: {
-        type: String
-      }
-    },
-    expirationDate: {
+    label: {
       type: String
     }
+  },
+  jobCategory: {
+    label: {
+      type: String
+    },
+    value: {
+      type: String
+    },
+    id: {
+      type: String
+    }
+  },
+  expirationDate: {
+    type: String
+  }
 })
 
 const JobPostSchema = new mongoose.Schema({
-    jobDetail : jobDetailSchema, 
-    jobDescription: {
-        longDesc: {
-          type: String
-        },
-        sortDesc: {
-          type: String
-        }
-      },
-      jobSalary: {
-        minAmount: {
-          type: String
-        },
-        maxAmount: {
-          type: String
-        },
-        currency: {
-          type: String
-        }
-      },
-      experience: {
-        number: {
-          type: String
-        },
-        numberTag: {
-          type: String
-        }
-      },
-      workingHours: {
-        hour: {
-          type: String
-        },
-        hourTag: {
-          type: String
-        }
-      },
-      userId: {
-        type: String
-      }
+  jobDetail: jobDetailSchema,
+  jobDescription: {
+    longDesc: {
+      type: String
+    },
+    sortDesc: {
+      type: String
+    }
+  },
+  jobSalary: {
+    minAmount: {
+      type: String
+    },
+    maxAmount: {
+      type: String
+    },
+    currency: {
+      type: String
+    }
+  },
+  experience: {
+    number: {
+      type: String
+    },
+    numberTag: {
+      type: String
+    }
+  },
+  workingHours: {
+    hour: {
+      type: String
+    },
+    hourTag: {
+      type: String
+    }
+  },
+  userId: {
+    type: String
+  }
 }, { timestamps: true })
 
 

@@ -6,12 +6,15 @@ import BodyDescComponent from "./BodyDescView";
 import HeaderViewComponent from "./HeaderView";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import JobApplyComponent from "components/web/JobApply";
+import { useSession, signOut } from 'next-auth/react';
 
 function PostViewComponent() {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [jobDetailObj, setJobDetailObj] = useState({})
+  const {data:session, status:loading } = useSession();
   const { jobId } = router.query;
 
 
@@ -32,7 +35,7 @@ function PostViewComponent() {
   };
 
   useEffect(() => {
-    fetchJobPostById();
+    jobId ? fetchJobPostById() : null;
   }, [jobId]); // Note the curly braces around myFunction!
 
 
@@ -48,15 +51,18 @@ function PostViewComponent() {
               </div>
               <div className="mt-0">
                 {jobDetailObj.jobDetail ? <HeaderViewComponent jobDetail={jobDetailObj.jobDetail} jobSalary={jobDetailObj.jobSalary} /> : null}
-                <BodyDescComponent {...jobDetailObj.jobDescription} />
+                <BodyDescComponent userInfo={jobDetailObj.userInfo} jobDescription={jobDetailObj.jobDescription} />
               </div>
             </main>
             <div className="hidden lg:block lg:col-span-3 xl:col-span-3">
-              <aside className="sticky top-5 space-y-1">
-                <LoginComponent />
-              </aside>
+              
+              {session && loading === 'unauthenticated' && (<aside className="sticky top-5 space-y-1"><LoginComponent /></aside>)}
+              {session && loading === 'authenticated' && (<aside className="sticky top-5 space-y-1"><JobApplyComponent/></aside>)}
             </div>
           </div>
+          <div className="absolute bottom-0 w-full px-0 py-2 bg-gray-700  text-right sm:px-6 h-2">
+          </div>
+          <div className="block h-16 w-full"></div>
         </div>
       }
     </>

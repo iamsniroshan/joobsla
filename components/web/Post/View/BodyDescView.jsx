@@ -2,7 +2,8 @@
 
 import BodyCompanyDetailViewComponent from './BodyCompnyDetailView'
 
-export default function BodyDescComponent(jobDescription) {
+export default function BodyDescComponent({userInfo=[],jobDescription = {}}) {
+
 
 
     return (
@@ -10,7 +11,7 @@ export default function BodyDescComponent(jobDescription) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-1  xl:grid xl:grid-cols-3 mt-8 text-sm">
           <aside className="space-y-1">
               <h2 className="sr-only">Details</h2>
-              <BodyCompanyDetailViewComponent/>
+              <BodyCompanyDetailViewComponent UserData={userInfo[0]}/>
             </aside>
               <div className="xl:col-span-2 xl:pl-8 xl:pr-8 xl:border-r xl:border-l xl:border-gray-200">
                 <div>
