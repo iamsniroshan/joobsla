@@ -7,8 +7,13 @@ import {
 } from '@heroicons/react/solid'
 import { format } from 'date-fns'
 
-export default function HeaderViewComponent({jobDetail,jobSalary}) {
+export default function HeaderViewComponent({ jobDetailObj}) {
 
+    const { jobDetail, jobSalary } = jobDetailObj
+
+    if(!jobDetail) {
+        return null
+    }
 
     return (
         <>
@@ -16,7 +21,7 @@ export default function HeaderViewComponent({jobDetail,jobSalary}) {
                 <div className="max-w-7xl bg-gray-50 mx-auto py-8  px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
                     <div className="flex-1 min-w-0">
                         <h1 className="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-                       {jobDetail.jobTitle}
+                            {jobDetail.jobTitle}
                         </h1>
                         <div className="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-8">
                             <div className="mt-2 flex items-center text-sm text-gray-500">
@@ -29,11 +34,11 @@ export default function HeaderViewComponent({jobDetail,jobSalary}) {
                             </div>
                             <div className="mt-2 flex items-center text-sm text-gray-500">
                                 <CurrencyDollarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                {jobSalary.minAmount}{jobSalary.currency} &ndash; {jobSalary.maxAmount}{jobSalary.currency}
+                                {jobSalary.minAmount}{jobSalary.currency} &ndash; {jobSalary.maxAmount}{jobDetailObj.jobSalary.currency}
                             </div>
                             <div className="mt-2 flex items-center text-sm text-gray-500">
                                 <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                {format(new Date(jobDetail?.expirationDate), 'dd MMMM yyyy')}
+                                {format(new Date(jobDetail.expirationDate), 'dd MMMM yyyy')}
                             </div>
                         </div>
                     </div>

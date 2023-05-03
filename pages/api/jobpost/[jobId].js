@@ -20,15 +20,21 @@ async function handler(req, res) {
           from: 'userinfo',
           localField: 'userId',
           foreignField: 'userId',
-          as: 'userInfo'
+          as: 'userDetail'
         }
       },
       {
         $project: {
-          'userInfo.experience': 1,
-          'userInfo.userInfo': 1,
-          'userInfo.profile': 1,
-          'jobDescription':1
+          
+          'userDetail.experience': 1,
+          'userDetail.userInfo': 1,
+          'userDetail.profile': 1,
+          'jobDescription':1,
+          'jobSalary':1,
+          'experience': 1,
+          'workingHours': 1,
+          'jobDetail': 1,
+          'userId': 1
         }
       }]).exec()
     res.status(200).json({ "status": "success", message: "Fetch all job posts success!", "data": result });

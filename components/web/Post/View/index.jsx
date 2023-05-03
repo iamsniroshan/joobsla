@@ -50,8 +50,8 @@ function PostViewComponent() {
               <div className="px-4 sm:px-0">
               </div>
               <div className="mt-0">
-                {jobDetailObj.jobDetail ? <HeaderViewComponent jobDetail={jobDetailObj.jobDetail} jobSalary={jobDetailObj.jobSalary} /> : null}
-                <BodyDescComponent userInfo={jobDetailObj.userInfo} jobDescription={jobDetailObj.jobDescription} />
+                <HeaderViewComponent jobDetailObj={jobDetailObj} />
+                <BodyDescComponent jobDetailObj={jobDetailObj} />
               </div>
             </main>
             <div className="hidden lg:block lg:col-span-3 xl:col-span-3">
