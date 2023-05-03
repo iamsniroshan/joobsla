@@ -36,7 +36,7 @@ export default function HeaderComponent() {
         className='bg-white shadow-md lg:static lg:overflow-y-visible'
       >
 
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-6">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-0">
           <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
             <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-3">
               <div className="flex-shrink-0 flex items-center">
