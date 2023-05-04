@@ -76,12 +76,16 @@ export default function JobApplyComponent() {
                   className={`group p-2 w-full flex items-center justify-between rounded-full border border-gray-300 shadow-sm space-x-3 text-left hover:bg-green-100 focus:outline-none ${isProfileSelected ? "bg-green-100" : ""}`}
                 >
                   <span className="min-w-0 flex-1 flex items-center space-x-3">
-                    <span className="block flex-shrink-0">
-                      {user.profile.imgUrl ? (<Image src={user.profile.imgUrl} alt="profile logo" width="40" height="40" className="rounded-full" />) : (
-                        <span className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-gray-500">
-                          <span className="text-xl font-medium leading-none text-white">SN</span>
-                        </span>
-                      )}
+                    <span className="block flex-shrink-0  h-10 w-10">
+                      {user.profile.imgUrl
+                        ? (<span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500">
+                          <Image src={user.profile.imgUrl} alt="profile logo" width="21" height="21" className="rounded-full" />
+                        </span>)
+                        : (
+                          <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500">
+                            <span className="text-xl font-medium leading-none text-white">SN</span>
+                          </span>
+                        )}
                     </span>
                     <span className="block min-w-0 flex-1">
                       <span className="block text-sm font-medium text-gray-900 truncate">{user.userInfo.firstName} {user.userInfo.lastName}</span>
