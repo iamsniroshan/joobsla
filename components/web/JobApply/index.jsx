@@ -2,14 +2,14 @@
 import { useSession, signOut } from 'next-auth/react';
 /* This example requires Tailwind CSS v2.0+ */
 import {
-  CheckIcon
+  CheckIcon, ViewBoardsIcon
 } from "@heroicons/react/solid";
 import { useQuery } from 'react-query';
 import { getUserInfoApi, postJobApplicationApi } from 'services/api';
 import { useEffect, useState } from 'react';
 import { PlusIcon } from '@heroicons/react/solid'
 import Image from 'next/image';
-
+import Link from 'next/link'
 
 
 export default function JobApplyComponent({ jobDetailObj }) {
@@ -37,11 +37,6 @@ export default function JobApplyComponent({ jobDetailObj }) {
     return null
   }
 
-
-
-
-
-
   const applyButtonClickHandler = () => {
     postJobApplicationApi({ applicationUserNote: 'Dummy', jobId: _id }).then(item => {
       if (item.status === 'success') {
@@ -51,6 +46,15 @@ export default function JobApplyComponent({ jobDetailObj }) {
         console.log('Application failed')
       }
     });
+  }
+
+  function MyLink(props) {
+    let { href, children, ...rest } = props
+    return (
+      <Link href={href}>
+        <a {...rest}>{children}</a>
+      </Link>
+    )
   }
 
 
@@ -151,11 +155,22 @@ export default function JobApplyComponent({ jobDetailObj }) {
                   d="M34 40h10v-4a6 6 0 00-10.712-3.714M34 40H14m20 0v-4a9.971 9.971 0 00-.712-3.714M14 40H4v-4a6 6 0 0110.713-3.714M14 40v-4c0-1.313.253-2.566.713-3.714m0 0A10.003 10.003 0 0124 26c4.21 0 7.813 2.602 9.288 6.286M30 14a6 6 0 11-12 0 6 6 0 0112 0zm12 6a4 4 0 11-8 0 4 4 0 018 0zm-28 0a4 4 0 11-8 0 4 4 0 018 0z"
                 />
               </svg>
-              <h2 className="mt-2 text-lg font-medium text-gray-900">You Already applied this job</h2>
-              <p className="mt-1 text-sm text-gray-500">To check status of this application visit our board</p>
+              <h2 className="mt-2 text-lg font-medium text-gray-900">You already applied this job</h2>
+              <p className="mt-1 text-sm text-gray-500">To check status of this application visit job application management board</p>
             </div>
           </div>
         </div>
+        <MyLink href={'/user/application'}>
+          <div className="p-4 flex items-start rounded-lg hover:bg-green-100 focus:outline-none transition ease-in-out duration-150 mt-10 border border-gray-300">
+            <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
+              <ViewBoardsIcon className="h-9 w-9" aria-hidden="true" />
+            </div>
+            <div className="ml-4">
+              <p className="text-base font-medium text-gray-900">Applications</p>
+              <p className="mt-1  text-gray-500 text-xs">Mange your jobs applications</p>
+            </div>
+          </div>
+        </MyLink>
       </>
     )
   }
