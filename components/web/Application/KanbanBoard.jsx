@@ -30,9 +30,7 @@ export default function KanbanBoardComponent() {
   }, [data, session]);
 
   const onDragOver = (ev) => {
-    console.log("xxxxxxxxxxx");
     ev.preventDefault();
-    console.log("1");
   };
 
   const onDragStart = (ev, name, id) => {
@@ -50,6 +48,8 @@ export default function KanbanBoardComponent() {
       }
       return task;
     });
+    console.log(cat)
+    console.log(id)
     setTasks([...fTasks]);
   };
 
