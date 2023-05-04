@@ -2,6 +2,7 @@
 import { useSession, signOut } from 'next-auth/react';
 /* This example requires Tailwind CSS v2.0+ */
 import {
+  CheckIcon,
   PaperClipIcon,
   PencilAltIcon,
   PencilIcon,
@@ -10,130 +11,106 @@ import { useQuery } from 'react-query';
 import { getUserInfoApi } from 'services/api';
 import { useState } from 'react';
 import { format } from "date-fns";
+import { PlusIcon } from '@heroicons/react/solid'
+import Image from 'next/image';
 
 const people = [
   {
-    name: 'Michael Foster',
-    role: 'Co-Founder / CTO',
+    name: 'Lindsay Walton',
+    handle: 'lindsaywalton',
+    email: 'lindsaywalton@example.com',
+    role: 'Front-end Developer',
+    imageId: '1517841905240-472988babdf9',
     imageUrl:
-      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-  },
-  // More people...
+      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  }
 ]
 
-export default function JobApplyComponent()  {
+export default function JobApplyComponent() {
 
-  const [userDetail, setUserDetail] = useState({});
+  const [userDetail, setUserDetail] = useState([]);
+  const [isProfileSelected, setIsProfileSelected] = useState(false);
 
-    const { isLoading, error, data } = useQuery('userInfoUseQuery', () => getUserInfoApi(),{
-        onSuccess: (data) => setUserDetail(data.data[0])
-    });
+  const { isLoading, error, data } = useQuery('userInfoUseQuery', () => getUserInfoApi(), {
+    onSuccess: (res) => setUserDetail(res.data)
+  });
 
-  const {data:session, status:loading } = useSession();
-  const { userInfo, cv, salary } = userDetail
+  const { data: session, status: loading } = useSession();
 
+  const profileSelector = () => setIsProfileSelected(!isProfileSelected)
 
-  if(!userInfo) {
+  if (isLoading) {
     return null
   }
 
   return (
     <>
-    <div className="bg-white">
-      <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 ">
-        <div className="space-y-8 sm:space-y-12">
-          <ul className="mx-auto">
-            {people.map((person) => (
-              <li key={person.name}>
-                <div className="space-y-4">
-                  <img className="mx-auto h-20 w-20 rounded-full lg:w-24 lg:h-24" src={person.imageUrl} alt="" />
-                  <div className="space-y-2">
-                    <div className="text-xs font-medium lg:text-sm">
-                      <h3>{person.name}</h3>
-                      <p className="text-indigo-600">{person.role}</p>
-                    </div>
-                  </div>
-                </div>
+      <div className="max-w-md mx-auto sm:max-w-3xl">
+        <div>
+          <div className="text-center">
+            <svg
+              className="mx-auto h-12 w-12 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 48 48"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M34 40h10v-4a6 6 0 00-10.712-3.714M34 40H14m20 0v-4a9.971 9.971 0 00-.712-3.714M14 40H4v-4a6 6 0 0110.713-3.714M14 40v-4c0-1.313.253-2.566.713-3.714m0 0A10.003 10.003 0 0124 26c4.21 0 7.813 2.602 9.288 6.286M30 14a6 6 0 11-12 0 6 6 0 0112 0zm12 6a4 4 0 11-8 0 4 4 0 018 0zm-28 0a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+            <h2 className="mt-2 text-lg font-medium text-gray-900">Login as member</h2>
+            <p className="mt-1 text-sm text-gray-500">I am agree to share my detail to company</p>
+          </div>
+        </div>
+        <div className="mt-10">
+          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide text-center">Select below profile and click apply</h3>
+          <ul className="mt-4 w-100">
+            {userDetail.map((user, personIdx) => (
+              <li key={personIdx} onClick={profileSelector}>
+                <button
+                  type="button"
+                  className={`group p-2 w-full flex items-center justify-between rounded-full border border-gray-300 shadow-sm space-x-3 text-left hover:bg-green-100 focus:outline-none ${isProfileSelected ? "bg-green-100" : ""}`}
+                >
+                  <span className="min-w-0 flex-1 flex items-center space-x-3">
+                    <span className="block flex-shrink-0">
+                      {user.profile.imgUrl ? (<Image src={user.profile.imgUrl} alt="profile logo" width="40" height="40" className="rounded-full" />) : (
+                        <span className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-gray-500">
+                          <span className="text-xl font-medium leading-none text-white">SN</span>
+                        </span>
+                      )}
+                    </span>
+                    <span className="block min-w-0 flex-1">
+                      <span className="block text-sm font-medium text-gray-900 truncate">{user.userInfo.firstName} {user.userInfo.lastName}</span>
+                      <span className="block text-sm font-medium text-gray-500 truncate">{user.userInfo.lastName}</span>
+                    </span>
+                  </span>
+                  <span className="flex-shrink-0 h-10 w-10 inline-flex items-center justify-center">
+                    {
+                      isProfileSelected
+                        ? <CheckIcon className="h-6 w-7 text-green-400 group-hover:text-gray-500" aria-hidden="true" />
+                        : <PlusIcon className="h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+                    }
+                  </span>
+                </button>
               </li>
             ))}
           </ul>
         </div>
-      </div>
-    </div>
-    <div className="border-t border-gray-200">
-
-    {userInfo && (
-      <dl>
-        {userInfo.firstName && (
-          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Full name</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {userInfo.firstName} {userInfo?.lastName}
-            </dd>
-          </div>
-        )}
-        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt className="text-sm font-medium text-gray-500">
-            Application for
-          </dt>
-          <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            Backend Developer
-          </dd>
+        <div className="mt-12 grid w-100">
+          <button
+            disabled={!isProfileSelected ? true : false}
+            type="submit"
+            className="block text-md shadow bg-yellow-400 hover:bg-yellow-400 border border-yellow-500 hover:border-transparent focus:outline-none text-gray-800  py-1 px-6 rounded font-bold cursor-pointer w-100 uppercase disabled:bg-gray-400 disabled:border-gray-500 disabled:opacity-50"
+          >
+            Apply
+          </button>
         </div>
-        {userInfo.emailAddress && (
-          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">
-              Email address
-            </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {userInfo.emailAddress}
-            </dd>
-          </div>
-        )}
-        {salary.salaryExpectation && (
-          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">
-              Salary expectation
-            </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {salary.salaryExpectation} {salary.currency}
-            </dd>
-          </div>
-        )}
-        {cv.fileName && (
-          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">
-              Attachments
-            </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                  <div className="w-0 flex-1 flex items-center">
-                    <PaperClipIcon
-                      className="flex-shrink-0 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                    <span className="ml-2 flex-1 w-0 truncate">
-                      {cv.fileName.split(/_(.*)/s)[1]}
-                    </span>
-                  </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a
-                      href="#"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Download
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </dd>
-          </div>
-        )}
-      </dl>
-    )}
-  </div>
-  </>
+      </div>
+    </>
   )
 }
 
