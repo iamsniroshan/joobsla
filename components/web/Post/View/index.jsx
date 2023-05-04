@@ -57,7 +57,7 @@ function PostViewComponent() {
             <div className="hidden lg:block lg:col-span-3 xl:col-span-3">
               
               {loading === 'unauthenticated' && (<aside className="sticky top-5 space-y-1"><LoginComponent /></aside>)}
-              {session && loading === 'authenticated' && (<aside className="sticky top-5 space-y-1"><JobApplyComponent/></aside>)}
+              {session && loading === 'authenticated' && (<aside className="sticky top-5 space-y-1"><JobApplyComponent jobDetailObj={jobDetailObj}/></aside>)}
             </div>
           </div>
           <div className="absolute bottom-0 w-full px-0 py-2 bg-gray-700  text-right sm:px-6 h-2">

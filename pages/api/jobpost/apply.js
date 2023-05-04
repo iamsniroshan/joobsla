@@ -17,10 +17,10 @@ async function handler(req, res) {
     await dbConnect();
 
     const userId = session.user.id;
-    const newObj = { ...data, applicationUserId: userId }
+    const newObj = { applicationUserNote: data.applicationUserNote, applicationUserId: userId }
 
     try {
-        const result = await jobPosts.updateOne({ userId: userId }, { $push: { jobApplications: newObj } })
+        const result = await jobPosts.updateOne({ _id: data.jobId }, { $push: { jobApplications: newObj } })
         res.status(201).json({ status: "success", message: "job application success!", data: result, });
     } catch (error) {
         res.status(500).json({ status: "error", message: "job application failed!", data: error });

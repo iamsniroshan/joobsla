@@ -30,6 +30,7 @@ async function handler(req, res) {
           'userDetail.userInfo': 1,
           'userDetail.profile': 1,
           'jobDescription':1,
+          'jobApplications':1,
           'jobSalary':1,
           'experience': 1,
           'workingHours': 1,
