@@ -34,6 +34,10 @@ const jobApplicationsSchema = new mongoose.Schema({
   },
   applicationUserNote: {
     type: String
+  },
+  applicationStatus: {
+    type: String,
+    default: 'applied'
   }
 })
 
@@ -44,7 +48,6 @@ const JobPostSchema = new mongoose.Schema({
   },
   jobApplications: {
     type: [jobApplicationsSchema],
-    required: false,
     default: []
   },
   jobDescription: {

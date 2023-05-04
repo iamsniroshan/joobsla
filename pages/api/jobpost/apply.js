@@ -17,7 +17,7 @@ async function handler(req, res) {
     await dbConnect();
 
     const userId = session.user.id;
-    const newObj = { applicationUserNote: data.applicationUserNote, applicationUserId: userId }
+    const newObj = { applicationUserNote: data.applicationUserNote, applicationUserId: userId, applicationStatus: 'applied' }
 
     try {
         const result = await jobPosts.updateOne({ _id: data.jobId }, { $push: { jobApplications: newObj } })
