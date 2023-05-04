@@ -8,7 +8,7 @@ import {
   PencilIcon,
 } from "@heroicons/react/solid";
 import { useQuery } from 'react-query';
-import { getUserInfoApi } from 'services/api';
+import { getUserInfoApi, postJobApplicationApi } from 'services/api';
 import { useState } from 'react';
 import { format } from "date-fns";
 import { PlusIcon } from '@heroicons/react/solid'
@@ -42,6 +42,19 @@ export default function JobApplyComponent() {
   if (isLoading) {
     return null
   }
+
+
+
+  const applyButtonClickHandler = () => {
+    postJobApplicationApi({ applicationUserNote: 'Dummy' }).then(item => {
+      if (item.status === 'success') {
+          console.log(item)
+      } else {
+        console.log('Application failed')
+      }
+    });
+  }
+
 
   return (
     <>
@@ -106,6 +119,7 @@ export default function JobApplyComponent() {
         </div>
         <div className="mt-12 grid w-100">
           <button
+          onClick={applyButtonClickHandler}
             disabled={!isProfileSelected ? true : false}
             type="submit"
             className="block text-md shadow bg-yellow-400 hover:bg-yellow-400 border border-yellow-500 hover:border-transparent focus:outline-none text-gray-800  py-1 px-6 rounded font-bold cursor-pointer w-100 uppercase disabled:bg-gray-400 disabled:border-gray-500 disabled:opacity-50"

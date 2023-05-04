@@ -28,8 +28,25 @@ const jobDetailSchema = new mongoose.Schema({
   }
 })
 
+const jobApplicationsSchema = new mongoose.Schema({
+  applicationUserId: {
+    type: String
+  },
+  applicationUserNote: {
+    type: String
+  }
+})
+
 const JobPostSchema = new mongoose.Schema({
-  jobDetail: jobDetailSchema,
+  jobDetail: {
+    type: jobDetailSchema,
+    required: false,
+  },
+  jobApplications: {
+    type: [jobApplicationsSchema],
+    required: false,
+    default: []
+  },
   jobDescription: {
     longDesc: {
       type: String
