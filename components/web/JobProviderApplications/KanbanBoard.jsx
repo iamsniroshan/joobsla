@@ -5,6 +5,7 @@ import KanbanFilterComponent from "./SubComponents/KanbanFilter";
 import getAppliedJobPostApi from "services/api/getAppliedJobPost";
 import { useQuery } from "react-query";
 import { useSession, signOut } from 'next-auth/react';
+import updateApplicationStatusApi from "services/api/updateJobApplicationStatus";
 
 
 
@@ -24,7 +25,8 @@ export default function KanbanBoardComponent() {
           jobTitle: e.jobDetail.jobTitle,
           jobType: e.jobDetail.jobType.value,
           sortDesc: e.jobDescription.sortDesc,
-          category: e.jobApplications.find(e => e.applicationUserId === session.user.id).applicationStatus,
+          applicationStatus: e.jobApplications.find(e => e.applicationUserId === session.user.id).applicationStatus,
+          applicationId: e.jobApplications.find(e => e.applicationUserId === session.user.id)._id,
         }
       })
       setTasks([...newArr]);
@@ -43,21 +45,31 @@ export default function KanbanBoardComponent() {
   const onDrop = (ev, cat) => {
     setClickedTileId('')
     const id = ev.dataTransfer.getData("id");
-
+    let draggedObj = {}
     let fTasks = tasks.filter((task) => {
       if (task._id == id) {
-        task.category = cat;
+        task.applicationStatus = cat;
+        draggedObj = task
       }
       return task;
     });
-    console.log(cat)
-    console.log(id)
+    updateApplicationStatusApiHandler(draggedObj);
     setTasks([...fTasks]);
   };
 
+  const updateApplicationStatusApiHandler = (draggedObj) => {
+    updateApplicationStatusApi(draggedObj).then(item => {
+      if (item.status === 'success') {
+        console.log('update application status success');
+      } else {
+        console.log('update application status failed!!');
+      }
+    });
+  }
+
   const handleKeyPress = (ev) => {
     if (ev.key == "Enter" && ev.target.value != "") {
-      setTasks([...tasks, { jobTitle: ev.target.value, category: "todo" }]);
+      setTasks([...tasks, { jobTitle: ev.target.value, applicationStatus: "todo" }]);
       ev.target.value = " ";
     }
   };
@@ -71,7 +83,7 @@ export default function KanbanBoardComponent() {
   };
 
   tasks.forEach((t) => {
-    tasksArr[t.category].push(
+    tasksArr[t.applicationStatus].push(
       <div
         className={`item-container ${isClickedTileId === t._id ? "opacity-50 border-2 border-dark-blue-500  rounded-md" : ""}`}
         key={t.jobTitle}
