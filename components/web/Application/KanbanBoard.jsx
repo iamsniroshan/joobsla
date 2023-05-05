@@ -21,7 +21,9 @@ export default function KanbanBoardComponent() {
       const newArr = data.data.map(e => {
         return {
           _id: e._id,
-          name: e.jobDetail.jobTitle,
+          jobTitle: e.jobDetail.jobTitle,
+          jobType: e.jobDetail.jobType.value,
+          sortDesc: e.jobDescription.sortDesc,
           category: e.jobApplications.find(e => e.applicationUserId === session.user.id).applicationStatus,
         }
       })
@@ -33,7 +35,7 @@ export default function KanbanBoardComponent() {
     ev.preventDefault();
   };
 
-  const onDragStart = (ev, name, id) => {
+  const onDragStart = (ev, jobTitle, id) => {
     setClickedTileId(id)
     ev.dataTransfer.setData("id", id);
   };
@@ -55,7 +57,7 @@ export default function KanbanBoardComponent() {
 
   const handleKeyPress = (ev) => {
     if (ev.key == "Enter" && ev.target.value != "") {
-      setTasks([...tasks, { name: ev.target.value, category: "todo" }]);
+      setTasks([...tasks, { jobTitle: ev.target.value, category: "todo" }]);
       ev.target.value = " ";
     }
   };
@@ -72,7 +74,7 @@ export default function KanbanBoardComponent() {
     tasksArr[t.category].push(
       <div
         className={`item-container ${isClickedTileId === t._id ? "opacity-50 border-2 border-dark-blue-500  rounded-md" : ""}`}
-        key={t.name}
+        key={t.jobTitle}
         draggable
         onDragStart={(e) => onDragStart(e, t.name, t._id)}
       >

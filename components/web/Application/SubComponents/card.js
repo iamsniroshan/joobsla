@@ -3,24 +3,27 @@ export default function Card(props) {
 		<a className='transition block p-5 bg-white rounded-md shadow cursor-move ghost-card'>
 			<div className='flex items-center justify-between space-x-4'>
 				<h4 className='text-sm font-medium leading-snug'>
-				{props.componentToPassDown.name}
+					{props.componentToPassDown.jobTitle}
 				</h4>
 				<img
-					className='object-cover w-6 h-6 rounded-full'
-					src='https://images.unsplash.com/photo-1463453091185-61582044d556?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.5&w=72&h=72&q=80'
+					className='w-14 h-6 object-contain'
+					src='https://looka.com/wp-content/themes/looka/images/logos/looka_logo_black.svg'
 					alt=''
 				/>
 			</div>
-			<div className='flex items-baseline justify-between mt-4'>
-				<p className='text-sm text-gray-600'>
-					<time dateTime='2020-07-07'>July 7</time>
+			<p class="text-sm text-gray-700 overflow-hidden mh-16">
+				{props.componentToPassDown.sortDesc}
+			</p>
+			<div className='flex items-center justify-between mt-4'>
+				<p className='text-xs px-2 dark:text-neutral-300 text-green-700 bg-green-100 rounded'>
+					{props.componentToPassDown.jobType}
 				</p>
-				<div className='inline-flex items-center p-2 py-1 text-green-700 bg-green-100 rounded'>
-					<svg className='w-2 h-2' viewBox='0 0 8 8' fill='currentColor'>
-						<circle cx='4' cy='4' r='3' />
+				<a href="#" class="flex text-gray-700">
+					<svg fill="none" viewBox="0 0 24 24" class="w-6 h-6 text-blue-500" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
 					</svg>
-					<span className='ml-1 text-xs font-medium'>Enhancement</span>
-				</div>
+					5
+				</a>
 			</div>
 		</a>
 	);
