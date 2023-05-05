@@ -160,7 +160,7 @@ export default function JobApplyComponent({ jobDetailObj }) {
             </div>
           </div>
         </div>
-        <MyLink href={'/user/application'}>
+        <MyLink href={'/user/boards/job-seeker-applications'}>
           <div className="p-4 flex items-start rounded-lg hover:bg-green-100 focus:outline-none transition ease-in-out duration-150 mt-10 border border-gray-300">
             <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
               <ViewBoardsIcon className="h-9 w-9" aria-hidden="true" />

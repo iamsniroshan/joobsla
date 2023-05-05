@@ -9,7 +9,7 @@ const appsMenuData = [
   {
     name: 'Applications',
     description: 'Mange your jobs applications',
-    href: '/user/application',
+    href: '/user/boards/job-seeker-applications',
     srcUrl: '/apps/kb.png',
     icon: ViewBoardsIcon
   },

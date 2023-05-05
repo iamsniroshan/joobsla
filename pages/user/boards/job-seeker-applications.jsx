@@ -3,10 +3,10 @@ import { userLayout } from "components/web/Layout";
 import dynamic from "next/dynamic";
 
 
-const KanbanBoardComponent = dynamic(() => import("components/web/Application/KanbanBoard"));
+const KanbanBoardComponent = dynamic(() => import("components/web/JobSeekerApplications/KanbanBoard"));
 
 const Application = () => {
-  return <KanbanBoardComponent/>
+  return <KanbanBoardComponent/> // job seeker kanban board
 };
 
 Application.auth = true;
