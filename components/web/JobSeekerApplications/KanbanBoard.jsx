@@ -5,6 +5,10 @@ import KanbanFilterComponent from "./SubComponents/KanbanFilter";
 import getAppliedJobPostApi from "services/api/getAppliedJobPost";
 import { useQuery } from "react-query";
 import { useSession, signOut } from 'next-auth/react';
+import updateApplicationStatusApi from "services/api/updateJobApplicationStatus";
+
+
+
 
 
 export default function KanbanBoardComponent() {
@@ -21,12 +25,56 @@ export default function KanbanBoardComponent() {
           jobTitle: e.jobDetail.jobTitle,
           jobType: e.jobDetail.jobType.value,
           sortDesc: e.jobDescription.sortDesc,
-          category: e.jobApplications.find(e => e.applicationUserId === session.user.id).applicationStatus,
+          applicationStatus: e.jobApplications.find(e => e.applicationUserId === session.user.id).applicationStatus,
+          applicationId: e.jobApplications.find(e => e.applicationUserId === session.user.id)._id,
+          updatedAt: e.jobApplications.find(e => e.applicationUserId === session.user.id).updatedAt,
+          createdAt: e.jobApplications.find(e => e.applicationUserId === session.user.id).createdAt,
         }
       })
       setTasks([...newArr]);
     }
   }, [data, session]);
+
+  const onDragOver = (ev) => {
+    ev.preventDefault();
+  };
+
+  const onDragStart = (ev, jobTitle, id) => {
+    setClickedTileId(id)
+    ev.dataTransfer.setData("id", id);
+  };
+
+  const onDrop = (ev, cat) => {
+    setClickedTileId('')
+    const id = ev.dataTransfer.getData("id");
+    let draggedObj = {}
+    let fTasks = tasks.filter((task) => {
+      if (task._id == id) {
+        task.applicationStatus = cat;
+        draggedObj = task
+      }
+      return task;
+    });
+    updateApplicationStatusApiHandler(draggedObj);
+    setTasks([...fTasks]);
+  };
+
+  const updateApplicationStatusApiHandler = (draggedObj) => {
+    updateApplicationStatusApi(draggedObj).then(item => {
+      if (item.status === 'success') {
+        console.log('update application status success');
+      } else {
+        console.log('update application status failed!!');
+      }
+    });
+  }
+
+  const handleKeyPress = (ev) => {
+    if (ev.key == "Enter" && ev.target.value != "") {
+      setTasks([...tasks, { jobTitle: ev.target.value, applicationStatus: "todo" }]);
+      ev.target.value = " ";
+    }
+  };
 
   const tasksArr = {
     applied: [],
@@ -37,10 +85,12 @@ export default function KanbanBoardComponent() {
   };
 
   tasks.forEach((t) => {
-    tasksArr[t.category].push(
+    tasksArr[t.applicationStatus].push(
       <div
         className={`item-container ${isClickedTileId === t._id ? "opacity-50 border-2 border-dark-blue-500  rounded-md" : ""}`}
         key={t.jobTitle}
+        draggable
+        onDragStart={(e) => onDragStart(e, t.name, t._id)}
       >
         <Card componentToPassDown={t} />
       </div>
@@ -59,6 +109,8 @@ export default function KanbanBoardComponent() {
               {Object.keys(tasksArr).map((item, i) =>
                 <div
                   key={i}
+                  onDragOver={(e) => onDragOver(e)}
+                  onDrop={(e) => onDrop(e, item)}
                   className="flex flex-col flex-shrink-0 bg-gray-100 rounded-md w-60"
                 >
                   <Column.Header>{item}</Column.Header>
@@ -67,6 +119,7 @@ export default function KanbanBoardComponent() {
               )}
             </div>
           </main>
+
         </div>
       </div>
     </>

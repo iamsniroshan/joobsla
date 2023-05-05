@@ -27,6 +27,8 @@ export default function KanbanBoardComponent() {
           sortDesc: e.jobDescription.sortDesc,
           applicationStatus: e.jobApplications.find(e => e.applicationUserId === session.user.id).applicationStatus,
           applicationId: e.jobApplications.find(e => e.applicationUserId === session.user.id)._id,
+          updatedAt: e.jobApplications.find(e => e.applicationUserId === session.user.id).updatedAt,
+          createdAt: e.jobApplications.find(e => e.applicationUserId === session.user.id).createdAt,
         }
       })
       setTasks([...newArr]);
