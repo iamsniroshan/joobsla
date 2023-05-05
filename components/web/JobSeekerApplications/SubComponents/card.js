@@ -1,17 +1,20 @@
 export default function Card(props) {
 	return (
-		<a className='transition block p-5 bg-white rounded-md shadow cursor-pointer ghost-card'>
+		<a className='transition block p-5 bg-white rounded-md shadow cursor-move ghost-card'>
 			<div className='flex items-center justify-between space-x-4'>
-				<h4 className='text-sm font-medium leading-snug'>
+				<span className='text-sm text-gray-900 truncate'>
 					{props.componentToPassDown.jobTitle}
-				</h4>
+				</span>
+			</div>
+			<div className='flex items-center justify-between space-x-4'>
+				<span className='text-sm font-medium leading-snug'>{props.componentToPassDown.createdAt}</span>
 				<img
 					className='w-14 h-6 object-contain'
 					src='https://looka.com/wp-content/themes/looka/images/logos/looka_logo_black.svg'
 					alt=''
 				/>
 			</div>
-			<p class="text-sm text-gray-700 overflow-hidden mh-16">
+			<p class="text-sm text-gray-700 overflow-hidden h-14">
 				{props.componentToPassDown.sortDesc}
 			</p>
 			<div className='flex items-center justify-between mt-4'>
