@@ -98,11 +98,6 @@ const JobPostSchema = new mongoose.Schema({
   }
 }, { timestamps: true })
 
-// Middleware to update timestamps when document is updated
-jobApplicationsSchema.pre('findOneAndUpdate', function (next) {
-  this._update.updatedAt = new Date();
-  next();
-});
 
 
 export default mongoose.models.jobPosts || mongoose.model('jobPosts', JobPostSchema, 'jobpost')
