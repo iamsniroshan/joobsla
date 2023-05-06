@@ -30,6 +30,7 @@ export default function HeaderComponent() {
 
   return (
     <>
+    {JSON.stringify(session)}
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
       <div
         as="header"

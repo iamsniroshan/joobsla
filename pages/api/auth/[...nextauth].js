@@ -5,14 +5,16 @@ import jwt from "jsonwebtoken";
 import users from "models/users";
 import dbConnect from "helpers/dbConnect";
 
+const MAX_SESSION_AGE_SECONDS = 30 * 24 * 60 * 60; // 30 days
+const SECRET_KEY = process.env.NEXTAUTH_SECRET || 'default_secret';
+
+
 export default NextAuth({
   session: {
-    //strategy: "database",
-    strategy: "jwt",
-    // Seconds - How long until an idle session expires and is no longer valid.
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    strategy: 'jwt',
+    maxAge: MAX_SESSION_AGE_SECONDS,
   },
-  secret: 'nirosh'/* Please use `process.env.NEXTAUTH_SECRET` */,
+  secret: SECRET_KEY,
   jwt: {
     encode: async ({ secret, token }) => {
       return jwt.sign(token, secret);
@@ -32,7 +34,7 @@ export default NextAuth({
       async authorize(credentials, req) {
 
         await dbConnect();
-        const userObj = await users.findOne({ email: credentials.email }).exec();
+        const userObj = await users.findOne({ email: credentials.email });
 
         if (!userObj) {
           throw new Error("No user found!");
@@ -48,30 +50,34 @@ export default NextAuth({
         }
 
         const user = {
+          id: userObj._id.toString(),
+          name: userObj.name,
           email: userObj.email,
-          id: userObj._id,
-          name:"yyyyyy",
-          role: 'admin',
-          image: 'image'
+          image: userObj.image,
+          role: userObj.role // Assuming the user role is stored in the userObj
         };
-        return user
+      
+        return user;
       }
     }),
   ],
   callbacks: {
-
-    async signIn({ user, account, profile, email, credentials }) {
+    async jwt({ token,account }) {
+      if (account) {
+        token.accessToken = account.access_token
+      }
+      return token
+    },
+    async session({ session, token, user}) {
+      session.user.id = token.sub;
+      session.user.role = JSON.stringify(user);
+      return session;
+    },
+    async signIn() {
       return true;
     },
     async redirect({ url, baseUrl }) {
       return baseUrl;
-    },
-    async session({ session, user, token }) {
-      session.user.id = token.sub;
-      return session;
-    },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      return token;
-    },
+    }
   },
 });
