@@ -31,9 +31,6 @@ export default function PostCardListComponent() {
     deleteJob(jobPostId);
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
   if (error) {
     return <p>Error: {error}</p>;
