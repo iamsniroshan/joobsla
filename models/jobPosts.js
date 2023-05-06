@@ -39,6 +39,10 @@ const jobApplicationsSchema = new mongoose.Schema({
     type: String,
     default: 'applied'
   },
+  order: {
+    type: Number,
+    default: 0
+  },
   createdAt: {
     type: Date,
     default: Date.now

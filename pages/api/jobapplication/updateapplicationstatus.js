@@ -26,7 +26,8 @@ async function handler(req, res) {
             },
             {
               $set: {
-                "jobApplications.$.applicationStatus": data.applicationStatus
+                "jobApplications.$.applicationStatus": data.applicationStatus,
+                "jobApplications.$.order": data.order
               }
             }
           )
