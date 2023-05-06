@@ -49,15 +49,18 @@ export default NextAuth({
           throw new Error("Could not log you in!");
         }
 
-        const user = {
+        const token = {
           id: userObj._id.toString(),
-          name: userObj.name,
+          name: {
+            name:userObj.name,
+            role:userObj.role
+          },
           email: userObj.email,
           image: userObj.image,
-          role: userObj.role // Assuming the user role is stored in the userObj
+          role: userObj.role
         };
-      
-        return user;
+        console.log(token)
+        return token;
       }
     }),
   ],
@@ -70,7 +73,8 @@ export default NextAuth({
     },
     async session({ session, token, user}) {
       session.user.id = token.sub;
-      session.user.role = JSON.stringify(user);
+      session.user.role = token.name.role
+      session.user.name = token.name.name 
       return session;
     },
     async signIn() {
