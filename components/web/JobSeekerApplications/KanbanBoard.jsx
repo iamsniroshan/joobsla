@@ -19,7 +19,7 @@ export default function KanbanBoardComponent() {
 
   useEffect(() => {
     if (data && session) {
-      const newArr = data.data.map(e => {
+      const newArr = data.data.map((e,i) => {
         return {
           _id: e._id,
           jobTitle: e.jobDetail.jobTitle,
@@ -29,8 +29,10 @@ export default function KanbanBoardComponent() {
           applicationId: e.jobApplications.find(e => e.applicationUserId === session.user.id)._id,
           updatedAt: e.jobApplications.find(e => e.applicationUserId === session.user.id).updatedAt,
           createdAt: e.jobApplications.find(e => e.applicationUserId === session.user.id).createdAt,
+          order: i
         }
       })
+      newArr.sort((a, b) => a.order - b.order);
       setTasks([...newArr]);
     }
   }, [data, session]);
@@ -42,17 +44,42 @@ export default function KanbanBoardComponent() {
     }
     const sourceIndex = result.source.index;
     const destinationIndex = result.destination.index;
+    console.log('xxxxxxxx')
+    const newArr = moveArrayObject(tasks, result);
     let draggedObj = {}
-    let fTasks = tasks.filter((task) => {
+    let fTasks = newArr.filter((task) => {
       if (task._id == result.draggableId) {
         task.applicationStatus = result.destination.droppableId;
         draggedObj = task
       }
       return task;
     });
+    fTasks.sort((a, b) => a.order - b.order);
     updateApplicationStatusApiHandler(draggedObj);
     setTasks([...fTasks]);
   };
+
+  function moveArrayObject(arr, result) {
+    if(result.destination.droppableId === result.source.droppableId) {
+      const destinationArr = arr.filter(e => e.applicationStatus === result.destination.droppableId)
+      const remainingArr = arr.filter(e => e.applicationStatus !== result.destination.droppableId)
+      const [removedElement] = destinationArr.splice(result.source.index, 1);
+      destinationArr.splice(result.destination.index, 0, removedElement);
+      const comArr = [...destinationArr, ...remainingArr]
+      comArr.map((e,index) => e.order = index)
+      return comArr;
+    } else {
+      const destinationArr = arr.filter(e => e.applicationStatus === result.destination.droppableId)
+      const sourceArr = arr.filter(e => e.applicationStatus === result.source.droppableId)
+      const remainingArr = arr.filter(e => e.applicationStatus !== result.source.droppableId && e.applicationStatus !== result.destination.droppableId)
+      const [removedElement] = sourceArr.splice(result.source.index, 1);
+      destinationArr.splice(result.destination.index, 0, removedElement);
+      const comArr = [...destinationArr,...sourceArr, ...remainingArr]
+      comArr.map((e,index) => e.order = index)
+      return comArr;
+    }
+  }
+  
 
 
   const updateApplicationStatusApiHandler = (draggedObj) => {
@@ -113,8 +140,8 @@ export default function KanbanBoardComponent() {
                                       className="my-3"
                                     >
                                       <div
-                                        className={`item-container ${isClickedTileId === t._id
-                                          ? "opacity-50 border-2 border-dark-blue-500  rounded-md"
+                                        className={`item-container bg-white ${snapshot.draggingFromThisWith === t._id
+                                          ? "bg-amber-50"
                                           : ""
                                           }`}
                                       >

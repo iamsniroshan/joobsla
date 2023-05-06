@@ -4,7 +4,7 @@ import DateDiff from "components/common/DateDiff";
 
 export default function Card(props) {
 	return (
-		<a className='transition block p-5 bg-white rounded-md shadow cursor-move ghost-card'>
+		<a className='transition block p-5 rounded-md shadow cursor-move ghost-card'>
 			<div className='flex items-center justify-between space-x-4'>
 				<span className="inline-flex text-sm text-gray-500 items-center justify-between">
                                 <ClockIcon className="h-4 w-4 font-light" aria-hidden="true" />
