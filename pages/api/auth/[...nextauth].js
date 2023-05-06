@@ -25,7 +25,6 @@ export default NextAuth({
   },
   providers: [
     CredentialsProvider({
-      //adapter: MongoDBAdapter(clientPromise),
       name: "credentials",
       credentials: {
         username: { label: "username", type: "text" },
