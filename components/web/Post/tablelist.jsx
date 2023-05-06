@@ -10,6 +10,7 @@ import { CalendarIcon, LocationMarkerIcon, UsersIcon, ArrowCircleRightIcon } fro
 import ShimmerLoader from "components/common/Loader/shimmerLoader";
 import { deleteJobPostApi, getJobPostApi } from "services/api/jobPostApi";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import MyLink from "components/common/MyLink";
 
 
 export default function PostCardListComponent() {
@@ -139,7 +140,9 @@ export default function PostCardListComponent() {
                                   </span>
 
                                   <span className="block"><ArrowCircleRightIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 mt-1" aria-hidden="true" /></span>
-                                  <span className="block text-sm font-medium text-indigo-600 truncate p-1">View applications</span>
+                                  <MyLink href={'/user/boards/job-provider-applications'}>
+                                  <span className="block text-sm font-medium text-indigo-600 hover:text-yellow-700 truncate p-1">View applications</span>
+                                  </MyLink>
                                 </div>
                               </div>
 
@@ -165,8 +168,8 @@ export default function PostCardListComponent() {
                                 </span>
                               </div>
                               <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                <span className="block text-sm font-medium text-red-600 truncate p-0" onClick={() => handleDelete(eachPost._id)}>Delete</span>
-                                <span className="block text-sm font-medium text-green-600 truncate p-0 ml-6">Edit</span>
+                                <span className="block text-sm font-medium text-red-600 hover:text-yellow-700 truncate p-0" onClick={() => handleDelete(eachPost._id)}>Delete</span>
+                                <span className="block text-sm font-medium text-green-600 hover:text-yellow-700 truncate p-0 ml-6">Edit</span>
                               </div>
                             </div>
                           </div>

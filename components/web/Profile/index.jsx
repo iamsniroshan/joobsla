@@ -6,7 +6,6 @@ import Link from 'next/link'
 import UserMenuComponent from './UserMenu'
 import UserProfileComponent from './UserProfile'
 import { getUserInfoApi } from 'services/api';
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 
@@ -14,12 +13,12 @@ import { useQuery } from '@tanstack/react-query';
 
 export default function ProfileComponent() {
 
-    const [userDetail, setUserDetail] = useState({});
-
-    const { isLoading, error, data } = useQuery({queryKey: ["userInfoUseQuery"],queryFn:() => getUserInfoApi()},{
-        onSuccess: (data) => setUserDetail(data.data[0])
-    });
+    const { isLoading, error, data } = useQuery({queryKey: ["userInfoUseQuery"],queryFn:() => getUserInfoApi()});
     const { makeContextualHref, returnHref } = useContextualRouting();
+    
+    if(isLoading) {
+        return null
+    }
 
     return (
         <>
@@ -33,10 +32,10 @@ export default function ProfileComponent() {
                             {/* Left column */}
                             <div className="grid grid-cols-1 gap-4 lg:col-span-2">
                                 {/* user Profile */}
-                                <UserProfileComponent profile={userDetail.profile} userInfo={userDetail.userInfo}/>
+                                <UserProfileComponent profile={data.data[0].profile} userInfo={data.data[0].userInfo}/>
                                 {/* Actions panel */}
                                 <section aria-labelledby="quick-links-title">
-                                    <UserInformationComponent userInfo={userDetail.userInfo} cv={userDetail.cv} salary={userDetail.salary}/>
+                                    <UserInformationComponent userInfo={data.data[0].userInfo} cv={data.data[0].cv} salary={data.data[0].salary}/>
                                 </section>
                             </div>
 
@@ -60,7 +59,7 @@ export default function ProfileComponent() {
                                                 </span>
                                             </Link>
                                             <div className="flow-root mt-6">
-                                                <ExperienceComponent experience={userDetail.experience}/>
+                                                <ExperienceComponent experience={data.data[0].experience}/>
                                             </div>
                                         </div>
                                     </div>
