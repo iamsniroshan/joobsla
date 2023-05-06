@@ -6,7 +6,7 @@ import getAppliedJobPostApi from "services/api/getAppliedJobPost";
 import { useQuery } from "react-query";
 import { useSession, signOut } from 'next-auth/react';
 import updateApplicationStatusApi from "services/api/updateJobApplicationStatus";
-
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 
@@ -35,22 +35,17 @@ export default function KanbanBoardComponent() {
     }
   }, [data, session]);
 
-  const onDragOver = (ev) => {
-    ev.preventDefault();
-  };
 
-  const onDragStart = (ev, jobTitle, id) => {
-    setClickedTileId(id)
-    ev.dataTransfer.setData("id", id);
-  };
-
-  const onDrop = (ev, cat) => {
-    setClickedTileId('')
-    const id = ev.dataTransfer.getData("id");
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
     let draggedObj = {}
     let fTasks = tasks.filter((task) => {
-      if (task._id == id) {
-        task.applicationStatus = cat;
+      if (task._id == result.draggableId) {
+        task.applicationStatus = result.destination.droppableId;
         draggedObj = task
       }
       return task;
@@ -58,6 +53,7 @@ export default function KanbanBoardComponent() {
     updateApplicationStatusApiHandler(draggedObj);
     setTasks([...fTasks]);
   };
+
 
   const updateApplicationStatusApiHandler = (draggedObj) => {
     updateApplicationStatusApi(draggedObj).then(item => {
@@ -69,12 +65,6 @@ export default function KanbanBoardComponent() {
     });
   }
 
-  const handleKeyPress = (ev) => {
-    if (ev.key == "Enter" && ev.target.value != "") {
-      setTasks([...tasks, { jobTitle: ev.target.value, applicationStatus: "todo" }]);
-      ev.target.value = " ";
-    }
-  };
 
   const tasksArr = {
     applied: [],
@@ -85,43 +75,68 @@ export default function KanbanBoardComponent() {
   };
 
   tasks.forEach((t) => {
-    tasksArr[t.applicationStatus].push(
-      <div
-        className={`item-container ${isClickedTileId === t._id ? "opacity-50 border-2 border-dark-blue-500  rounded-md" : ""}`}
-        key={t.jobTitle}
-        draggable
-        onDragStart={(e) => onDragStart(e, t.name, t._id)}
-      >
-        <Card componentToPassDown={t} />
-      </div>
-    );
+    tasksArr[t.applicationStatus].push(t);
   });
-
 
 
   return (
     <>
-      <div className="flex flex-col h-full">
-        <KanbanFilterComponent />
-        <div className="-mt-24 flex  kanban-height max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 bg-white rounded-lg">
-          <main className="flex-1 overflow-auto">
-            <div className="inline-flex h-full p-3 space-x-3 overflow-hidden">
-              {Object.keys(tasksArr).map((item, i) =>
-                <div
-                  key={i}
-                  onDragOver={(e) => onDragOver(e)}
-                  onDrop={(e) => onDrop(e, item)}
-                  className="flex flex-col flex-shrink-0 bg-gray-100 rounded-md w-60"
-                >
-                  <Column.Header>{item}</Column.Header>
-                  <Column.Body>{tasksArr[item]}</Column.Body>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full">
+            <KanbanFilterComponent />
+            <div className="-mt-24 flex  kanban-height max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 bg-white rounded-lg">
+              <main className="flex-1 overflow-auto">
+                <div className="inline-flex h-full p-3 space-x-3 overflow-hidden">
+                  {Object.keys(tasksArr).map((item, i) =>
+                    <div
+                      key={i}
+                      className="flex flex-col flex-shrink-0 bg-gray-100 rounded-md w-60"
+                    >
+                      <Column.Header>{item}</Column.Header>
+                      <Column.Body>
+                        <Droppable droppableId={item} key={item}>
+                          {(provided, snapshot) => (
+                            <div {...provided.droppableProps} ref={provided.innerRef} style={{
+                              borderRadius: '0.375rem',
+                              minHeight: 'calc(100vh - 225px)',
+                              borderRadius: '4px',
+                              backgroundColor: snapshot.isDraggingOver ? '#f8fafc' : '',
+                            }}>
+                              {tasksArr[item].map((t, index) => (
+                                <Draggable key={t._id} draggableId={t._id} index={index}>
+                                  {(provided) => (
+                                    <div
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      ref={provided.innerRef}
+                                      className="my-3"
+                                    >
+                                      <div
+                                        className={`item-container ${isClickedTileId === t._id
+                                          ? "opacity-50 border-2 border-dark-blue-500  rounded-md"
+                                          : ""
+                                          }`}
+                                      >
+                                        <Card componentToPassDown={t} />
+                                      </div>
+                                    </div>
+                                  )}
+                                </Draggable>
+                              ))}
+                              {provided.placeholder}
+                            </div>
+                          )}
+                        </Droppable>
+                      </Column.Body>
+                    </div>
+                  )}
                 </div>
-              )}
+              </main>
             </div>
-          </main>
-
+          </div>
         </div>
-      </div>
+      </DragDropContext>
     </>
   );
 }
