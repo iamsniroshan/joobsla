@@ -3,7 +3,7 @@ import RadioBoxInput from "components/common/Inputs/RadioBoxInpt";
 import { useContextualRouting } from "next-use-contextual-routing";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getUserInfoApi, updateUserInfoApi } from "services/api";
 
 
@@ -26,7 +26,7 @@ export default function UserInformationFormComponent() {
     const [error, setError] = useState(initialError)
     const router = useRouter();
     const { returnHref } = useContextualRouting();
-    const { isLoading } = useQuery('userInfoUseQuery', () => getUserInfoApi(), {
+    const { isLoading } = useQuery({queryKey: ["userInfoUseQuery"],queryFn:() => getUserInfoApi()}, {
         onSuccess: (data) => setFormData(data.data[0])
     });
 

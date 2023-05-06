@@ -5,19 +5,39 @@ import Link from "next/link";
 import { format } from 'date-fns'
 
 import { CalendarIcon, LocationMarkerIcon, UsersIcon, ArrowCircleRightIcon } from '@heroicons/react/solid'
-import { useQuery } from "react-query";
-import getJobPostApi from "services/api/getJobPost";
+
+
 import ShimmerLoader from "components/common/Loader/shimmerLoader";
+import { deleteJobPostApi, getJobPostApi } from "services/api/jobPostApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 
 export default function PostCardListComponent() {
 
   const { makeContextualHref, returnHref } = useContextualRouting();
-  const { isLoading, error, data } = useQuery('jobPostUseQuery', () => getJobPostApi());
+  const { isLoading, error, data, refetch } = useQuery({queryKey: ["jobPostUseQuery"],queryFn:() => getJobPostApi()});
 
-  // if (isLoading) return "Loading...";
 
-  if (error) return "An error has occurred: " + error.message;
+  const { mutate:deleteJob } = useMutation(deleteJobPostApi, {
+    onSuccess: () => {
+      refetch()
+    },
+    onError: (error) => {
+      // Error actions
+    },
+  });
+
+  const handleDelete = (jobPostId) => {
+    deleteJob(jobPostId);
+  };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <>
@@ -148,7 +168,7 @@ export default function PostCardListComponent() {
                                 </span>
                               </div>
                               <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                <span className="block text-sm font-medium text-red-600 truncate p-0">Delete</span>
+                                <span className="block text-sm font-medium text-red-600 truncate p-0" onClick={() => handleDelete(eachPost._id)}>Delete</span>
                                 <span className="block text-sm font-medium text-green-600 truncate p-0 ml-6">Edit</span>
                               </div>
                             </div>

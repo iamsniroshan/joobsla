@@ -5,9 +5,9 @@ import { useContextualRouting } from 'next-use-contextual-routing';
 import Link from 'next/link'
 import UserMenuComponent from './UserMenu'
 import UserProfileComponent from './UserProfile'
-import { useQuery } from 'react-query';
 import { getUserInfoApi } from 'services/api';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 
 
@@ -16,7 +16,7 @@ export default function ProfileComponent() {
 
     const [userDetail, setUserDetail] = useState({});
 
-    const { isLoading, error, data } = useQuery('userInfoUseQuery', () => getUserInfoApi(),{
+    const { isLoading, error, data } = useQuery({queryKey: ["userInfoUseQuery"],queryFn:() => getUserInfoApi()},{
         onSuccess: (data) => setUserDetail(data.data[0])
     });
     const { makeContextualHref, returnHref } = useContextualRouting();

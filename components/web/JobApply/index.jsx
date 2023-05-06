@@ -4,12 +4,12 @@ import { useSession, signOut } from 'next-auth/react';
 import {
   CheckIcon, ViewBoardsIcon
 } from "@heroicons/react/solid";
-import { useQuery } from 'react-query';
 import { getUserInfoApi, postJobApplicationApi } from 'services/api';
 import { useEffect, useState } from 'react';
 import { PlusIcon } from '@heroicons/react/solid'
 import Image from 'next/image';
 import Link from 'next/link'
+import { useQuery } from '@tanstack/react-query';
 
 
 export default function JobApplyComponent({ jobDetailObj }) {
@@ -18,7 +18,7 @@ export default function JobApplyComponent({ jobDetailObj }) {
   const [isApplied, setIsApplied] = useState(false);
   const [isProfileSelected, setIsProfileSelected] = useState(false);
 
-  const { isLoading, error, data } = useQuery('userInfoUseQuery', () => getUserInfoApi(), {
+  const { isLoading, error, data } = useQuery({queryKey: ["userInfoUseQuery"],queryFn:() => getUserInfoApi()}, {
     onSuccess: (res) => setUserDetail(res.data)
   });
 

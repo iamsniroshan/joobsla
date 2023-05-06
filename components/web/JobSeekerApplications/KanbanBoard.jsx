@@ -3,7 +3,7 @@ import Card from "./SubComponents/card";
 import Column from "./SubComponents/column";
 import KanbanFilterComponent from "./SubComponents/KanbanFilter";
 import getAppliedJobPostApi from "services/api/getAppliedJobPost";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useSession, signOut } from 'next-auth/react';
 import updateApplicationStatusApi from "services/api/updateJobApplicationStatus";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -15,7 +15,7 @@ export default function KanbanBoardComponent() {
   const [tasks, setTasks] = useState([]);
   const [isDragDisabled, setIsDragDisabled] = useState(false);
   const { data: session, status: loading } = useSession();
-  const { isLoading, error, data } = useQuery('appliedJobPostUseQuery', () => getAppliedJobPostApi());
+  const { isLoading, error, data } = useQuery({queryKey: ["appliedJobPostUseQuery"],queryFn:() => getAppliedJobPostApi()});
 
   useEffect(() => {
     if (data && session) {

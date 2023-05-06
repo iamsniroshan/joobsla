@@ -3,10 +3,9 @@ import "styles/globals.css";
 import "tailwindcss/tailwind.css";
 import { SessionProvider  } from "next-auth/react";
 import { AuthGuard } from "hoc/AuthGuard";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { Hydrate } from "react-query/hydration";
+import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";;
 import { useState } from "react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 
 

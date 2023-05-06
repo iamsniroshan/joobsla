@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import * as myConstClass from "constant";
 import { updateUserInfoApi } from "services/api";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 
 
@@ -26,7 +26,7 @@ export default function ExperienceFormComponent() {
     const router = useRouter();
     const { returnHref } = useContextualRouting();
 
-    const { refetch } = useQuery('userInfoUseQuery');
+    const { refetch } = useQuery({queryKey: ["userInfoUseQuery"]});
 
 
     const handleInputChange = ({ element, inputName, groupNme }) => {
