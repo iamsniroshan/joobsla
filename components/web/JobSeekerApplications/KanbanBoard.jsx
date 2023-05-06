@@ -13,7 +13,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default function KanbanBoardComponent() {
   const [tasks, setTasks] = useState([]);
-  const [isClickedTileId, setClickedTileId] = useState('');
+  const [isDragDisabled, setIsDragDisabled] = useState(false);
   const { data: session, status: loading } = useSession();
   const { isLoading, error, data } = useQuery('appliedJobPostUseQuery', () => getAppliedJobPostApi());
 
@@ -42,9 +42,6 @@ export default function KanbanBoardComponent() {
     if (!result.destination) {
       return;
     }
-    const sourceIndex = result.source.index;
-    const destinationIndex = result.destination.index;
-    console.log('xxxxxxxx')
     const newArr = moveArrayObject(tasks, result);
     let draggedObj = {}
     let fTasks = newArr.filter((task) => {
@@ -131,7 +128,7 @@ export default function KanbanBoardComponent() {
                               backgroundColor: snapshot.isDraggingOver ? '#f8fafc' : '',
                             }}>
                               {tasksArr[item].map((t, index) => (
-                                <Draggable key={t._id} draggableId={t._id} index={index}>
+                                <Draggable key={t._id} draggableId={t._id} index={index} isDragDisabled={isDragDisabled}>
                                   {(provided) => (
                                     <div
                                       {...provided.draggableProps}
