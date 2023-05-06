@@ -125,7 +125,7 @@ export default function KanbanBoardComponent() {
                         <Droppable droppableId={item} key={item}>
                           {(provided, snapshot) => (
                             <div {...provided.droppableProps} ref={provided.innerRef} style={{
-                              borderRadius: '0.375rem',
+                              borderRadius: '0.5rem',
                               minHeight: 'calc(100vh - 225px)',
                               borderRadius: '4px',
                               backgroundColor: snapshot.isDraggingOver ? '#f8fafc' : '',
@@ -140,7 +140,7 @@ export default function KanbanBoardComponent() {
                                       className="my-3"
                                     >
                                       <div
-                                        className={`item-container bg-white ${snapshot.draggingFromThisWith === t._id
+                                        className={`item-container bg-white rounded-lg ${snapshot.draggingFromThisWith === t._id
                                           ? "bg-amber-50"
                                           : ""
                                           }`}
