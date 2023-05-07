@@ -15,15 +15,18 @@ import { useRouter } from "next/router";
 import { AddPostWizardContextInitialValues } from "components/context/AddPostWizardContext";
 import { useState } from "react";
 import { useAtom } from "jotai";
+import AlertPopup from "components/common/AlertPopup";
 
 
 export default function PostCardListComponent() {
 
   const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
   const { makeContextualHref, returnHref } = useContextualRouting();
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [jobPostToDelete, setJobPostToDelete] = useState(null);
 
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ["jobPostUseQuery", { openPostAddModal: true}],
+    queryKey: ["jobPostUseQuery", { openPostAddModal: true }],
     queryFn: () => getJobPostApi(),
   });
 
@@ -39,8 +42,19 @@ export default function PostCardListComponent() {
   });
 
   const handleDelete = (jobPostId) => {
-    deleteJob(jobPostId);
+    setShowConfirm(true);
+    setJobPostToDelete(jobPostId)
   };
+
+  const handleDeleteConfirm = () => {
+    deleteJob(jobPostToDelete)
+    setShowConfirm(false)
+  };
+
+  const handleDeleteCancel = () => {
+    setShowConfirm(false)
+    setJobPostToDelete(null)
+  }
 
   const handleEditClick = (eachPost) => {
     router.push(makeContextualHref({ openPostAddModal: true, viewType: 'edit', jobId: eachPost._id }));
@@ -53,6 +67,16 @@ export default function PostCardListComponent() {
 
   return (
     <>
+      {showConfirm && (
+        <AlertPopup
+          title="Confirm Delete"
+          message="Are you sure you want to delete this item? This action cannot be undone."
+          onAccept={handleDeleteConfirm}
+          onReject={handleDeleteCancel}
+        />
+      )}
+
+
       <div className="relative bg-grayBg">
         <div
           as="header"
@@ -119,7 +143,7 @@ export default function PostCardListComponent() {
                   ? <ShimmerLoader repeatCount="10" />
                   :
                   <ul className="divide-y divide-gray-200">
-                    {data.data.map((eachPost,index) => (
+                    {data.data.map((eachPost, index) => (
                       <li key={index}>
                         <a href="#" className="block hover:bg-gray-50">
                           <div className="px-4 py-4 sm:px-6">

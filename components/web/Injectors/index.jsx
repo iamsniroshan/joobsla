@@ -27,12 +27,12 @@ export default function InjectorComponent() {
       <RightSideBar open={experienceEditModal}>
         <ExperienceFormComponent/>
       </RightSideBar>
-      {/* <OverlayModalComponent open={openPostAddModal} width="md:max-w-7xl">
+      <OverlayModalComponent open={openPostAddModal} width="md:max-w-7xl" title={viewType === 'create' ? 'Post New Job': viewType === 'edit' ? 'Edit Job post' : ''}>
         <PostAddComponent />
-      </OverlayModalComponent> */}
-      <TopSideBar open={openPostAddModal} title={viewType === 'create' ? 'Post New Job': viewType === 'edit' ? 'Edit Job post' : ''}>
+      </OverlayModalComponent>
+      {/* <TopSideBar open={openPostAddModal} title={viewType === 'create' ? 'Post New Job': viewType === 'edit' ? 'Edit Job post' : ''}>
         <PostAddComponent />
-      </TopSideBar>
+      </TopSideBar> */}
       {/* Job post view and apply */}
       <TopSideBar open={openPostViewAndApply} title="Job Detail">
         <PostViewComponent />

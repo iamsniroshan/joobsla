@@ -41,7 +41,7 @@ export default function OverlayModalComponent(props) {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Overlay className="hidden fixed inset-0 bg-gray-500 bg-opacity-70 transition-opacity md:block" />
+                <Dialog.Overlay className="hidden fixed inset-0 bg-black bg-opacity-50 transition-opacity md:block" />
               </Transition.Child>
 
               {/* This element is to trick the browser into centering the modal contents. */}
