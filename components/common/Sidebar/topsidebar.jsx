@@ -2,22 +2,31 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useContextualRouting } from 'next-use-contextual-routing';
-import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { XIcon } from '@heroicons/react/outline'
-import { LinkIcon, PlusIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { AddPostWizardContextInitialValues } from 'components/context/AddPostWizardContext';
 
 export default function TopSideBar(props) {
     const { open = false, children, width = 'max-full', title } = props;
     const router = useRouter();
     const [isShowModal, setShowModal] = useState(false)
     const { makeContextualHref, returnHref } = useContextualRouting();
+    const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
+
 
     useEffect(() => {
         setShowModal(open);
     }, [open])
 
     const closeModalHandler = () => {
+        // reset value when close model
+        setPostDetails({
+            jobDetail: { jobTitle: "", jobType: "", jobCategory: "", expirationDate: new Date() },
+            jobDescription: { longDesc: "", sortDesc: "" },
+            jobSalary: { minAmount: "", maxAmount: "", currency: "lkr-month" },
+            experience: { number: "", numberTag: "plus-year" },
+            workingHours: { hour: "", hourTag: "h-week" }
+        });
         router.push(returnHref, undefined, { shallow: true })
     }
 
@@ -48,35 +57,35 @@ export default function TopSideBar(props) {
                             leaveFrom="-translate-y-0"
                             leaveTo="-translate-y-full"
                         >
-                                <div className={`w-screen  ${width}`}>
-                                    <div className="h-full flex flex-col bg-white">
-                                            {/* Header */}
-                                            <div className="absolute w-full px-4 py-2 bg-gradient-to-r from-sky-800 to-cyan-600 sm:px-6">
-                                            <div className="container mx-auto max-w-7xl">
-                                                <div className="flex items-start justify-between space-x-3">
-                                                    <div className="space-y-1">
-                                                        <Dialog.Title className="text-lg font-medium text-white">{title}</Dialog.Title>
-                                                    </div>
-                                                    <div className="h-7 flex items-center">
-                                                        <button
-                                                            type="button"
-                                                            className="text-white hover:text-yellow-200"
-                                                            onClick={() => closeModalHandler()}
-                                                        >
-                                                            <span className="sr-only">Close panel</span>
-                                                            <XIcon className="h-6 w-6" aria-hidden="true" />
-                                                        </button>
-                                                    </div>
+                            <div className={`w-screen  ${width}`}>
+                                <div className="h-full flex flex-col bg-white">
+                                    {/* Header */}
+                                    <div className="absolute w-full px-4 py-2 bg-gradient-to-r from-sky-800 to-cyan-600 sm:px-6">
+                                        <div className="container mx-auto max-w-7xl">
+                                            <div className="flex items-start justify-between space-x-3">
+                                                <div className="space-y-1">
+                                                    <Dialog.Title className="text-lg font-medium text-white">{title}</Dialog.Title>
                                                 </div>
+                                                <div className="h-7 flex items-center">
+                                                    <button
+                                                        type="button"
+                                                        className="text-white hover:text-yellow-200"
+                                                        onClick={() => closeModalHandler()}
+                                                    >
+                                                        <span className="sr-only">Close panel</span>
+                                                        <XIcon className="h-6 w-6" aria-hidden="true" />
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div className="w-full h-12"></div>
-                                        {/* Adding children here */}
-                                        <div className="h-full flex flex-col bg-white overflow-y-scroll">
-                                        {children}
                                         </div>
                                     </div>
+                                    <div className="w-full h-12"></div>
+                                    {/* Adding children here */}
+                                    <div className="h-full flex flex-col bg-white overflow-y-scroll">
+                                        {children}
+                                    </div>
                                 </div>
+                            </div>
                         </Transition.Child>
                     </div>
                 </div>
