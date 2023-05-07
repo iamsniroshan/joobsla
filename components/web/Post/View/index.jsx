@@ -1,7 +1,5 @@
-import FilterComponent from "components/web/List/Filter";
-import InfiniteScrollComponent from "components/web/List/InfiniteScroll";
+
 import LoginComponent from "components/web/Login";
-import BodyCompanyDetailViewComponent from "./BodyCompnyDetailView";
 import BodyDescComponent from "./BodyDescView";
 import HeaderViewComponent from "./HeaderView";
 import { useRouter } from "next/router";
@@ -9,39 +7,51 @@ import { useEffect, useState } from "react";
 import JobApplyComponent from "components/web/JobApply";
 import { useSession, signOut } from 'next-auth/react';
 import JobApplyPreviewComponent from "components/web/JobApplyPreview";
+import { getJobPostByIdApi } from "services/api/jobPostApi";
+import { useQueries } from "@tanstack/react-query";
+import { getUserInfoApi } from "services/api";
 
-function PostViewComponent({ jobDetailObj: jobDetailPropObj}) {
+
+function PostViewComponent({ postDetailsProp }) {
 
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [jobDetailObj, setJobDetailObj] = useState({})
   const { data: session, status: loading } = useSession();
-  const { jobId, viewType } = router.query;
+  const { jobId = null, viewType } = router.query;
+  const [jobDetailObj, setJobDetailObj] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
 
-
-  const fetchJobPostById = async () => {
-    setIsLoading(true)
-    const res = await fetch(`/api/jobpost/${jobId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (res.ok) {
-      const postDetails = await res.json();
-      setJobDetailObj(postDetails.data[0])
-      setIsLoading(false)
-    }
-
-  };
+  const [jobPostData, userInfoData] = useQueries({
+    queries: [
+      { queryKey: ['jobPostByIdQuery'], queryFn: () => getJobPostByIdApi(jobId) },
+      { queryKey: ['userInfoUseQuery'], queryFn: () => getUserInfoApi() }
+    ]
+  });
+  
+  const jobPostDataLoading = jobPostData.isLoading
+  const userInfoDataLoading = userInfoData.isLoading;
 
   useEffect(() => {
-    jobId ? fetchJobPostById() : setJobDetailObj(jobDetailPropObj);
-  }, []);
+    if(viewType === 'edit') {
+      setJobDetailObj(postDetailsProp)
+    }
+  }, [postDetailsProp])
 
-
+  useEffect(() => {
+    if (viewType === 'create' && !userInfoDataLoading) {
+      const mergeObj = { ...postDetailsProp, userDetail: { ...userInfoData.data.data } }
+      setJobDetailObj(mergeObj)
+    }
+  }, [userInfoData, userInfoDataLoading])
+  
+  useEffect(() => {
+    if(viewType === 'view' && !jobPostDataLoading) {
+      setJobDetailObj(jobPostData.data.data[0])
+    }
+  }, [jobPostData, jobPostDataLoading])
+  
   return (
     <>
+    {/* {JSON.stringify(jobDetailObj)} */}
       {isLoading
         ? <p>Loading</p>
         : <div className="py-1">
@@ -56,7 +66,7 @@ function PostViewComponent({ jobDetailObj: jobDetailPropObj}) {
               </div>
             </main>
             <div className="hidden lg:block lg:col-span-3 xl:col-span-3">
-              {viewType
+              {viewType === 'create' || viewType === 'edit'
                 ? <aside className="sticky top-5 space-y-1"><JobApplyPreviewComponent /></aside>
                 :
                 <div>

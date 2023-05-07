@@ -41,7 +41,7 @@ export default function PostCardListComponent() {
 
   const handleEditClick = (eachPost) => {
     setJobDetailStore(eachPost);
-    router.push(makeContextualHref({ openPostAddModal: true, viewType: 'edit' }));
+    router.push(makeContextualHref({ openPostAddModal: true, viewType: 'edit', jobId: eachPost._id }));
   }
 
 

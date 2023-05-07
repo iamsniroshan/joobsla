@@ -22,3 +22,16 @@ export const deleteJobPostApi = async (jobPostId) => {
   const data = await response.json();
   return data;
 };
+
+export const getJobPostByIdApi = async (jobId) => {
+  const response = await fetch(`/api/jobpost/${jobId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const data = await response.json();
+  return data;
+};
+

@@ -6,7 +6,7 @@ export default function BodyDescComponent({ jobDetailObj }) {
 
   const { jobDescription, userDetail } = jobDetailObj
 
-  if (!userDetail) {
+  if (!jobDescription) {
     return null;
   }
 

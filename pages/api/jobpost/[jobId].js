@@ -12,6 +12,7 @@ async function handler(req, res) {
     return;
   }
 
+
   try {
     const result = await jobPosts.aggregate([
       { "$match": { _id: mongoose.Types.ObjectId(jobId) } },
@@ -38,9 +39,9 @@ async function handler(req, res) {
           'userId': 1
         }
       }]).exec()
-    res.status(200).json({ "status": "success", message: "Fetch all job posts success!", "data": result });
+    res.status(200).json({ "status": "success", message: "Fetch job by id success!", "data": result });
   } catch (error) {
-    res.status(500).json({ "status": "error", message: "Fetch all job posts failed!", "data": [], error });
+    res.status(500).json({ "status": "error", message: "Fetch job by id failed!", "data": [], error });
   }
 
 }
