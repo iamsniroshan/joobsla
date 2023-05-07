@@ -40,10 +40,10 @@ function PostAddComponent() {
   }, [viewType])
 
   useEffect(() => {
-    if (viewType === 'edit' && !isLoading) {
+    if (viewType === 'edit' && !isLoading && data) {
       setPostDetails(data.data[0]);
     }
-  }, [viewType,isLoading])
+  }, [isLoading, data])
 
 
   return (
