@@ -1,5 +1,5 @@
 import { AddPostWizardContext } from 'components/context';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MultiStepForm from './StepComponents/MultiStepForm';
 import { JobDetailsComponent, JobDescriptionComponent, JobPreviewComponent } from './StepComponents';
 import { AddPostWizardContextInitialValues } from 'components/context/AddPostWizardContext';
@@ -15,13 +15,22 @@ const componentsList = [
 
 function PostAddComponent() {
 
-  // State to store checkout details
-  // This is used to prevent losing unsaved changes when you switch the component.
   const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
 
 
+  // reset post wizard
+  useEffect(() => {
+    setPostDetails({
+      jobDetail: { jobTitle: "", jobType: "", jobCategory: "", expirationDate: new Date() },
+      jobDescription: { longDesc: "", sortDesc: "" },
+      jobSalary: { minAmount: "", maxAmount: "", currency: "lkr-month" },
+      experience: { number: "", numberTag: "plus-year" },
+      workingHours: { hour: "", hourTag: "h-week" }
+    });
+  }, []);
+
   return (
-    <div className="xxxxxxxx">
+    <div className="add-post-wizard">
       <AddPostWizardContext.Provider value={{ postDetails, setPostDetails }}>
         <MultiStepForm
           list={componentsList}
