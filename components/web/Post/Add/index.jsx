@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MultiStepForm from './StepComponents/MultiStepForm';
 import { JobDetailsComponent, JobDescriptionComponent, JobPreviewComponent } from './StepComponents';
 import { AddPostWizardContextInitialValues } from 'components/context/AddPostWizardContext';
-
+import { useRouter } from 'next/router'
 
 // List of components to switch inside the multi-form container
 const componentsList = [
@@ -17,17 +17,22 @@ function PostAddComponent() {
 
   const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
 
+  const router = useRouter();
+  const { viewType } = router.query;
 
   // reset post wizard
   useEffect(() => {
-    setPostDetails({
-      jobDetail: { jobTitle: "", jobType: "", jobCategory: "", expirationDate: new Date() },
-      jobDescription: { longDesc: "", sortDesc: "" },
-      jobSalary: { minAmount: "", maxAmount: "", currency: "lkr-month" },
-      experience: { number: "", numberTag: "plus-year" },
-      workingHours: { hour: "", hourTag: "h-week" }
-    });
-  }, []);
+    if (viewType === 'create') {
+      setPostDetails({
+        jobDetail: { jobTitle: "", jobType: "", jobCategory: "", expirationDate: new Date() },
+        jobDescription: { longDesc: "", sortDesc: "" },
+        jobSalary: { minAmount: "", maxAmount: "", currency: "lkr-month" },
+        experience: { number: "", numberTag: "plus-year" },
+        workingHours: { hour: "", hourTag: "h-week" }
+      });
+    }
+  }, [])
+
 
   return (
     <div className="add-post-wizard">

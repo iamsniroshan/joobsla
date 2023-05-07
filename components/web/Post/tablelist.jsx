@@ -16,10 +16,10 @@ import MyLink from "components/common/MyLink";
 export default function PostCardListComponent() {
 
   const { makeContextualHref, returnHref } = useContextualRouting();
-  const { isLoading, error, data, refetch } = useQuery({queryKey: ["jobPostUseQuery"],queryFn:() => getJobPostApi()});
+  const { isLoading, error, data, refetch } = useQuery({ queryKey: ["jobPostUseQuery"], queryFn: () => getJobPostApi() });
 
 
-  const { mutate:deleteJob } = useMutation(deleteJobPostApi, {
+  const { mutate: deleteJob } = useMutation(deleteJobPostApi, {
     onSuccess: () => {
       refetch()
     },
@@ -88,7 +88,7 @@ export default function PostCardListComponent() {
                   </div>
                   <div className="ml-4 mt-4 flex-shrink-0">
                     <Link scroll={false}
-                      href={makeContextualHref({ openPostAddModal: true })}
+                      href={makeContextualHref({ openPostAddModal: true, viewType: 'create' })}
                     >
                       <button
                         type="button"
@@ -141,7 +141,7 @@ export default function PostCardListComponent() {
 
                                   <span className="block"><ArrowCircleRightIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 mt-1" aria-hidden="true" /></span>
                                   <MyLink href={'/user/boards/job-provider-applications'}>
-                                  <span className="block text-sm font-medium text-indigo-600 hover:text-yellow-700 truncate p-1">View applications</span>
+                                    <span className="block text-sm font-medium text-indigo-600 hover:text-yellow-700 truncate p-1">View applications</span>
                                   </MyLink>
                                 </div>
                               </div>
