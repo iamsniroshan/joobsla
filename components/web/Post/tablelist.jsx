@@ -11,13 +11,20 @@ import ShimmerLoader from "components/common/Loader/shimmerLoader";
 import { deleteJobPostApi, getJobPostApi } from "services/api/jobPostApi";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import MyLink from "components/common/MyLink";
+import { useRouter } from "next/router";
+import { AddPostWizardContextInitialValues } from "components/context/AddPostWizardContext";
+import { useState } from "react";
+import { jobDetailAtom } from "atoms-store";
+import { useAtom } from "jotai";
 
 
 export default function PostCardListComponent() {
 
+  const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
   const { makeContextualHref, returnHref } = useContextualRouting();
   const { isLoading, error, data, refetch } = useQuery({ queryKey: ["jobPostUseQuery"], queryFn: () => getJobPostApi() });
-
+  const router = useRouter();
+  const [jobDetailStore, setJobDetailStore] = useAtom(jobDetailAtom)
 
   const { mutate: deleteJob } = useMutation(deleteJobPostApi, {
     onSuccess: () => {
@@ -31,6 +38,11 @@ export default function PostCardListComponent() {
   const handleDelete = (jobPostId) => {
     deleteJob(jobPostId);
   };
+
+  const handleEditClick = (eachPost) => {
+    setJobDetailStore(eachPost);
+    router.push(makeContextualHref({ openPostAddModal: true, viewType: 'edit' }));
+  }
 
 
   if (error) {
@@ -169,7 +181,7 @@ export default function PostCardListComponent() {
                               </div>
                               <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                                 <span className="block text-sm font-medium text-red-600 hover:text-yellow-700 truncate p-0" onClick={() => handleDelete(eachPost._id)}>Delete</span>
-                                <span className="block text-sm font-medium text-green-600 hover:text-yellow-700 truncate p-0 ml-6">Edit</span>
+                                <span className="block text-sm font-medium text-green-600 hover:text-yellow-700 truncate p-0 ml-6" onClick={() => handleEditClick(eachPost)}>Edit</span>
                               </div>
                             </div>
                           </div>
