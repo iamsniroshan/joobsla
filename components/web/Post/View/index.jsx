@@ -16,7 +16,7 @@ function PostViewComponent({ postDetailsProp }) {
 
   const router = useRouter();
   const { data: session, status: loading } = useSession();
-  const { jobId = '6455bbc9d4a113ba0e747158', viewType } = router.query;
+  const { jobId = null, viewType } = router.query;
   const [jobDetailObj, setJobDetailObj] = useState({})
   const [isLoading, setIsLoading] = useState(false)
 

@@ -4,8 +4,8 @@ import MultiStepForm from './StepComponents/MultiStepForm';
 import { JobDetailsComponent, JobDescriptionComponent, JobPreviewComponent } from './StepComponents';
 import { AddPostWizardContextInitialValues } from 'components/context/AddPostWizardContext';
 import { useRouter } from 'next/router'
-import { jobDetailAtom } from 'atoms-store';
-import { useAtom } from 'jotai';
+import { getJobPostByIdApi } from 'services/api/jobPostApi';
+import { useQuery } from '@tanstack/react-query';
 
 // List of components to switch inside the multi-form container
 const componentsList = [
@@ -18,9 +18,13 @@ const componentsList = [
 function PostAddComponent() {
 
   const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
-  const [jobDetailStore] = useAtom(jobDetailAtom)
   const router = useRouter();
-  const { viewType } = router.query;
+  const { viewType , jobId } = router.query;
+
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["jobPostByIdQuery", { openPostAddModal: true}],
+    queryFn: () => getJobPostByIdApi(jobId),
+  });
 
   // reset post wizard
   useEffect(() => {
@@ -32,10 +36,14 @@ function PostAddComponent() {
         experience: { number: "", numberTag: "plus-year" },
         workingHours: { hour: "", hourTag: "h-week" }
       });
-    } else if (viewType === 'edit') {
-      setPostDetails(jobDetailStore);
     }
-  }, [])
+  }, [viewType])
+
+  useEffect(() => {
+    if (viewType === 'edit' && !isLoading) {
+      setPostDetails(data.data[0]);
+    }
+  }, [viewType,isLoading])
 
 
   return (

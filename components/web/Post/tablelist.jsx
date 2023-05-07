@@ -14,7 +14,6 @@ import MyLink from "components/common/MyLink";
 import { useRouter } from "next/router";
 import { AddPostWizardContextInitialValues } from "components/context/AddPostWizardContext";
 import { useState } from "react";
-import { jobDetailAtom } from "atoms-store";
 import { useAtom } from "jotai";
 
 
@@ -29,7 +28,6 @@ export default function PostCardListComponent() {
   });
 
   const router = useRouter();
-  const [jobDetailStore, setJobDetailStore] = useAtom(jobDetailAtom)
 
   const { mutate: deleteJob } = useMutation(deleteJobPostApi, {
     onSuccess: () => {
@@ -45,7 +43,6 @@ export default function PostCardListComponent() {
   };
 
   const handleEditClick = (eachPost) => {
-    setJobDetailStore(eachPost);
     router.push(makeContextualHref({ openPostAddModal: true, viewType: 'edit', jobId: eachPost._id }));
   }
 
