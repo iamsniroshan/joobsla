@@ -22,7 +22,12 @@ export default function PostCardListComponent() {
 
   const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
   const { makeContextualHref, returnHref } = useContextualRouting();
-  const { isLoading, error, data, refetch } = useQuery({ queryKey: ["jobPostUseQuery"], queryFn: () => getJobPostApi() });
+
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["jobPostUseQuery", { openPostAddModal: true}],
+    queryFn: () => getJobPostApi(),
+  });
+
   const router = useRouter();
   const [jobDetailStore, setJobDetailStore] = useAtom(jobDetailAtom)
 
