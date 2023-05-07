@@ -109,7 +109,7 @@ export default function HeaderComponent() {
                               src={user.imageUrl}
                               alt=""
                             />
-                            <span className="flex px-3 h-8 w-full pt-1 pb-2 rounded-full">
+                            <span className="flex h-9 px-2 w-full rounded-full items-center justify-between">
                               {session.user.email}
                             </span>
                           </Menu.Button>

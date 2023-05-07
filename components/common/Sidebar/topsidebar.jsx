@@ -4,14 +4,12 @@ import { Dialog, Transition } from '@headlessui/react'
 import { useContextualRouting } from 'next-use-contextual-routing';
 import { useRouter } from 'next/router';
 import { XIcon } from '@heroicons/react/outline'
-import { AddPostWizardContextInitialValues } from 'components/context/AddPostWizardContext';
 
 export default function TopSideBar(props) {
     const { open = false, children, width = 'max-full', title } = props;
     const router = useRouter();
     const [isShowModal, setShowModal] = useState(false)
     const { makeContextualHref, returnHref } = useContextualRouting();
-    const [postDetails, setPostDetails] = useState(AddPostWizardContextInitialValues);
 
 
     useEffect(() => {
@@ -19,14 +17,6 @@ export default function TopSideBar(props) {
     }, [open])
 
     const closeModalHandler = () => {
-        // reset value when close model
-        setPostDetails({
-            jobDetail: { jobTitle: "", jobType: "", jobCategory: "", expirationDate: new Date() },
-            jobDescription: { longDesc: "", sortDesc: "" },
-            jobSalary: { minAmount: "", maxAmount: "", currency: "lkr-month" },
-            experience: { number: "", numberTag: "plus-year" },
-            workingHours: { hour: "", hourTag: "h-week" }
-        });
         router.push(returnHref, undefined, { shallow: true })
     }
 
