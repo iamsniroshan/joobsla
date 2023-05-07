@@ -119,8 +119,8 @@ export default function PostCardListComponent() {
                   ? <ShimmerLoader repeatCount="10" />
                   :
                   <ul className="divide-y divide-gray-200">
-                    {data.data.map((eachPost) => (
-                      <li key={eachPost._id}>
+                    {data.data.map((eachPost,index) => (
+                      <li key={index}>
                         <a href="#" className="block hover:bg-gray-50">
                           <div className="px-4 py-4 sm:px-6">
                             <div className="flex items-center justify-between">

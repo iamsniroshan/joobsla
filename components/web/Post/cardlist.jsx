@@ -77,9 +77,9 @@ export default function PostCardListComponent() {
                 {/* Left nav */}
                 <div className="hidden lg:block lg:col-span-2">
                   <nav className="flex space-x-4">
-                    {navigation.map((item) => (
+                    {navigation.map((item,index) => (
                       <a
-                        key={item.name}
+                        key={index}
                         href={item.href}
                         className={classNames(
                           item.current ? "text-white" : "text-cyan-100",
@@ -142,9 +142,9 @@ export default function PostCardListComponent() {
               </Link>
 
             </li>
-            {people.map((person) => (
+            {people.map((person,index) => (
               <li
-                key={person.email}
+                key={index}
                 className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200"
               >
                 <div className="w-full flex items-center justify-between p-6 space-x-6">

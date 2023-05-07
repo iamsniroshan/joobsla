@@ -9,7 +9,7 @@ export default function PanelSteps(props) {
     <nav aria-label="Progress">
       <ol className="flex items-center justify-center  mx-auto border border-gray-300 bg-gray-100 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0">
         {steps.map((step, stepIdx) => (
-          <li key={step.headerText} className="relative md:flex-1 md:flex">
+          <li key={stepIdx} className="relative md:flex-1 md:flex">
             {step.status === 'complete' ? (
               <a href={step.href} className="group flex items-center w-full">
                 <span className="px-6 py-2 flex items-center text-sm font-medium">

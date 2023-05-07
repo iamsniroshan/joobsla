@@ -23,15 +23,15 @@ export default function Card(props) {
 					{props.componentToPassDown.jobTitle}
 				</span>
 			</div>
-			<p class="text-sm text-gray-700 overflow-hidden h-14">
+			<p className="text-sm text-gray-700 overflow-hidden h-14">
 				{props.componentToPassDown.sortDesc}
 			</p>
 			<div className='flex items-center justify-between mt-4'>
 				<p className='text-xs px-2 dark:text-neutral-300 text-green-700 bg-green-100 rounded'>
 					{props.componentToPassDown.jobType}
 				</p>
-				<a href="#" class="flex text-gray-700 text-xs">
-					<svg fill="none" viewBox="0 0 24 24" class="w-5 h-5 text-blue-500" stroke="currentColor">
+				<a href="#" className="flex text-gray-700 text-xs">
+					<svg fill="none" viewBox="0 0 24 24" className="w-5 h-5 text-blue-500" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
 					</svg>
 					5

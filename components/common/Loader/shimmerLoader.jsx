@@ -19,17 +19,17 @@ export default function ShimmerLoader({ repeatCount, type = '' }) {
                         </div>
                     </div>
 
-                    <div class="w-full">
-                        <div class="p-3 space-y-4">
-                            <div class="animate-pulse w-2/3 h-6 bg-slate-200"></div>
-                            <div class="flex space-x-4">
-                                <div class="animate-pulse w-1/3 h-3 bg-sky-200"></div>
-                                <div class="animate-pulse w-1/3 h-3 bg-sky-200"></div>
-                                <div class="animate-pulse w-1/3 h-3 bg-sky-200"></div>
+                    <div className="w-full">
+                        <div className="p-3 space-y-4">
+                            <div className="animate-pulse w-2/3 h-6 bg-slate-200"></div>
+                            <div className="flex space-x-4">
+                                <div className="animate-pulse w-1/3 h-3 bg-sky-200"></div>
+                                <div className="animate-pulse w-1/3 h-3 bg-sky-200"></div>
+                                <div className="animate-pulse w-1/3 h-3 bg-sky-200"></div>
                             </div>
-                            <div class="space-y-2">
-                                <div class="animate-pulse w-3/4 h-3 bg-slate-200"></div>
-                                <div class="animate-pulse w-full h-3 bg-slate-200"></div>
+                            <div className="space-y-2">
+                                <div className="animate-pulse w-3/4 h-3 bg-slate-200"></div>
+                                <div className="animate-pulse w-full h-3 bg-slate-200"></div>
                             </div>
                         </div>
                     </div>

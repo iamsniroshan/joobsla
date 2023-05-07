@@ -92,8 +92,8 @@ function CustomYearDropdownPicker({ years,date, changeYear }) {
                 value={(date).getFullYear()}
                 onChange={({ target: { value } }) => changeYear(value)}
             >
-                {years.map((option) => (
-                    <option key={option} value={option}>
+                {years.map((option,index) => (
+                    <option key={index} value={option}>
                         {option}
                     </option>
                 ))}

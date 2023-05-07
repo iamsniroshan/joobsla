@@ -90,10 +90,10 @@ export default function SearchSelectInput({ value, data = [], label, onChange, r
                     static
                     className="max-h-60 border border-gray-300 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"
                   >
-                    {people.map((person) => {
+                    {people.map((person,index) => {
                       const selected = isSelected(person);
                       return (
-                        <Listbox.Option key={person} value={person}>
+                        <Listbox.Option key={index} value={person}>
                           {({ active }) => (
                             <div
                               className={`${

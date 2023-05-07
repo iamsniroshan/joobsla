@@ -64,8 +64,8 @@ export default function AppMenuComponent() {
                   <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                     <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-1">
                       <Menu.Items>
-                        {appsMenuData.map((item) => (
-                          <Menu.Item>
+                        {appsMenuData.map((item,index) => (
+                          <Menu.Item key={index}>
                             <MyLink href={item.href}>
                               <div className="p-4 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
                                 <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">

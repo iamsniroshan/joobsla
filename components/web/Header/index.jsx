@@ -169,7 +169,7 @@ export default function HeaderComponent() {
                     shallow
                     className="ml-6 inline-flex items-center"
                   >
-                    <button class="block text-md mr-4 shadow bg-yellow-400 hover:bg-yellow-400 border border-yellow-500 hover:border-transparent focus:outline-none text-gray-800  py-1 px-6 rounded font-bold cursor-pointer">Create New Account</button>
+                    <button className="block text-md mr-4 shadow bg-yellow-400 hover:bg-yellow-400 border border-yellow-500 hover:border-transparent focus:outline-none text-gray-800  py-1 px-6 rounded font-bold cursor-pointer">Create New Account</button>
 
                   </Link>
                   <Link
@@ -178,7 +178,7 @@ export default function HeaderComponent() {
                     shallow
                     className="ml-6 inline-flex items-center cursor-hand"
                   >
-                    <button class="block text-md mr-4 shadow bg-white hover:bg-rose-600 border border-rose-700 hover:border-transparent focus:outline-none text-black hover:text-white  py-1 px-10 rounded font-bold cursor-hand">Log In</button>
+                    <button className="block text-md mr-4 shadow bg-white hover:bg-rose-600 border border-rose-700 hover:border-transparent focus:outline-none text-black hover:text-white  py-1 px-10 rounded font-bold cursor-hand">Log In</button>
                   </Link>
                 </>
               )}

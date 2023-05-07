@@ -26,7 +26,7 @@ export default function DoubleSelectInput({ value, childSelect, label, name, pla
                         name={childSelect.name}
                         className="focus:ring-0 focus:border-0 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
                     >
-                        {childSelect.data.map(e => <option value={e.value}>{e.label}</option>)}
+                        {childSelect.data.map((e,index) => <option key={index} value={e.value}>{e.label}</option>)}
                     </select>
                 </div>
             </div>

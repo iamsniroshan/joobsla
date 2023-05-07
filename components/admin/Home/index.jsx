@@ -78,8 +78,8 @@ export default function HomeComponent() {
           <div className="px-4 mt-6 sm:px-6 lg:px-8">
             <h2 className="text-gray-500 text-xs font-medium uppercase tracking-wide">Pinned Projects</h2>
             <ul className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3">
-              {pinnedProjects.map((project) => (
-                <li key={project.id} className="relative col-span-1 flex shadow-sm rounded-md">
+              {pinnedProjects.map((project,index) => (
+                <li key={index} className="relative col-span-1 flex shadow-sm rounded-md">
                   <div
                     className={classNames(
                       project.bgColorClass,
@@ -176,8 +176,8 @@ export default function HomeComponent() {
               <h2 className="text-gray-500 text-xs font-medium uppercase tracking-wide">Projects</h2>
             </div>
             <ul className="mt-3 border-t border-gray-200 divide-y divide-gray-100">
-              {projects.map((project) => (
-                <li key={project.id}>
+              {projects.map((project,index) => (
+                <li key={index}>
                   <a href="#" className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
                     <span className="flex items-center truncate space-x-3">
                       <span
@@ -217,8 +217,8 @@ export default function HomeComponent() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-100">
-                  {projects.map((project) => (
-                    <tr key={project.id}>
+                  {projects.map((project,index) => (
+                    <tr key={index}>
                       <td className="px-6 py-3 max-w-0 w-full whitespace-nowrap text-sm font-medium text-gray-900">
                         <div className="flex items-center space-x-3 lg:pl-2">
                           <div
@@ -235,9 +235,9 @@ export default function HomeComponent() {
                       <td className="px-6 py-3 text-sm text-gray-500 font-medium">
                         <div className="flex items-center space-x-2">
                           <div className="flex flex-shrink-0 -space-x-1">
-                            {project.members.map((member) => (
+                            {project.members.map((member,index) => (
                               <img
-                                key={member.handle}
+                                key={index}
                                 className="max-w-none h-6 w-6 rounded-full ring-2 ring-white"
                                 src={member.imageUrl}
                                 alt={member.name}

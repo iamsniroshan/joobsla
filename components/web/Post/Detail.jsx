@@ -170,9 +170,9 @@ export default function PostDetailsComponent() {
                           static
                           className="origin-top-right absolute left-0 mt-2 -mr-1 w-72 rounded-md shadow-lg overflow-hidden bg-white divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none sm:left-auto sm:right-0"
                         >
-                          {publishingOptions.map((option) => (
+                          {publishingOptions.map((option,index) => (
                             <Listbox.Option
-                              key={option.name}
+                              key={index}
                               className={({ active }) =>
                                 classNames(
                                   active ? 'text-white bg-purple-500' : 'text-gray-900',
@@ -263,9 +263,9 @@ export default function PostDetailsComponent() {
         <div className="border-b border-gray-200">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-              {tabs.map((tab) => (
+              {tabs.map((tab,index) => (
                 <a
-                  key={tab.name}
+                  key={index}
                   href={tab.href}
                   className={classNames(
                     tab.current
@@ -286,8 +286,8 @@ export default function PostDetailsComponent() {
       {/* Description list */}
       <div className="mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 overflow-y-scroll job-detail-height">
         <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-          {Object.keys(profile.fields).map((field) => (
-            <div key={field} className="sm:col-span-1">
+          {Object.keys(profile.fields).map((field,index) => (
+            <div key={index} className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">{field}</dt>
               <dd className="mt-1 text-sm text-gray-900">{profile.fields[field]}</dd>
             </div>

@@ -35,10 +35,10 @@ export default function DesktopLeftNavComponent() {
           <div className="flex flex-col flex-grow border-r bg-cyan-700 border-cyan-700 pt-5 pb-4 overflow-y-auto">
             <nav className="mt-5 flex-1 flex flex-col divide-y divide-cyan-800 overflow-y-auto" aria-label="Sidebar">
               <div className="px-2 space-y-1">
-                {navigation.map((item) => (
+                {navigation.map((item,index) => (
                    <Link href={item.href}>
                   <a
-                    key={item.name}
+                    key={index}
                     className={classNames(
                       item.current ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
                       'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
@@ -54,9 +54,9 @@ export default function DesktopLeftNavComponent() {
               </div>
               <div className="mt-6 pt-6">
                 <div className="px-2 space-y-1">
-                  {secondaryNavigation.map((item) => (
+                  {secondaryNavigation.map((item,index) => (
                     <a
-                      key={item.name}
+                      key={index}
                       href={item.href}
                       className="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
                     >

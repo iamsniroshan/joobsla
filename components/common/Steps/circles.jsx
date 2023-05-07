@@ -18,7 +18,7 @@ export default function CirclesSteps() {
     <nav aria-label="Progress">
       <ol className="flex items-center justify-center  mx-auto">
         {steps.map((step, stepIdx) => (
-          <li key={step.name} className={classNames(stepIdx !== steps.length - 1 ? 'pr-8 sm:pr-20' : '', 'relative')}>
+          <li key={stepIdx} className={classNames(stepIdx !== steps.length - 1 ? 'pr-8 sm:pr-20' : '', 'relative')}>
             {step.status === 'complete' ? (
               <>
                 <div className="absolute inset-0 flex items-center" aria-hidden="true">

@@ -8,7 +8,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function SelectInput({ value, data = [], label, onChange, validate, isClearable=false}) {
+export default function SelectInput({ value ={value:'', label:''}, data = [], label, onChange, validate, isClearable=false}) {
   const [selectedOption, setSelectedOption] = useState({})
   const [focusToggle, setFocusToggle] = useState(true)
 

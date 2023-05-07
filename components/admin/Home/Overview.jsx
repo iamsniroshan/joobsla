@@ -19,9 +19,9 @@ export default function OverviewComponent() {
       {/* <h3 className="text-lg leading-6 font-medium text-gray-900">Last 30 days</h3> */}
 
       <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((item) => (
+        {stats.map((item,index) => (
           <div
-            key={item.id}
+            key={index}
             className="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden"
           >
             <dt>

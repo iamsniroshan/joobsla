@@ -90,9 +90,9 @@ const InfiniteScrollComponent = () => {
       >
         {isLoading ? <ShimmerLoader repeatCount="12" type="home-page-job-list"/>:
                 <ul className="grid grid-cols-3 gap-4">
-                {posts.map((job) => (
+                {posts.map((job,index) => (
                   <li
-                    key={job._id}
+                    key={index}
                     className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:border-solid hover:cursor-pointer"
                   >
                     <article aria-labelledby={"job-title-" + job._id}>

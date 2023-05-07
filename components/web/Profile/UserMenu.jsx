@@ -52,9 +52,9 @@ export default function UserMenuComponent() {
                 {/* Left nav */}
                 <div className="hidden lg:block lg:col-span-2">
                   <nav className="flex space-x-4">
-                    {navigation.map((item) => (
+                    {navigation.map((item,index) => (
                       <a
-                        key={item.name}
+                        key={index}
                         href={item.href}
                         className={classNames(
                           item.current ? "text-white" : "text-cyan-100",
@@ -157,9 +157,9 @@ export default function UserMenuComponent() {
                       </div>
                     </div>
                     <div className="mt-3 px-2 space-y-1">
-                      {navigation.map((item) => (
+                      {navigation.map((item,index) => (
                         <a
-                          key={item.name}
+                          key={index}
                           href={item.href}
                           className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                         >
@@ -187,9 +187,9 @@ export default function UserMenuComponent() {
                       </button>
                     </div>
                     <div className="mt-3 px-2 space-y-1">
-                      {userNavigation.map((item) => (
+                      {userNavigation.map((item,index) => (
                         <a
-                          key={item.name}
+                          key={index}
                           href={item.href}
                           className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
                         >

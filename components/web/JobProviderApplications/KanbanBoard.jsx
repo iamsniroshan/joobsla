@@ -128,7 +128,7 @@ export default function KanbanBoardComponent() {
                               backgroundColor: snapshot.isDraggingOver ? '#f8fafc' : '',
                             }}>
                               {tasksArr[item].map((t, index) => (
-                                <Draggable key={t._id} draggableId={t._id} index={index} isDragDisabled={isDragDisabled}>
+                                <Draggable key={index} draggableId={t._id} index={index} isDragDisabled={isDragDisabled}>
                                   {(provided) => (
                                     <div
                                       {...provided.draggableProps}
