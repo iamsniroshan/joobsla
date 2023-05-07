@@ -5,7 +5,7 @@ import { JobDetailsComponent, JobDescriptionComponent, JobPreviewComponent } fro
 import { AddPostWizardContextInitialValues } from 'components/context/AddPostWizardContext';
 import { useRouter } from 'next/router'
 import { getJobPostByIdApi } from 'services/api/jobPostApi';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient, useQuery } from '@tanstack/react-query';
 
 // List of components to switch inside the multi-form container
 const componentsList = [
@@ -21,10 +21,22 @@ function PostAddComponent() {
   const router = useRouter();
   const { viewType , jobId } = router.query;
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["jobPostByIdQuery", { openPostAddModal: true}],
-    queryFn: () => getJobPostByIdApi(jobId),
-  });
+  const { isLoading, error, data, refetch } = useQuery(
+    ['jobPostByIdQuery', { openPostAddModal: true }],
+    () => getJobPostByIdApi(jobId),
+    {
+      enabled: !!jobId,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+  
+  useEffect(() => {
+    if (jobId) {
+      refetch();
+    }
+  }, [jobId]);
 
   // reset post wizard
   useEffect(() => {
