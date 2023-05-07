@@ -21,7 +21,7 @@ function PostAddComponent() {
   const router = useRouter();
   const { viewType , jobId } = router.query;
 
-  const { isLoading, error, data, refetch } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ["jobPostByIdQuery", { openPostAddModal: true}],
     queryFn: () => getJobPostByIdApi(jobId),
   });
