@@ -16,7 +16,7 @@ function PostViewComponent({ postDetailsProp }) {
 
   const router = useRouter();
   const { data: session, status: loading } = useSession();
-  const { jobId = null, viewType } = router.query;
+  const { jobId = '6455bbc9d4a113ba0e747158', viewType } = router.query;
   const [jobDetailObj, setJobDetailObj] = useState({})
   const [isLoading, setIsLoading] = useState(false)
 
@@ -38,10 +38,12 @@ function PostViewComponent({ postDetailsProp }) {
 
   useEffect(() => {
     if (viewType === 'create' && !userInfoDataLoading) {
-      const mergeObj = { ...postDetailsProp, userDetail: { ...userInfoData.data.data } }
-      setJobDetailObj(mergeObj)
+      setTimeout(() => {
+        setJobDetailObj({ ...postDetailsProp, userDetail: { ...userInfoData.data.data } })
+      }, 0);
     }
-  }, [userInfoData, userInfoDataLoading])
+  }, [viewType, userInfoData, userInfoDataLoading, postDetailsProp]);
+  
   
   useEffect(() => {
     if(viewType === 'view' && !jobPostDataLoading) {
@@ -51,7 +53,6 @@ function PostViewComponent({ postDetailsProp }) {
   
   return (
     <>
-    {/* {JSON.stringify(jobDetailObj)} */}
       {isLoading
         ? <p>Loading</p>
         : <div className="py-1">
