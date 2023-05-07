@@ -14,13 +14,10 @@ import { useQuery } from '@tanstack/react-query';
 
 export default function JobApplyComponent({ jobDetailObj }) {
 
-  const [userDetail, setUserDetail] = useState([]);
   const [isApplied, setIsApplied] = useState(false);
   const [isProfileSelected, setIsProfileSelected] = useState(false);
 
-  const { isLoading, error, data } = useQuery({queryKey: ["userInfoUseQuery"],queryFn:() => getUserInfoApi()}, {
-    onSuccess: (res) => setUserDetail(res.data)
-  });
+  const { isLoading, error, data } = useQuery({queryKey: ["userInfoUseQuery"],queryFn:() => getUserInfoApi()});
 
   const { jobApplications = [], _id } = jobDetailObj
 
@@ -85,7 +82,7 @@ export default function JobApplyComponent({ jobDetailObj }) {
           <div className="mt-10">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide text-center">Select below profile and click apply</h3>
             <ul className="mt-4 w-100">
-              {userDetail.map((user, personIdx) => (
+              {data.data.map((user, personIdx) => (
                 <li key={personIdx} onClick={profileSelector}>
                   <button
                     type="button"

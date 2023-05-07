@@ -8,14 +8,15 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import JobApplyComponent from "components/web/JobApply";
 import { useSession, signOut } from 'next-auth/react';
+import JobApplyPreviewComponent from "components/web/JobApplyPreview";
 
-function PostViewComponent() {
+function PostViewComponent({ jobDetailObj: jobDetailPropObj}) {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [jobDetailObj, setJobDetailObj] = useState({})
-  const {data:session, status:loading } = useSession();
-  const { jobId } = router.query;
+  const { data: session, status: loading } = useSession();
+  const { jobId, viewType } = router.query;
 
 
   const fetchJobPostById = async () => {
@@ -27,16 +28,16 @@ function PostViewComponent() {
       },
     });
     if (res.ok) {
-      setIsLoading(false)
       const postDetails = await res.json();
       setJobDetailObj(postDetails.data[0])
+      setIsLoading(false)
     }
 
   };
 
   useEffect(() => {
-    jobId ? fetchJobPostById() : null;
-  }, [jobId]); // Note the curly braces around myFunction!
+    jobId ? fetchJobPostById() : setJobDetailObj(jobDetailPropObj);
+  }, []);
 
 
   return (
@@ -55,9 +56,14 @@ function PostViewComponent() {
               </div>
             </main>
             <div className="hidden lg:block lg:col-span-3 xl:col-span-3">
-              
-              {loading === 'unauthenticated' && (<aside className="sticky top-5 space-y-1"><LoginComponent /></aside>)}
-              {session && loading === 'authenticated' && (<aside className="sticky top-5 space-y-1"><JobApplyComponent jobDetailObj={jobDetailObj}/></aside>)}
+              {viewType
+                ? <aside className="sticky top-5 space-y-1"><JobApplyPreviewComponent /></aside>
+                :
+                <div>
+                  {loading === 'unauthenticated' && (<aside className="sticky top-5 space-y-1"><LoginComponent /></aside>)}
+                  {session && loading === 'authenticated' && (<aside className="sticky top-5 space-y-1"><JobApplyComponent jobDetailObj={jobDetailObj} /></aside>)}
+                </div>
+              }
             </div>
           </div>
           <div className="absolute bottom-0 w-full px-0 py-2 bg-gray-700  text-right sm:px-6 h-2">

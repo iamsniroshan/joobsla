@@ -6,7 +6,7 @@ const JobPreviewComponent = () => {
     const { postDetails } = useContext(AddPostWizardContext);
     return (
         <>
-                <PostViewComponent {...postDetails} postId={''}/>
+                <PostViewComponent jobDetailObj={postDetails} postId={''}/>
         </>
     )
 }

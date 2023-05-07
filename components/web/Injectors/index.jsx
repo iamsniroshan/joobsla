@@ -13,7 +13,7 @@ import PostViewComponent from '../Post/View';
 export default function InjectorComponent() {
 
   const router = useRouter()
-  const { openLoginModal, userInfoEditModal, openPostAddModal,experienceEditModal,openPostViewAndApply } = router.query
+  const { openLoginModal, userInfoEditModal, openPostAddModal,experienceEditModal,openPostViewAndApply, viewType } = router.query
   //const [openLogin, setOpenLogin] = useAtom(openLoginAtom)
 
   return (
@@ -30,7 +30,7 @@ export default function InjectorComponent() {
       {/* <OverlayModalComponent open={openPostAddModal} width="md:max-w-7xl">
         <PostAddComponent />
       </OverlayModalComponent> */}
-      <TopSideBar open={openPostAddModal} title="Post New Job">
+      <TopSideBar open={openPostAddModal} title={viewType === 'create' ? 'Post New Job': viewType === 'edit' ? 'Edit Job post' : ''}>
         <PostAddComponent />
       </TopSideBar>
       {/* Job post view and apply */}
