@@ -40,12 +40,12 @@ export default function HeaderComponent() {
           <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
             <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-3">
               <div className="flex-shrink-0 flex items-center">
-                <Link href="/">
+                <Link legacyBehavior={true} href="/">
                   <a href="#">
-                    <Image src="/logos/web-logo.png" alt="admin logo" width="120" height="43.8" />
+                    <Image src="/logos/web-logo.png" alt="admin logo" width={120} height={43.8} />
                   </a>
                 </Link>
-                <Link href="/">
+                <Link legacyBehavior={true} href="/">
                   <a className="text-sm font-medium text-gray-900 hover:underline pl-32">
                     Home
                   </a>
@@ -133,7 +133,7 @@ export default function HeaderComponent() {
                                   className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900'
                                     } group text-gray-700 hover:bg-gray-100 flex rounded-md items-center w-full py-2 text-sm px-4`}
                                 >
-                                  <Link href="/user/profile">
+                                  <Link legacyBehavior={true} href="/user/profile">
                                     <a>
                                       Your Profile
                                     </a>
@@ -163,7 +163,7 @@ export default function HeaderComponent() {
               </Menu>
               {loading === 'unauthenticated' && (
                 <>
-                  <Link
+                  <Link legacyBehavior={true}
                     href={makeContextualHref({ openLoginModal: true })}
                     as="/login"
                     shallow
@@ -172,7 +172,7 @@ export default function HeaderComponent() {
                     <button className="block text-md mr-4 shadow bg-yellow-500 hover:text-white border border-yellow-500 hover:border-transparent focus:outline-none text-gray-800  py-1 px-6 rounded font-bold cursor-pointer">Create New Account</button>
 
                   </Link>
-                  <Link
+                  <Link legacyBehavior={true}
                     href={makeContextualHref({ openLoginModal: true })}
                     as="/login"
                     shallow

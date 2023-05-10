@@ -22,5 +22,5 @@ function NavLink({ children, href, exact, ...props }) {
         props.className += ' active';
     }
 
-    return <Link href={href} {...props}>{children}</Link>;
+    return <Link legacyBehavior={true} href={href} {...props}>{children}</Link>;
 }

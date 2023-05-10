@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const MONGODB_URI = process.env.MONGO_URI
+const MONGODB_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/joobsladb"
 
 if (!MONGODB_URI) {
   throw new Error(
@@ -28,7 +28,7 @@ async function dbConnect() {
     const opts = {
       bufferCommands: false,
     }
-
+    mongoose.set('strictQuery', true);
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       return mongoose
     })

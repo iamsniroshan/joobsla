@@ -126,7 +126,7 @@ export default function ExperienceFormComponent() {
                             <SelectInput
                                 label="Employment Type"
                                 data={myConstClass.jobTypeData}
-                                value={formData?.experience.employmentType || {}}
+                                value={formData?.experience.employmentType || { value: '', label: '' }}
                                 onChange={(e) =>
                                     handleInputChange({
                                         element: e,
@@ -144,7 +144,7 @@ export default function ExperienceFormComponent() {
                             <SelectInput
                                 label="Location"
                                 data={myConstClass.location}
-                                value={formData?.experience.location || {}}
+                                value={formData?.experience.location || { value: '', label: '' }}
                                 onChange={(e) =>
                                     handleInputChange({
                                         element: e,

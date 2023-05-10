@@ -126,7 +126,7 @@ export default function PostCardListComponent() {
           {/* Main 1 column grid */}
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
             <li className="flex col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-              <Link scroll={false}
+              <Link legacyBehavior={true} scroll={false}
                 href={makeContextualHref({ openPostAddModal: true })}
                 className="ml-6 inline-flex items-center"
               >

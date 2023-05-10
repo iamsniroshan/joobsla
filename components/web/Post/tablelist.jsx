@@ -125,7 +125,7 @@ export default function PostCardListComponent() {
                     </p>
                   </div>
                   <div className="ml-4 mt-4 flex-shrink-0">
-                    <Link scroll={false}
+                    <Link legacyBehavior={true} scroll={false}
                       href={makeContextualHref({ openPostAddModal: true, viewType: 'create' })}
                     >
                       <button

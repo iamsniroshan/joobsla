@@ -57,7 +57,7 @@ function ProfileDropdownComponent() {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <Link href="/user/profile">
+                    <Link legacyBehavior={true} href="/user/profile">
                       <a
                         href="/"
                         className={classNames(

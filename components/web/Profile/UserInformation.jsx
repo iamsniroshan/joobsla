@@ -20,7 +20,7 @@ export default function UserInformationComponent({ userInfo, cv, salary }) {
         <p className="mt-1 max-w-2xl text-sm text-gray-500">
           Personal details and application.
         </p>
-        <Link
+        <Link legacyBehavior={true}
           scroll={false}
           href={makeContextualHref({ userInfoEditModal: true })}
         >

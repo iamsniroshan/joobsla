@@ -51,7 +51,7 @@ export default function ProfileComponent() {
                                             >
                                                 Experience
                                             </h2>
-                                            <Link scroll={false}
+                                            <Link legacyBehavior={true} scroll={false}
                                                 href={makeContextualHref({ experienceEditModal: true })}
                                             >
                                                 <span className="flex absolute right-4 top-4 font-bold text-sm text-blue-600 pr-3 hover:text-green-600 cursor-pointer">

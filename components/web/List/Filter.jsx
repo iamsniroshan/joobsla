@@ -56,7 +56,7 @@ const FilterComponent = () => {
 
               <SelectInput label="Job Category"
                 data={constData.jobCatData}
-                value={filterObj.jobCategory || {}} isMultiple="true" isClearable={true}
+                value={filterObj.jobCategory || { value: '', label: '' }} isMultiple="true" isClearable={true}
                 onChange={(e) => handleInputChange({ element: e, inputName: 'jobCategory', groupNme: '' })}
               />
 

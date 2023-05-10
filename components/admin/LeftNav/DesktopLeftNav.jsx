@@ -36,7 +36,7 @@ export default function DesktopLeftNavComponent() {
             <nav className="mt-5 flex-1 flex flex-col divide-y divide-cyan-800 overflow-y-auto" aria-label="Sidebar">
               <div className="px-2 space-y-1">
                 {navigation.map((item,index) => (
-                   <Link href={item.href}>
+                   <Link legacyBehavior={true} href={item.href}>
                   <a
                     key={index}
                     className={classNames(

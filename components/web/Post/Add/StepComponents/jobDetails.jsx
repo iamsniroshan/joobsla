@@ -85,7 +85,7 @@ const JobDetailsComponent = () => {
               validate={error.jobCategory}
               label="Job Category"
               data={myConstClass.jobCatData}
-              value={jobDetail.jobCategory || {}}
+              value={jobDetail.jobCategory || { value: '', label: '' }}
               onChange={(e) =>
                 handleInputChange({
                   element: e,

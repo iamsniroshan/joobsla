@@ -2,11 +2,19 @@
 import { useState, useEffect } from 'react'
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import Select from 'react-tailwindcss-select';
-
+import PropTypes from 'prop-types';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
+SelectInput.propTypes = {
+  value: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
+  // ...
+};
 
 export default function SelectInput({ value ={value:'', label:''}, data = [], label, onChange, validate, isClearable=false}) {
   const [selectedOption, setSelectedOption] = useState({})
